@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huduma za GIS & Teknolojia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f4f4f4;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .service-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-title {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .service-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .service-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .benefits {
+            background: #f8f9ff;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        .benefits h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Huduma za GIS & Teknolojia</h1>
+        <p>Experienced in GIS & Technology Advancing</p>
+    </div>
+
+    <div class="container">
+        <div class="services-grid">
+            <!-- Upimaji wa Ardhi Section -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Land Surveying" class="service-image">
+                <h2 class="service-title">Upimaji wa Ardhi</h2>
+                <p class="service-description">
+                    Kuwezesha kupima na kupata Cadastral Engineering Maps na Topographic Survey kwa usahihi na ubora wa hali ya juu.
+                </p>
+
+                <h3 style="color: #667eea; font-size: 1.2rem; margin-bottom: 0.5rem;">Huduma Zinazotolewa:</h3>
+                <ul class="service-list">
+                    <li>Upimaji wa Cadastral (Mpakani)</li>
+                    <li>Topographic Survey - Ramani za Maeneo</li>
+                    <li>Engineering Survey kwa Miradi ya Ujenzi</li>
+                    <li>GPS/GNSS Survey kwa Usahihi wa Juu</li>
+                    <li>Boundary Demarcation - Kuweka Alama za Mpakani</li>
+                    <li>Construction Staking - Upimaji wa Msingi</li>
+                    <li>As-Built Survey baada ya Ujenzi</li>
+                    <li>Hydrographic Survey - Upimaji wa Maji</li>
+                    <li>Volume Calculations - Mahesabu ya Kiasi</li>
+                </ul>
+
+                <div class="benefits">
+                    <h4>Faida:</h4>
+                    <p>Usahihi wa hali ya juu, teknolojia ya kisasa, ripoti za haraka, na wataalamu wenye uzoefu.</p>
+                </div>
+            </div>
+
+            <!-- GIS & Mapping Operations Section -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="GIS Mapping" class="service-image">
+                <h2 class="service-title">GIS & Mapping Operations</h2>
+                <p class="service-description">
+                    Kwa kutumia tools mbalimbali za skimfumo ili kuwezesha kufanya uchambuzi wa Takwimu za Kijiografia kwa ufanisi.
+                </p>
+
+                <h3 style="color: #667eea; font-size: 1.2rem; margin-bottom: 0.5rem;">Huduma Zinazotolewa:</h3>
+                <ul class="service-list">
+                    <li>Spatial Data Analysis - Uchambuzi wa Data za Kijiografia</li>
+                    <li>GIS Database Design & Management</li>
+                    <li>Digital Mapping - Ramani za Kidijitali</li>
+                    <li>Remote Sensing & Image Processing</li>
+                    <li>GPS Data Collection & Integration</li>
+                    <li>Custom GIS Application Development</li>
+                    <li>Web GIS Solutions</li>
+                    <li>Spatial Data Visualization</li>
+                    <li>GIS Training & Capacity Building</li>
+                    <li>Data Conversion & Migration</li>
+                </ul>
+
+                <div class="benefits">
+                    <h4>Programu Tunazotumia:</h4>
+                    <p>ArcGIS, QGIS, AutoCAD Map 3D, Global Mapper, Google Earth Pro, na mengineyo.</p>
+                </div>
+
+            </div>
+
+            <!-- Land Use and Land Planning Section -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80" alt="Land Planning" class="service-image">
+                <h2 class="service-title">Land Use and Land Planning</h2>
+                <p class="service-description">
+                    Upangaji wa matumizi bora ya ardhi kwa kutumia tools bora na teknolojia ya hali ya juu.
+                </p>
+
+                <h3 style="color: #667eea; font-size: 1.2rem; margin-bottom: 0.5rem;">Huduma Zinazotolewa:</h3>
+                <ul class="service-list">
+                    <li>Master Planning - Mipango Mikuu ya Miji</li>
+                    <li>Land Use Planning & Zoning</li>
+                    <li>Urban Planning & Development</li>
+                    <li>Rural Planning & Agricultural Zoning</li>
+                    <li>Environmental Impact Assessment (EIA)</li>
+                    <li>Site Planning & Analysis</li>
+                    <li>Infrastructure Planning</li>
+                    <li>Land Suitability Analysis</li>
+                    <li>Settlement Planning</li>
+                    <li>Strategic Environmental Assessment (SEA)</li>
+                    <li>Community Participation & Consultation</li>
+                </ul>
+
+                <div class="benefits">
+                    <h4>Matokeo:</h4>
+                    <p>Matumizi bora ya ardhi, maendeleo endelevu, mazingira salama, na mipango inayozingatia sheria za nchi.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Additional Information Section -->
+        <div style="background: rgb(168, 208, 209); padding: 2rem; border-radius: 10px; margin-top: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            <h2 style="color: #667eea; text-align: center; margin-bottom: 1rem;">Kwa Nini Uchague Sisi?</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div style="text-align: center;">
+                    <h3 style="color: #667eea;">🎯 Uzoefu</h3>
+                    <p>Timu yenye uzoefu wa miaka mingi katika sekta ya GIS na Upimaji</p>
+                </div>
+                <div style="text-align: center;">
+                    <h3 style="color: #667eea;">⚡ Teknolojia ya Kisasa</h3>
+                    <p>Tunatumia vifaa na programu za hali ya juu</p>
+                </div>
+                <div style="text-align: center;">
+                    <h3 style="color: #667eea;">✅ Usahihi</h3>
+                    <p>Matokeo sahihi na ya kuaminika</p>
+                </div>
+                <div style="text-align: center;">
+                    <h3 style="color: #667eea;">🚀 Haraka</h3>
+                    <p>Tunakamilisha miradi kwa wakati uliowekwa</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

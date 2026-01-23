@@ -1,0 +1,110 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(120deg, #9dbbc0, #ac7098);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 420px;
+}
+
+.register-form {
+    background: #fff;
+    padding: 25px;
+    border-radius: 120px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    text-align: center;
+    animation: slideUp 0.8s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.register-form h2 {
+    color: #5f6d57;
+    margin-bottom: 5px;
+}
+
+.register-form p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.register-form input,
+.register-form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+}
+
+.register-form input:focus,
+.register-form select:focus {
+    border-color: #27ae60;
+    box-shadow: 0 0 8px rgba(39, 174, 96, 0.4);
+    outline: none;
+}
+
+.register-form button {
+    width: 100%;
+    padding: 12px;
+    background: #9baeaf;
+    border: none;
+    color: rgb(160, 92, 92);
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.register-form button:hover {
+    background: #778a7f;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.register-form button:active {
+    transform: scale(0.98);
+}
+
+.login-link {
+    margin-top: 18px;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: #27ae60;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.login-link a:hover {
+    color: #1e8449;
+}
+
+#error {
+    display: block;
+    margin-bottom: 10px;
+    color: red;
+    font-size: 14px;
+}

@@ -1,0 +1,187 @@
+<!-- PROJECTS SECTION -->
+<section class="section light">
+    <h2 class="section-title">Sample Projects</h2>
+    <div class="underline"></div>
+<style>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+  }
+  
+  body {
+    background: #f4f6f9;
+    color: #333;
+  }
+  
+  /* HERO */
+  .hero {
+    background: #063970;
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+  }
+  
+  .hero-content {
+    max-width: 900px;
+    margin: auto;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .hero p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+  
+  .hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  /* BUTTONS */
+  .btn {
+    padding: 12px 22px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  
+  .btn.primary {
+    background: #4da3ff;
+    color: white;
+  }
+  
+  .btn.primary:hover {
+    background: #3587e0;
+  }
+  
+  .btn.secondary {
+    background: #2f80ed;
+    color: white;
+  }
+  
+  .btn.secondary:hover {
+    background: #1f6ed5;
+  }
+  
+  /* SECTIONS */
+  .section {
+    padding: 70px 20px;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .section.light {
+    background: #f9fbfd;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 2rem;
+  }
+  
+  .underline {
+    width: 60px;
+    height: 4px;
+    background: #4da3ff;
+    margin: 10px auto 40px;
+    border-radius: 5px;
+  }
+  
+  /* CARDS */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+  
+  .cards.four {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-6px);
+  }
+  
+  .card h3 {
+    margin-bottom: 15px;
+    color: #063970;
+  }
+  
+  .card p {
+    font-size: 0.95rem;s
+    line-height: 1.6;
+  }
+  
+  /* RESPONSIVE */
+  @media (max-width: 992px) {
+    .cards,
+    .cards.four {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .hero h1 {
+      font-size: 2rem;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .cards,
+    .cards.four {
+      grid-template-columns: 1fr;
+    }
+  
+    .hero h1 {
+      font-size: 1.7rem;
+    }
+  }</style>
+    <div class="cards four">
+      <div class="card">
+        <h3>Healthcare GIS Mapping</h3>
+        <p>
+          Implemented geospatial data systems to optimize healthcare
+          facility planning and service delivery.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Agriculture Monitoring</h3>
+        <p>
+          Developed mobile and web-based platforms for monitoring crop performance,
+        land use patterns, soil conditions, and seasonal agricultural productivity
+        through GIS and remote sensing data..
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Real Estate Dashboard</h3>
+        <p>
+          Built an interactive property management and analytics system.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Land Surveying & Cadastral Mapping</h3>
+      <p>
+        Conducted high-precision land surveying and cadastral mapping using
+        GNSS and total station technologies to support land registration,
+        boundary verification, and legal land documentation.
+      </p>
+    </div>

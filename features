@@ -1,0 +1,30 @@
+<!-- PROJECTS SECTION -->
+  <section class="section light">
+    <h2 class="section-title">Sample Projects</h2>
+    <div class="underline"></div>
+
+    <div class="cards four">
+      <div class="card">
+        <h3>Healthcare GIS Mapping</h3>
+        <p>
+          Implemented geospatial data systems to optimize healthcare
+          facility planning and service delivery.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Agriculture Monitoring</h3>
+        <p>
+          Developed mobile and web platforms for tracking crop performance
+          and land use.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Real Estate Dashboard</h3>
+        <p>
+          Built an interactive property management and analytics system.
+        </p>
+      </div>
+
+      <div class="card">
