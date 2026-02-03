@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ardhi Geo Solution Tanzania</title>
+    <title>Ardhi Geo Solution Tanzania - Geospatial & Land Management</title>
     <style>
         * {
             margin: 0;
@@ -12,9 +12,48 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #4a5f3a 0%, #2d3a24 50%, #1a2316 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated background particles */
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.3;
+            }
         }
 
         /* Navigation */
@@ -22,231 +61,62 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(26, 26, 26, 0.95);
             backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 1000;
-            padding: 1rem 0;
+            padding: 1rem 2rem;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
         }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        nav.visible {
+            transform: translateY(0);
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
+        nav ul {
             list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #667eea;
-        }
-
-        .login-btn {
-            padding: 0.5rem 1.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(185, 84, 84, 0.5);
-            backdrop-filter: blur(5px);
-            animation: fadeIn 0.3s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal-content {
-            background: white;
-            margin: 10% auto;
-            padding: 2rem;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 400px;
-            position: relative;
-            animation: slideDown 0.3s;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .close {
-            position: absolute;
-            right: 1.5rem;
-            top: 1rem;
-            font-size: 2rem;
-            font-weight: bold;
-            color: #999;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .close:hover {
-            color: #333;
-        }
-
-        .modal-content h2 {
-            margin-bottom: 1.5rem;
-            color: #333;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #333;
-            font-weight: 500;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 0.75rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .form-footer {
-            margin-top: 1rem;
-            text-align: center;
-            color: #666;
-        }
-
-        .form-footer a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .form-footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #97aa44 0%, #112416 100%);
             display: flex;
-            align-items: center;
             justify-content: center;
-            text-align: center;
-            color: white;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
 
-        .hero::before {
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
-            animation: float 20s infinite linear;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #6b8e4e;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
         }
 
-        @keyframes float {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-100px); }
+        nav a:hover::after {
+            width: 80%;
         }
 
+        nav a:hover {
+            color: #6b8e4e;
+        }
+
+        /* Hero Content */
         .hero-content {
-            max-width: 800px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
+            text-align: center;
+            z-index: 10;
+            max-width: 1000px;
             animation: fadeInUp 1s ease;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease 0.2s both;
         }
 
         @keyframes fadeInUp {
@@ -260,55 +130,108 @@
             }
         }
 
+        h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff, #6b8e4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #e0e0e0;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
         .cta-button {
             display: inline-block;
             padding: 1rem 2.5rem;
-            background: rgb(182, 219, 18);
-            color: #667eea;
+            background: linear-gradient(135deg, #6b8e4e, #4a5f3a);
+            color: #fff;
             text-decoration: none;
             border-radius: 50px;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 1.1rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-            animation: fadeInUp 1s ease 0.4s both;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 10px 30px rgba(107, 142, 78, 0.3);
+            animation: fadeInUp 1s ease 0.6s backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(187, 15, 15, 0.2);
+            box-shadow: 0 15px 40px rgba(107, 142, 78, 0.5);
         }
 
         /* Features Section */
         .features {
             padding: 5rem 2rem;
+            background: #1a1a1a;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #fff, #6b8e4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .features h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #333;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
         .feature-card {
+            background: linear-gradient(135deg, #2d3a24, #1f2718);
             padding: 2rem;
-            background: white;
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(107, 142, 78, 0.2);
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .feature-card.visible {
+            animation: fadeInUp 0.6s ease forwards;
         }
 
         .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 4px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 40px rgba(107, 142, 78, 0.3);
+            border-color: rgba(107, 142, 78, 0.5);
         }
 
         .feature-icon {
@@ -319,118 +242,948 @@
         .feature-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: #2f1bdd;
+            color: #6b8e4e;
         }
 
         .feature-card p {
-            color: #666;
+            color: #c0c0c0;
+            line-height: 1.6;
         }
 
-        /* Footer */
-        footer {
-            background: #774949;
-            color: rgb(241, 238, 238);
+        /* About Section */
+        .about {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #2d3a24, #1a2316);
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 2rem;
+            background: #1a1a1a;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #6b8e4e;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(107, 142, 78, 0.3);
+            background: rgba(45, 58, 36, 0.3);
+            color: #fff;
+            border-radius: 8px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #6b8e4e;
+            background: rgba(45, 58, 36, 0.5);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* Interactive Map */
+        .map-container {
+            margin-top: 3rem;
+            height: 400px;
+            background: linear-gradient(135deg, #2d3a24, #1f2718);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(107, 142, 78, 0.3);
+        }
+
+        .map-placeholder {
             text-align: center;
             padding: 2rem;
         }
 
+        .map-placeholder svg {
+            width: 200px;
+            height: 200px;
+            fill: #6b8e4e;
+            opacity: 0.3;
+        }
+
+        /* Footer */
+        footer {
+            background: #0d0d0d;
+            padding: 2rem;
+            text-align: center;
+            color: #888;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            fill: #6b8e4e;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            nav ul {
+                gap: 1rem;
             }
 
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .features h2 {
-                font-size: 2rem;
-            }
-
-            .feature-grid {
+            .features-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        /* Success message */
+        .success-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(135deg, #6b8e4e, #4a5f3a);
+            padding: 2rem 3rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .success-message.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .success-message h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Authentication Modal */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .auth-modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .auth-modal-content {
+            background: linear-gradient(135deg, #2d3a24, #1f2718);
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            border: 2px solid rgba(107, 142, 78, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            color: #6b8e4e;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+
+        .auth-form h2 {
+            margin-bottom: 0.5rem;
+            color: #6b8e4e;
+        }
+
+        .auth-subtitle {
+            color: #888;
+            margin-bottom: 2rem;
+        }
+
+        .auth-button {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #c0c0c0;
+            font-size: 0.9rem;
+        }
+
+        .checkbox-label input {
+            width: auto;
+        }
+
+        .forgot-password {
+            color: #6b8e4e;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: #8bb066;
+        }
+
+        .auth-switch {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #888;
+        }
+
+        .auth-switch a {
+            color: #6b8e4e;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .auth-switch a:hover {
+            color: #8bb066;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, #6b8e4e, #4a5f3a);
+            padding: 0.5rem 1.5rem !important;
+            border-radius: 25px;
+        }
+
+        /* Dashboard Styles */
+        .dashboard {
+            min-height: 100vh;
+            background: #1a1a1a;
+            padding: 2rem;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, #2d3a24, #1f2718);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(107, 142, 78, 0.3);
+        }
+
+        .dashboard-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .dashboard-nav h2 {
+            color: #6b8e4e;
+            font-size: 2rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-name {
+            color: #fff;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            background: rgba(107, 142, 78, 0.2);
+            border-radius: 25px;
+        }
+
+        .logout-btn {
+            background: rgba(255, 59, 48, 0.2);
+            border: 1px solid rgba(255, 59, 48, 0.5);
+            color: #ff3b30;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 59, 48, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .dashboard-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-card {
+            background: linear-gradient(135deg, #2d3a24, #1f2718);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(107, 142, 78, 0.3);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(107, 142, 78, 0.6);
+            box-shadow: 0 10px 30px rgba(107, 142, 78, 0.2);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-card h3 {
+            color: #6b8e4e;
+            margin-bottom: 1rem;
+        }
+
+        .card-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-label {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .dashboard-section {
+            background: linear-gradient(135deg, #2d3a24, #1f2718);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(107, 142, 78, 0.3);
+        }
+
+        .dashboard-section h3 {
+            color: #6b8e4e;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(107, 142, 78, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(107, 142, 78, 0.2);
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(107, 142, 78, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .activity-details {
+            flex: 1;
+        }
+
+        .activity-title {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-time {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .action-btn {
+            background: rgba(107, 142, 78, 0.2);
+            border: 1px solid rgba(107, 142, 78, 0.4);
+            color: #fff;
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .action-btn:hover {
+            background: rgba(107, 142, 78, 0.3);
+            border-color: rgba(107, 142, 78, 0.6);
+            transform: translateY(-3px);
+        }
+
+        .action-btn span {
+            font-size: 1.2rem;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .profile-field {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            background: rgba(107, 142, 78, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(107, 142, 78, 0.2);
+        }
+
+        .profile-field label {
+            color: #6b8e4e;
+            font-weight: 600;
+        }
+
+        .profile-field span {
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-nav {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .user-info {
+                flex-direction: column;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-field {
+                flex-direction: column;
+                gap: 0.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <div class="logo">Ardhi Geo Solution Tanzania</div>
-            <ul class="nav-links">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="features.html">Features</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="login.html">Login</a></li>
-            </ul>
-            <button class="login-btn" onclick="openModal()"></button>
-        </div>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
     </nav>
 
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Welcome Back</h2>
-            <form onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required placeholder="Enter your email">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" required placeholder="Enter your password">
-                </div>
-                <button type="submit" class="submit-btn">Sign In</button>
-                <div class="form-footer">
-                    <p>Don't have an account? <a href="register.html">Sign up</a></p>
-                </div>
-            </form>
+    <!-- Authentication Modal -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-modal-content">
+            <span class="close-modal" onclick="closeAuthModal()">&times;</span>
+            
+            <!-- Login Form -->
+            <div class="auth-form" id="loginForm">
+                <h2>Welcome Back</h2>
+                <p class="auth-subtitle">Login to access your dashboard</p>
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox"> Remember me
+                        </label>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="cta-button auth-button">Login</button>
+                </form>
+                <p class="auth-switch">Don't have an account? <a href="#" onclick="switchAuthForm('register')">Register here</a></p>
+            </div>
+
+            <!-- Registration Form -->
+            <div class="auth-form" id="registerForm" style="display: none;">
+                <h2>Create Account</h2>
+                <p class="auth-subtitle">Join Ardhi Geo Solution Tanzania</p>
+                <form onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label for="registerName">Full Name</label>
+                        <input type="text" id="registerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email Address</label>
+                        <input type="email" id="registerEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPhone">Phone Number</label>
+                        <input type="tel" id="registerPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerCompany">Company/Organization</label>
+                        <input type="text" id="registerCompany">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <input type="password" id="registerPassword" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Confirm Password</label>
+                        <input type="password" id="registerConfirmPassword" required minlength="6">
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" required> I agree to the Terms & Conditions
+                        </label>
+                    </div>
+                    <button type="submit" class="cta-button auth-button">Create Account</button>
+                </form>
+                <p class="auth-switch">Already have an account? <a href="#" onclick="switchAuthForm('login')">Login here</a></p>
+            </div>
         </div>
-    <div class="hero-image">
-        <img src="c:\Users\TANESCO\Downloads\images (1).jpg" alt="Engineering Work">
-        <button class="nav prev"></button>
-        <button class="nav next"></button>
-      </div> 
     </div>
 
+    <!-- User Dashboard -->
+    <div class="dashboard" id="userDashboard" style="display: none;">
+        <div class="dashboard-header">
+            <div class="dashboard-nav">
+                <h2>Dashboard</h2>
+                <div class="user-info">
+                    <span class="user-name" id="dashboardUserName">User</span>
+                    <button class="logout-btn" onclick="handleLogout()">Logout</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dashboard-content">
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-icon">📊</div>
+                    <h3>Projects</h3>
+                    <p class="card-number">0</p>
+                    <p class="card-label">Active Projects</p>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="card-icon">📁</div>
+                    <h3>Documents</h3>
+                    <p class="card-number">0</p>
+                    <p class="card-label">Uploaded Files</p>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="card-icon">🗺️</div>
+                    <h3>Maps</h3>
+                    <p class="card-number">0</p>
+                    <p class="card-label">Created Maps</p>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="card-icon">📈</div>
+                    <h3>Analytics</h3>
+                    <p class="card-number">0</p>
+                    <p class="card-label">Data Points</p>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Recent Activity</h3>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon">✓</div>
+                        <div class="activity-details">
+                            <p class="activity-title">Account Created</p>
+                            <p class="activity-time">Just now</p>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">📝</div>
+                        <div class="activity-details">
+                            <p class="activity-title">Welcome! Start by exploring our services</p>
+                            <p class="activity-time">Just now</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Quick Actions</h3>
+                <div class="quick-actions">
+                    <button class="action-btn" onclick="showComingSoon('New Project')">
+                        <span>➕</span> New Project
+                    </button>
+                    <button class="action-btn" onclick="showComingSoon('Upload Document')">
+                        <span>📤</span> Upload Document
+                    </button>
+                    <button class="action-btn" onclick="showComingSoon('Create Map')">
+                        <span>🗺️</span> Create Map
+                    </button>
+                    <button class="action-btn" onclick="showComingSoon('Request Survey')">
+                        <span>📐</span> Request Survey
+                    </button>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Your Profile</h3>
+                <div class="profile-info">
+                    <div class="profile-field">
+                        <label>Name:</label>
+                        <span id="profileName">-</span>
+                    </div>
+                    <div class="profile-field">
+                        <label>Email:</label>
+                        <span id="profileEmail">-</span>
+                    </div>
+                    <div class="profile-field">
+                        <label>Phone:</label>
+                        <span id="profilePhone">-</span>
+                    </div>
+                    <div class="profile-field">
+                        <label>Company:</label>
+                        <span id="profileCompany">-</span>
+                    </div>
+                    <button class="action-btn" onclick="showComingSoon('Edit Profile')">Edit Profile</button>
+                </div>
+            </div>
+
+            <button class="cta-button" onclick="backToHomePage()" style="margin-top: 2rem;">Back to Home</button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
             <h1>Ardhi Geo Solution Tanzania</h1>
-            <p>Delivering innovative geospatial and land management solutions by integrating advanced GIS systems, accurate land surveying, spatial data analysis, and sustainable land-use planning to support infrastructure growth and informed decision-making across Tanzania.
-             </p>
-            <a href="#features" class="cta-button">Get Started</a>
+            <p>Delivering innovative geospatial and land management solutions by integrating advanced GIS systems, accurate land surveying, spatial data analysis, and sustainable land-use planning to support infrastructure growth and informed decision-making across Tanzania.</p>
+            <button class="cta-button" onclick="scrollToContact()">Get Started</button>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24">
+                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+            </svg>
         </div>
     </section>
 
+    <!-- Features Section -->
     <section class="features" id="features">
-        <h2>Experienced in GIS & Technology Advancing
-        </h2>
-        <div class="feature-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🌍</div>
-                <h3>Upimaji wa Ardhi</h3>
-                <p>Kuwezesha kupima na kupata Cadastral Engineering Maps na Topographic Survey.</p>
-            </div>
+        <h2 class="section-title">Our Services</h2>
+        <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">🗺️</div>
-                <h3>GIS & Mapping Operations</h3>
-                <p>Kwa kutumia tools mbalimbali za skimfumo ili kuwezesha kufanya uchambuzi wa Takwimu za Kijiografia.</p>
+                <h3>GIS Systems</h3>
+                <p>Advanced Geographic Information Systems for comprehensive spatial data management and analysis, enabling better decision-making.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📐</div>
+                <h3>Land Surveying</h3>
+                <p>Precise and accurate land surveying services using modern technology to ensure reliable measurements and boundary determinations.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Spatial Data Analysis</h3>
+                <p>In-depth spatial data analysis to extract meaningful insights for urban planning, resource management, and development projects.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">🌱</div>
-                <h3>Land use and Land Planning</h3>
-                <p>Upangaji wa matumizi bora ya ardhi kwa kutumia tools bora na teknolojia ya hali ya juu.</p>
-            </div> 
+                <h3>Sustainable Planning</h3>
+                <p>Environmentally conscious land-use planning strategies that balance development needs with ecological preservation.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏗️</div>
+                <h3>Infrastructure Support</h3>
+                <p>Geospatial solutions tailored for infrastructure development, from roads to utilities, ensuring optimal placement and efficiency.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💡</div>
+                <h3>Consulting Services</h3>
+                <p>Expert consulting for land management challenges, providing strategic guidance for public and private sector projects.</p>
+            </div>
         </div>
     </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="section-title">About Us</h2>
+        <div class="about-content">
+            <p>Ardhi Geo Solution Tanzania is a leading provider of geospatial and land management services dedicated to transforming how Tanzania approaches land development and infrastructure planning.</p>
+            <p>With a team of experienced professionals and cutting-edge technology, we deliver solutions that are accurate, sustainable, and tailored to meet the unique challenges of Tanzania's diverse landscape.</p>
+            <p>Our commitment to excellence and innovation drives us to continuously improve our services and support Tanzania's growth journey.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="service">Service Interested In</label>
+                <input type="text" id="service" name="service" placeholder="e.g., GIS Systems, Land Surveying">
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="cta-button">Send Message</button>
+        </form>
+
+        <div class="map-container">
+            <div class="map-placeholder">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/>
+                </svg>
+                <h3>Tanzania</h3>
+                <p>Serving clients across the nation</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Ardhi Geo Solution Tanzania. All rights reserved.</p>
+        <p>Empowering Tanzania through innovative geospatial solutions.</p>
     </footer>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        <h3>✓ Message Sent!</h3>
+        <p>Thank you for contacting us. We'll get back to you soon.</p>
+    </div>
+
+    <script>
+        // Create animated particles
+        function createParticles() {
+            const hero = document.querySelector('.hero');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                hero.appendChild(particle);
+            }
+        }
+
+        // Show navbar on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('visible');
+            } else {
+                navbar.classList.remove('visible');
+            }
+
+            // Animate feature cards on scroll
+            const cards = document.querySelectorAll('.feature-card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (cardTop < windowHeight - 100) {
+                    card.classList.add('visible');
+                }
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll to contact function
+        function scrollToContact() {
+            document.getElementById('contact').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('show');
+            
+            // Reset form
+            this.reset();
+            
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 3000);
+        });
+
+        // Initialize particles
+        createParticles();
+
+        // Trigger animation on load
+        window.addEventListener('load', function() {
+            const cards = document.querySelectorAll('.feature-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.animationDelay = index * 0.1 + 's';
+                }, 100);
+            });
+        });
+
+        // Add hover effect to particles
+        document.addEventListener('mousemove', function(e) {
+            const particles = document.querySelectorAll('.particle');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            particles.forEach((particle, index) => {
+                const speed = (index % 3 + 1) * 0.5;
+                const x = (mouseX - 0.5) * speed * 20;
+                const y = (mouseY - 0.5) * speed * 20;
+                particle.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+    </script>
 </body>
 </html>
