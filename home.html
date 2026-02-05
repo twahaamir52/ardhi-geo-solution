@@ -13,112 +13,394 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f4f4f4;
+            background: linear-gradient(180deg, #2d5016 0%, #1a2f0a 50%, #0d1705 100%);
+            min-height: 100vh;
+            padding: 20px;
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem 0;
             text-align: center;
+            color: #c5e1a5;
+            padding: 40px 20px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            color: #aed581;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        .services-grid {
+            max-width: 1400px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 30px;
+            padding: 20px;
         }
 
         .service-card {
-            background: white;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            background: linear-gradient(135deg, rgba(45, 80, 22, 0.9) 0%, rgba(26, 47, 10, 0.95) 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+            border: 1px solid rgba(197, 225, 165, 0.1);
+        }
+
+        .service-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .service-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .service-card:nth-child(3) {
+            animation-delay: 0.6s;
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            border-color: rgba(197, 225, 165, 0.3);
         }
 
-        .service-image {
+        .card-image {
             width: 100%;
-            height: 200px;
+            height: 250px;
             object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
+            transition: transform 0.5s ease;
         }
 
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        .service-card:hover .card-image {
+            transform: scale(1.1);
         }
 
-        .service-title {
-            color: #667eea;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+        .image-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .card-content {
+            padding: 30px;
+        }
+
+        .card-title {
+            font-size: 1.8em;
+            color: #aed581;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #558b2f;
+            transition: width 0.3s ease;
+        }
+
+        .service-card:hover .card-title::after {
+            width: 100px;
+        }
+
+        .card-description {
+            color: #c5e1a5;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .services-section-title {
+            color: #aed581;
+            font-size: 1.3em;
+            margin-bottom: 15px;
             font-weight: 600;
-        }
-
-        .service-description {
-            color: #666;
-            margin-bottom: 1.5rem;
         }
 
         .service-list {
             list-style: none;
-            margin-bottom: 1.5rem;
         }
 
-        .service-list li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
+        .service-item {
+            padding: 12px 0;
+            color: #c5e1a5;
+            border-bottom: 1px solid rgba(197, 225, 165, 0.1);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateX(-20px);
         }
 
-        .service-list li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #667eea;
+        .service-card:hover .service-item {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .service-item:nth-child(1) { transition-delay: 0.1s; }
+        .service-item:nth-child(2) { transition-delay: 0.15s; }
+        .service-item:nth-child(3) { transition-delay: 0.2s; }
+        .service-item:nth-child(4) { transition-delay: 0.25s; }
+        .service-item:nth-child(5) { transition-delay: 0.3s; }
+        .service-item:nth-child(6) { transition-delay: 0.35s; }
+        .service-item:nth-child(7) { transition-delay: 0.4s; }
+        .service-item:nth-child(8) { transition-delay: 0.45s; }
+        .service-item:nth-child(9) { transition-delay: 0.5s; }
+        .service-item:nth-child(10) { transition-delay: 0.55s; }
+
+        .service-item:hover {
+            color: #aed581;
+            padding-left: 10px;
+            background: rgba(45, 80, 22, 0.3);
+        }
+
+        .service-item::before {
+            content: '✓';
+            color: #aed581;
             font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2em;
         }
 
-        .benefits {
-            background: #f8f9ff;
-            padding: 1rem;
-            border-radius: 5px;
-            margin-top: 1rem;
+        .service-item:last-child {
+            border-bottom: none;
         }
 
-        .benefits h4 {
-            color: #667eea;
-            margin-bottom: 0.5rem;
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .btn {
-            display: inline-block;
-            background: #667eea;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(45, 80, 22, 0.95) 0%, rgba(26, 47, 10, 0.98) 100%);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: scaleIn 0.3s ease;
+            border: 1px solid rgba(197, 225, 165, 0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: #aed581;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #c5e1a5;
+        }
+
+        .learn-more-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 0.8rem 1.5rem;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s ease;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .btn:hover {
-            background: #764ba2;
+        .learn-more-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Why Choose Us Section */
+        .why-choose-section {
+            max-width: 1400px;
+            margin: 60px auto;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            color: white;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .feature-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .feature-icon {
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80px;
+        }
+
+        .feature-icon svg {
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon svg {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .feature-title {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.05em;
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -128,114 +410,302 @@
         <p>Experienced in GIS & Technology Advancing</p>
     </div>
 
-    <div class="container">
-        <div class="services-grid">
-            <!-- Upimaji wa Ardhi Section -->
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Land Surveying" class="service-image">
-                <h2 class="service-title">Upimaji wa Ardhi</h2>
-                <p class="service-description">
-                    Kuwezesha kupima na kupata Cadastral Engineering Maps na Topographic Survey kwa usahihi na ubora wa hali ya juu.
-                </p>
-
-                <h3 style="color: #667eea; font-size: 1.2rem; margin-bottom: 0.5rem;">Huduma Zinazotolewa:</h3>
-                <ul class="service-list">
-                    <li>Upimaji wa Cadastral (Mpakani)</li>
-                    <li>Topographic Survey - Ramani za Maeneo</li>
-                    <li>Engineering Survey kwa Miradi ya Ujenzi</li>
-                    <li>GPS/GNSS Survey kwa Usahihi wa Juu</li>
-                    <li>Boundary Demarcation - Kuweka Alama za Mpakani</li>
-                    <li>Construction Staking - Upimaji wa Msingi</li>
-                    <li>As-Built Survey baada ya Ujenzi</li>
-                    <li>Hydrographic Survey - Upimaji wa Maji</li>
-                    <li>Volume Calculations - Mahesabu ya Kiasi</li>
-                </ul>
-
-                <div class="benefits">
-                    <h4>Faida:</h4>
-                    <p>Usahihi wa hali ya juu, teknolojia ya kisasa, ripoti za haraka, na wataalamu wenye uzoefu.</p>
+    <!-- Why Choose Us Section -->
+    <div class="why-choose-section">
+        <h2 class="section-title">Kwa Nini Uchague Sisi?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                        <circle cx="40" cy="40" r="30" fill="#E8505B" opacity="0.2"/>
+                        <circle cx="40" cy="40" r="20" fill="#E8505B" opacity="0.4"/>
+                        <circle cx="40" cy="40" r="10" fill="#E8505B"/>
+                        <path d="M55 25 L40 40 L35 35" stroke="#5B7FE8" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    </svg>
                 </div>
+                <h3 class="feature-title">Uzoefu</h3>
+                <p class="feature-description">Timu yenye uzoefu wa miaka mingi katika sekta ya GIS na Upimaji</p>
             </div>
-
-            <!-- GIS & Mapping Operations Section -->
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="GIS Mapping" class="service-image">
-                <h2 class="service-title">GIS & Mapping Operations</h2>
-                <p class="service-description">
-                    Kwa kutumia tools mbalimbali za skimfumo ili kuwezesha kufanya uchambuzi wa Takwimu za Kijiografia kwa ufanisi.
-                </p>
-
-                <h3 style="color: #667eea; font-size: 1.2rem; margin-bottom: 0.5rem;">Huduma Zinazotolewa:</h3>
-                <ul class="service-list">
-                    <li>Spatial Data Analysis - Uchambuzi wa Data za Kijiografia</li>
-                    <li>GIS Database Design & Management</li>
-                    <li>Digital Mapping - Ramani za Kidijitali</li>
-                    <li>Remote Sensing & Image Processing</li>
-                    <li>GPS Data Collection & Integration</li>
-                    <li>Custom GIS Application Development</li>
-                    <li>Web GIS Solutions</li>
-                    <li>Spatial Data Visualization</li>
-                    <li>GIS Training & Capacity Building</li>
-                    <li>Data Conversion & Migration</li>
-                </ul>
-
-                <div class="benefits">
-                    <h4>Programu Tunazotumia:</h4>
-                    <p>ArcGIS, QGIS, AutoCAD Map 3D, Global Mapper, Google Earth Pro, na mengineyo.</p>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                        <rect x="25" y="20" width="30" height="20" rx="2" fill="#5B7FE8" opacity="0.3"/>
+                        <rect x="20" y="42" width="40" height="3" rx="1.5" fill="#5B7FE8"/>
+                        <rect x="28" y="48" width="24" height="2" rx="1" fill="#5B7FE8" opacity="0.6"/>
+                        <path d="M30 30 L35 35 L45 25" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    </svg>
                 </div>
-
+                <h3 class="feature-title">Teknolojia ya Kisasa</h3>
+                <p class="feature-description">Tunatumia vifaa na programu za hali ya juu</p>
             </div>
-
-            <!-- Land Use and Land Planning Section -->
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80" alt="Land Planning" class="service-image">
-                <h2 class="service-title">Land Use and Land Planning</h2>
-                <p class="service-description">
-                    Upangaji wa matumizi bora ya ardhi kwa kutumia tools bora na teknolojia ya hali ya juu.
-                </p>
-
-                <h3 style="color: #08090e; font-size: 1.2rem; margin-bottom: 0.5rem;">Huduma Zinazotolewa:</h3>
-                <ul class="service-list">
-                    <li>Master Planning - Mipango Mikuu ya Miji</li>
-                    <li>Land Use Planning & Zoning</li>
-                    <li>Urban Planning & Development</li>
-                    <li>Rural Planning & Agricultural Zoning</li>
-                    <li>Environmental Impact Assessment (EIA)</li>
-                    <li>Site Planning & Analysis</li>
-                    <li>Strategic Environmental Assessment (SEA)</li>
-                    <li>Community Participation & Consultation</li>
-                </ul>
-
-                <div class="benefits">
-                    <h4>Matokeo:</h4>
-                    <p>Matumizi bora ya ardhi, maendeleo endelevu, mazingira salama, na mipango inayozingatia sheria za nchi.</p>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                        <rect x="25" y="25" width="30" height="30" rx="5" fill="#4CAF50"/>
+                        <path d="M32 40 L38 46 L50 34" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
-
+                <h3 class="feature-title">Usahihi</h3>
+                <p class="feature-description">Matokeo sahihi na ya kuaminika</p>
             </div>
-        </div>
-
-        <!-- Additional Information Section -->
-        <div style="background: rgb(168, 208, 209); padding: 2rem; border-radius: 10px; margin-top: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-            <h2 style="color: #667eea; text-align: center; margin-bottom: 1rem;">Kwa Nini Uchague Sisi?</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
-                <div style="text-align: center;">
-                    <h3 style="color: #667eea;"> Uzoefu</h3>
-                    <p>Timu yenye uzoefu wa miaka mingi katika sekta ya GIS na Upimaji</p>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                        <path d="M40 15 L45 35 L40 55 L35 35 Z" fill="#FF9800"/>
+                        <path d="M40 25 L43 35 L40 45 L37 35 Z" fill="#FFC107"/>
+                    </svg>
                 </div>
-                <div style="text-align: center;">
-                    <h3 style="color: #667eea;"> Teknolojia ya Kisasa</h3>
-                    <p>Tunatumia vifaa na programu za hali ya juu</p>
-                </div>
-                <div style="text-align: center;">
-                    <h3 style="color: #667eea;"> Usahihi</h3>
-                    <p>Matokeo sahihi na ya kuaminika</p>
-                </div>
-                <div style="text-align: center;">
-                    <h3 style="color: #667eea;"> Haraka</h3>
-                    <p>Tunakamilisha miradi kwa wakati uliowekwa</p>
-                </div>
+                <h3 class="feature-title">Haraka</h3>
+                <p class="feature-description">Tunakamilisha miradi kwa wakati uliowekwa</p>
             </div>
         </div>
     </div>
+
+    <div class="container">
+        <!-- Card 1: Upimaji wa Ardhi -->
+        <div class="service-card" data-service="upimaji">
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=600&h=400&fit=crop" alt="Upimaji wa Ardhi" class="card-image">
+                <div class="image-overlay"></div>
+            </div>
+            <div class="card-content">
+                <h2 class="card-title">Upimaji wa Ardhi</h2>
+                <p class="card-description">Kuwezesha kupima na kupata Cadastral Engineering Maps na Topographic Survey kwa usahihi na ubora wa hali ya juu.</p>
+                
+                <h3 class="services-section-title">Huduma Zinazotolewa:</h3>
+                <ul class="service-list">
+                    <li class="service-item">Upimaji wa Cadastral (Mpakani)</li>
+                    <li class="service-item">Topographic Survey - Ramani za Maeneo</li>
+                    <li class="service-item">Engineering Survey kwa Miradi ya Ujenzi</li>
+                    <li class="service-item">GPS/GNSS Survey kwa Usahihi wa Juu</li>
+                    <li class="service-item">Boundary Demarcation - Kuweka Alama za Mpakani</li>
+                    <li class="service-item">Construction Staking - Upimaji wa Msingi</li>
+                    <li class="service-item">As-Built Survey baada ya Ujenzi</li>
+                    <li class="service-item">Hydrographic Survey - Upimaji wa Maji</li>
+                    <li class="service-item">Volume Calculations - Mahesabu ya Kiasi</li>
+                </ul>
+                <div style="background: #f8f9ff; padding: 15px; border-radius: 10px; margin-top: 20px;">
+                    <h4 style="color: #667eea; margin-bottom: 10px;">Faida:</h4>
+                    <p style="color: #666; font-size: 0.95em; line-height: 1.6;">Usahihi wa hali ya juu, teknolojia ya kisasa, ripoti za haraka, na wataalamu wenye uzoefu.</p>
+                </div>
+                <button class="learn-more-btn" onclick="openModal('upimaji')">Jifunze Zaidi</button>
+            </div>
+        </div>
+
+        <!-- Card 2: GIS & Mapping Operations -->
+        <div class="service-card" data-service="gis">
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="GIS & Mapping" class="card-image">
+                <div class="image-overlay"></div>
+            </div>
+            <div class="card-content">
+                <h2 class="card-title">GIS & Mapping Operations</h2>
+                <p class="card-description">Kwa kutumia tools mbalimbali za skimfumo ili kuwezesha kufanya uchambuzi wa Takwimu za Kijiografia kwa ufanisi.</p>
+                
+                <h3 class="services-section-title">Huduma Zinazotolewa:</h3>
+                <ul class="service-list">
+                    <li class="service-item">Spatial Data Analysis - Uchambuzi wa Data za Kijiografia</li>
+                    <li class="service-item">GIS Database Design & Management</li>
+                    <li class="service-item">Digital Mapping - Ramani za Kidijitali</li>
+                    <li class="service-item">Remote Sensing & Image Processing</li>
+                    <li class="service-item">GPS Data Collection & Integration</li>
+                    <li class="service-item">Custom GIS Application Development</li>
+                    <li class="service-item">Web GIS Solutions</li>
+                    <li class="service-item">Spatial Data Visualization</li>
+                    <li class="service-item">GIS Training & Capacity Building</li>
+                    <li class="service-item">Data Conversion & Migration</li>
+                </ul>
+                <div style="background: #f8f9ff; padding: 15px; border-radius: 10px; margin-top: 20px;">
+                    <h4 style="color: #667eea; margin-bottom: 10px;">Programu Tunazotumia:</h4>
+                    <p style="color: #666; font-size: 0.95em; line-height: 1.6;">ArcGIS, QGIS, AutoCAD Map 3D, Global Mapper, Google Earth Pro, na mengineyo.</p>
+                </div>
+                <button class="learn-more-btn" onclick="openModal('gis')">Jifunze Zaidi</button>
+            </div>
+        </div>
+
+        <!-- Card 3: Land Use and Land Planning -->
+        <div class="service-card" data-service="planning">
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop" alt="Land Planning" class="card-image">
+                <div class="image-overlay"></div>
+            </div>
+            <div class="card-content">
+                <h2 class="card-title">Land Use and Land Planning</h2>
+                <p class="card-description">Upangaji wa matumizi bora ya ardhi kwa kutumia tools bora na teknolojia ya hali ya juu.</p>
+                
+                <h3 class="services-section-title">Huduma Zinazotolewa:</h3>
+                <ul class="service-list">
+                    <li class="service-item">Master Planning - Mipango Mikuu ya Miji</li>
+                    <li class="service-item">Land Use Planning & Zoning</li>
+                    <li class="service-item">Urban Planning & Development</li>
+                    <li class="service-item">Rural Planning & Agricultural Zoning</li>
+                    <li class="service-item">Environmental Impact Assessment (EIA)</li>
+                    <li class="service-item">Site Planning & Analysis</li>
+                    <li class="service-item">Strategic Environmental Assessment (SEA)</li>
+                    <li class="service-item">Community Participation & Consultation</li>
+                </ul>
+                <div style="background: #f8f9ff; padding: 15px; border-radius: 10px; margin-top: 20px;">
+                    <h4 style="color: #667eea; margin-bottom: 10px;">Matokeo:</h4>
+                    <p style="color: #666; font-size: 0.95em; line-height: 1.6;">Matumizi bora ya ardhi, maendeleo endelevu, mazingira salama, na mipango inayozingatia sheria za nchi.</p>
+                </div>
+                <button class="learn-more-btn" onclick="openModal('planning')">Jifunze Zaidi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Modal functionality
+        const modalData = {
+            upimaji: {
+                title: 'Upimaji wa Ardhi',
+                description: 'Tunafanya kazi za upimaji wa ardhi kwa kutumia teknolojia ya kisasa ikiwemo GPS/GNSS, Total Stations, na drones. Huduma zetu zinajumuisha:',
+                details: [
+                    'Cadastral Survey kwa kupima mipaka ya ardhi',
+                    'Topographic Survey kwa kupata ramani za maeneo',
+                    'Engineering Survey kwa miradi ya ujenzi',
+                    'GPS/GNSS Survey kwa usahihi wa juu',
+                    'Boundary Demarcation - kuweka alama za mpakani',
+                    'Construction Staking - upimaji wa msingi',
+                    'As-built Survey baada ya ujenzi',
+                    'Hydrographic Survey kwa maeneo ya maji',
+                    'Volume Calculations - mahesabu ya kiasi'
+                ]
+            },
+            gis: {
+                title: 'GIS & Mapping Operations',
+                description: 'Tunasaidia katika uchambuzi wa data za kijiografia na utengenezaji wa ramani za kidijitali. Huduma zetu ni pamoja na:',
+                details: [
+                    'Spatial Analysis kwa maamuzi bora',
+                    'Database Design na Management',
+                    'Digital Mapping na Cartography',
+                    'Remote Sensing Data Processing',
+                    'GPS Data Collection & Integration',
+                    'GIS Application Development',
+                    'Web GIS Solutions',
+                    'Spatial Data Visualization',
+                    'GIS Training & Capacity Building',
+                    'Data Conversion & Migration'
+                ]
+            },
+            planning: {
+                title: 'Land Use and Land Planning',
+                description: 'Tunasaidia katika upangaji wa matumizi bora ya ardhi kwa maendeleo endelevu. Huduma zetu ni pamoja na:',
+                details: [
+                    'Master Planning kwa miji na vijiji',
+                    'Land Use Planning na Zoning',
+                    'Urban Design na Development Control',
+                    'Rural Development Planning',
+                    'Environmental Impact Assessment (EIA)',
+                    'Site Planning & Analysis',
+                    'Strategic Environmental Assessment (SEA)',
+                    'Community Participation & Consultation'
+                ]
+            }
+        };
+
+        function openModal(service) {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modal-body');
+            const data = modalData[service];
+            
+            let detailsHTML = data.details.map(detail => 
+                `<li style="padding: 10px 0; border-bottom: 1px solid #f0f0f0;">${detail}</li>`
+            ).join('');
+            
+            modalBody.innerHTML = `
+                <h2 style="color: #667eea; margin-bottom: 20px;">${data.title}</h2>
+                <p style="color: #666; line-height: 1.8; margin-bottom: 20px;">${data.description}</p>
+                <ul style="list-style: none; padding: 0;">
+                    ${detailsHTML}
+                </ul>
+                <div style="margin-top: 30px; padding: 20px; background: #f8f9ff; border-radius: 10px;">
+                    <h3 style="color: #764ba2; margin-bottom: 10px;">Wasiliana Nasi</h3>
+                    <p style="color: #666;">Kwa maelezo zaidi kuhusu huduma hizi, tafadhali wasiliana nasi.</p>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Smooth scroll to top button
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                document.body.style.paddingBottom = '60px';
+            } else {
+                document.body.style.paddingBottom = '20px';
+            }
+        });
+
+        // Add parallax effect to images
+        document.addEventListener('mousemove', function(e) {
+            const cards = document.querySelectorAll('.service-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                    const xRotation = ((y - rect.height / 2) / rect.height) * 5;
+                    const yRotation = ((x - rect.width / 2) / rect.width) * -5;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${xRotation}deg) rotateY(${yRotation}deg) translateY(-10px)`;
+                } else {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+                }
+            });
+        });
+
+        // Reset card rotation when mouse leaves
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+            });
+        });
+    </script>
 </body>
 </html>
