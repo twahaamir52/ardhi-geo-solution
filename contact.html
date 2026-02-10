@@ -1,174 +1,1118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ardhi Geo Solution | Contact Us</title>
-
-<style>
-    body {
-        font-family: "Segoe UI", sans-serif;
-        background: #5f6463;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;s
-        margin: 0;
-    }
-
-    .contact-container {
-        background: #e9e5e5;
-        padding: 28px;
-        width: 380px;
-        border-radius: 14px;
-        border-top: 4px solid #008578; /* Pharmacy theme color */
-        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        animation: fadeIn 0.7s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    h2 {
-        text-align: center;
-        margin-bottom: 5px;
-        color: #112e2b;
-    }
-
-    p.subtitle {
-        text-align: center;
-        color: #555;
-        margin-top: 0;
-        margin-bottom: 25px;
-    }
-
-    label {
-        font-weight: 600;
-        display: block;
-        margin-top: 15px;
-        color: #333;
-    }
-
-    input, textarea {
-        width: 100%;
-        padding: 12px;
-        margin-top: 5px;
-        border: 1px solid #b8d8d4;
-        border-radius: 6px;
-        transition: 0.3s;
-    }
-
-    input:focus, textarea:focus {
-        border-color: #008578;
-        box-shadow: 0 0 5px rgba(0,133,120,0.3);
-        outline: none;
-    }
-
-    textarea {
-        height: 110px;
-        resize: none;
-    }
-
-    button {
-        width: 100%;
-        margin-top: 22px;
-        padding: 12px;
-        font-size: 16px;
-        border: none;
-        background: #008578;
-        color: white;
-        font-weight: bold;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    button:hover {
-        background: #006f65;
-    }
-
-    /* Success Popup */
-    .popup {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(1);
-        background: #ffffff;
-        padding: 28px 35px;
-        border-radius: 12px;
-        text-align: center;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-        display: none;
-        z-index: 1000;
-        animation: pop 0.4s ease;
-    }
-
-    @keyframes pop {
-        from { transform: translate(-50%, -50%) scale(0.7); opacity: 0; }
-        to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-    }
-
-    .popup button {
-        margin-top: 15px;
-        background: #008578;
-    }
-</style>
-
-</head>
-<body>
-
-<div class="contact-container">
-    <h2>Ardhi Geo Solution</h2>
-    <p class="subtitle">How can we assist you today?</p>
-
-    <form id="contactForm">
-        <label>Your Name</label>
-        <input type="text" id="name" required placeholder="Enter your name">
-
-        <label>Email Address</label>
-        <input type="email" id="email" required placeholder="Enter your email">
-
-        <label>Your Message</label>
-        <textarea id="message" required placeholder="How can we help you?"></textarea>
-
-        <button type="submit">Send Message</button>
-    </form>
-</div>
-
-<!-- Success Popup -->
-<div class="popup" id="popup">
-    <h3>Message Sent ✔</h3>
-    <p>Thank you for contacting Nzugu­ni Pharmacy.  
-    Our team will respond shortly.</p>
-    <button onclick="closePopup()">OK</button>
-</div>
-
-<script>
-    const form = document.getElementById("contactForm");
-    const popup = document.getElementById("popup");
-
-    form.addEventListener("submit", function(e) {
-        e.preventDefault();
-
-        let name = document.getElementById("name").value.trim();
-        let email = document.getElementById("email").value.trim();
-        let message = document.getElementById("message").value.trim();
-
-        if (!name || !email || !message) {
-            alert("Please fill out all fields.");
-            return;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Interactive Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        popup.style.display = "block";
-        form.reset();
-    });
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a8d5e2 0%, #d4e7f0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-    function closePopup() {
-        popup.style.display = "none";
-    }
-</script>
+        /* Decorative background elements */
+        .bg-decoration {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            animation: fadeInScale 1s ease-out forwards;
+        }
 
+        .circle-1 {
+            width: 100px;
+            height: 100px;
+            border: 3px solid white;
+            top: 15%;
+            left: 10%;
+            animation-delay: 0.2s;
+        }
+
+        .circle-2 {
+            width: 60px;
+            height: 60px;
+            background: white;
+            top: 20%;
+            right: 15%;
+            animation-delay: 0.4s;
+        }
+
+        .circle-3 {
+            width: 40px;
+            height: 40px;
+            background: white;
+            bottom: 25%;
+            left: 8%;
+            animation-delay: 0.6s;
+        }
+
+        .circle-4 {
+            width: 80px;
+            height: 80px;
+            border: 3px solid white;
+            bottom: 15%;
+            right: 20%;
+            animation-delay: 0.8s;
+        }
+
+        .x-mark, .plus-mark {
+            position: absolute;
+            color: white;
+            font-size: 48px;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeInRotate 1s ease-out forwards;
+        }
+
+        .x-mark {
+            top: 12%;
+            right: 8%;
+            animation-delay: 0.3s;
+        }
+
+        .plus-mark {
+            bottom: 20%;
+            right: 12%;
+            animation-delay: 0.5s;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            max-width: 1000px;
+            width: 100%;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 0.8s ease-out 0.3s forwards;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #2c5282 0%, #4a7ba7 100%);
+            padding: 15px 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+
+        .nav-item {
+            width: 60px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 2px;
+            transition: background 0.3s;
+            transform: scaleX(0);
+            animation: expandWidth 0.5s ease-out forwards;
+        }
+
+        .nav-item:nth-child(1) { animation-delay: 0.6s; }
+        .nav-item:nth-child(2) { animation-delay: 0.7s; }
+        .nav-item:nth-child(3) { animation-delay: 0.8s; }
+        .nav-item:nth-child(4) { animation-delay: 0.9s; }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-section {
+            flex: 1;
+            padding: 80px 50px 50px;
+        }
+
+        h1 {
+            color: #2c5282;
+            font-size: 48px;
+            margin-bottom: 40px;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideInLeft 0.8s ease-out 1s forwards;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideInLeft 0.6s ease-out forwards;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 1.2s; }
+        .form-group:nth-child(2) { animation-delay: 1.4s; }
+        .form-group:nth-child(3) { animation-delay: 1.6s; }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .form-group:nth-child(1) .input-icon { animation-delay: 1.4s; }
+        .form-group:nth-child(2) .input-icon { animation-delay: 1.6s; }
+        .form-group:nth-child(3) .input-icon { animation-delay: 1.8s; }
+
+        input, textarea {
+            width: 100%;
+            padding: 18px 20px 18px 55px;
+            border: none;
+            background: #f0f4f8;
+            border-radius: 50px;
+            font-size: 16px;
+            color: #64748b;
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        textarea {
+            border-radius: 25px;
+            resize: vertical;
+            min-height: 120px;
+            padding-top: 20px;
+            font-family: inherit;
+        }
+
+        input:focus, textarea:focus {
+            background: #e2e8f0;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+            transform: scale(1.01);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #94a3b8;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.6s ease-out 1.8s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .illustration-section {
+            flex: 1;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 40px 40px;
+            position: relative;
+        }
+
+        .illustration {
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        /* Person on Skateboard Illustration */
+        .person-container {
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 0.8s ease-out 1.5s forwards;
+        }
+
+        .person {
+            width: 180px;
+            height: 250px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Head */
+        .head {
+            width: 60px;
+            height: 70px;
+            background: #fef3c7;
+            border: 2px solid #1e293b;
+            border-radius: 50% 50% 45% 45%;
+            position: absolute;
+            top: 0;
+            left: 60px;
+            z-index: 3;
+        }
+
+        .face-detail {
+            width: 8px;
+            height: 3px;
+            background: #1e293b;
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .eye-left {
+            top: 25px;
+            left: 15px;
+        }
+
+        .eye-right {
+            top: 25px;
+            right: 15px;
+        }
+
+        .smile {
+            width: 20px;
+            height: 10px;
+            border: 2px solid #1e293b;
+            border-top: none;
+            border-radius: 0 0 20px 20px;
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Body - Yellow Shirt */
+        .body {
+            width: 100px;
+            height: 80px;
+            background: #fbbf24;
+            border: 2px solid #1e293b;
+            border-radius: 10px;
+            position: absolute;
+            top: 65px;
+            left: 40px;
+            z-index: 2;
+        }
+
+        /* Arms */
+        .arm {
+            width: 50px;
+            height: 60px;
+            background: #fbbf24;
+            border: 2px solid #1e293b;
+            position: absolute;
+            top: 70px;
+            z-index: 4;
+        }
+
+        .arm-left {
+            left: 25px;
+            border-radius: 10px 0 0 10px;
+            transform: rotate(-10deg);
+        }
+
+        .arm-right {
+            right: 25px;
+            border-radius: 0 10px 10px 0;
+            transform: rotate(10deg);
+        }
+
+        .hand {
+            width: 25px;
+            height: 25px;
+            background: #fef3c7;
+            border: 2px solid #1e293b;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -10px;
+        }
+
+        .hand-left {
+            left: -5px;
+        }
+
+        .hand-right {
+            right: -5px;
+        }
+
+        /* Envelope */
+        .envelope-held {
+            width: 120px;
+            height: 80px;
+            background: white;
+            border: 3px solid #1e293b;
+            position: absolute;
+            top: 100px;
+            left: 30px;
+            z-index: 5;
+            transform: rotate(-5deg);
+            animation: envelopeBounce 2s ease-in-out 2s infinite;
+        }
+
+        .envelope-held::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            height: 45px;
+            background: white;
+            border: 3px solid #1e293b;
+            border-bottom: none;
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+        }
+
+        .envelope-lines {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .envelope-line {
+            width: 70px;
+            height: 2px;
+            background: #1e293b;
+            margin: 5px 0;
+        }
+
+        /* Legs */
+        .leg {
+            width: 30px;
+            height: 90px;
+            background: #cbd5e1;
+            border: 2px solid #1e293b;
+            position: absolute;
+            top: 140px;
+            border-radius: 5px;
+        }
+
+        .leg-left {
+            left: 55px;
+        }
+
+        .leg-right {
+            left: 95px;
+        }
+
+        /* Shoes */
+        .shoe {
+            width: 40px;
+            height: 25px;
+            background: #1e293b;
+            border: 2px solid #1e293b;
+            border-radius: 0 0 15px 5px;
+            position: absolute;
+            bottom: -25px;
+        }
+
+        /* Skateboard */
+        .skateboard-container {
+            position: relative;
+            width: 200px;
+            margin: 30px auto 0;
+            opacity: 0;
+            animation: slideInFromRight 0.8s ease-out 2s forwards;
+        }
+
+        .skateboard {
+            width: 200px;
+            height: 20px;
+            background: #2c5282;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .wheel {
+            width: 30px;
+            height: 30px;
+            background: #1e293b;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -5px;
+            animation: rotate 2s linear infinite;
+        }
+
+        .wheel-left { left: 10px; }
+        .wheel-right { right: 10px; }
+
+        /* Floating Icons */
+        .phone-icon {
+            position: absolute;
+            top: 80px;
+            right: 60px;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: popInFloat 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 2.2s forwards,
+                       float 3s ease-in-out 3s infinite;
+        }
+
+        .phone-icon::before {
+            content: '📞';
+            font-size: 28px;
+        }
+
+        .message-icon {
+            position: absolute;
+            top: 160px;
+            right: 20px;
+            width: 70px;
+            height: 60px;
+            background: #fbbf24;
+            border-radius: 10px;
+            opacity: 0;
+            animation: popInFloat 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 2.4s forwards,
+                       float 3s ease-in-out 3.5s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .message-lines {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .message-line {
+            width: 40px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+        }
+
+        /* Decorative Squiggles */
+        .squiggle {
+            position: absolute;
+            stroke: #fbbf24;
+            stroke-width: 2;
+            fill: none;
+            opacity: 0;
+            animation: drawPath 2s ease-in-out 2.6s forwards;
+        }
+
+        .squiggle path {
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            animation: drawLine 1.5s ease-out 2.6s forwards;
+        }
+
+        .squiggle-1 {
+            top: 40px;
+            right: 0;
+            width: 80px;
+            height: 80px;
+        }
+
+        .squiggle-2 {
+            bottom: 100px;
+            left: 10px;
+            width: 60px;
+            height: 60px;
+        }
+
+        .squiggle-3 {
+            top: 120px;
+            left: -10px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .small-dots {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #1e293b;
+            border-radius: 50%;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .dot-1 {
+            top: 60px;
+            left: 40px;
+            animation-delay: 2.8s;
+        }
+
+        .dot-2 {
+            top: 200px;
+            right: 80px;
+            animation-delay: 3s;
+        }
+
+        .dot-3 {
+            bottom: 120px;
+            left: 50px;
+            animation-delay: 3.2s;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: #10b981;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: successSlide 0.5s ease-out;
+        }
+
+        .error-message {
+            display: none;
+            background: #ef4444;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: successSlide 0.5s ease-out;
+        }
+
+        /* Loading Animation */
+        .loading-dots {
+            display: none;
+        }
+
+        .loading-dots.active {
+            display: inline-block;
+        }
+
+        .loading-dots span {
+            animation: blink 1.4s infinite;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInRotate {
+            from {
+                opacity: 0;
+                transform: rotate(-180deg) scale(0.5);
+            }
+            to {
+                opacity: 0.3;
+                transform: rotate(0deg) scale(1);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes expandWidth {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        @keyframes popInFloat {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            70% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes envelopeBounce {
+            0%, 100% {
+                transform: rotate(-5deg) translateY(0);
+            }
+            50% {
+                transform: rotate(-5deg) translateY(-5px);
+            }
+        }
+
+        @keyframes drawLine {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawPath {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes successSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.8);
+            }
+            70% {
+                transform: translateY(5px) scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes blink {
+            0%, 80%, 100% {
+                opacity: 0;
+            }
+            40% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .illustration-section {
+                display: none;
+            }
+
+            .form-section {
+                padding: 60px 30px 30px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Decorations -->
+    <div class="bg-decoration circle-1"></div>
+    <div class="bg-decoration circle-2"></div>
+    <div class="bg-decoration circle-3"></div>
+    <div class="bg-decoration circle-4"></div>
+    <div class="x-mark">×</div>
+    <div class="plus-mark">+</div>
+
+    <div class="container">
+        <!-- Top Navigation Bar -->
+        <div class="navbar">
+            <div class="nav-item"></div>
+            <div class="nav-item"></div>
+            <div class="nav-item"></div>
+            <div class="nav-item"></div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-section">
+            <h1>Contact us</h1>
+            <form id="contactForm">
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <span class="input-icon">👤</span>
+                        <input type="text" id="name" placeholder="Name" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <span class="input-icon">✉️</span>
+                        <input type="email" id="email" placeholder="Email" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <span class="input-icon">💬</span>
+                        <textarea id="message" placeholder="Message" required></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <span class="btn-text">Send Message</span>
+                    <span class="loading-dots">Sending<span>.</span><span>.</span><span>.</span></span>
+                </button>
+                
+                <div class="success-message" id="successMessage">
+                    ✓ Message sent successfully!
+                </div>
+                
+                <div class="error-message" id="errorMessage">
+                    ✗ Please fill in all fields correctly.
+                </div>
+            </form>
+        </div>
+
+        <!-- Illustration Section -->
+        <div class="illustration-section">
+            <div class="illustration">
+                <!-- Floating Icons -->
+                <div class="phone-icon"></div>
+                <div class="message-icon">
+                    <div class="message-lines">
+                        <div class="message-line"></div>
+                        <div class="message-line"></div>
+                        <div class="message-line"></div>
+                    </div>
+                </div>
+
+                <!-- Decorative Squiggles -->
+                <svg class="squiggle squiggle-1" viewBox="0 0 80 80">
+                    <path d="M 10 40 Q 30 10, 50 40 T 70 40" />
+                </svg>
+                
+                <svg class="squiggle squiggle-2" viewBox="0 0 60 60">
+                    <path d="M 10 30 Q 25 10, 40 30 T 55 30" />
+                </svg>
+
+                <svg class="squiggle squiggle-3" viewBox="0 0 50 50">
+                    <path d="M 5 25 Q 18 8, 30 25 T 45 25" />
+                </svg>
+
+                <!-- Small Dots -->
+                <div class="small-dots dot-1"></div>
+                <div class="small-dots dot-2"></div>
+                <div class="small-dots dot-3"></div>
+
+                <!-- Person with Envelope -->
+                <div class="person-container">
+                    <div class="person">
+                        <!-- Head -->
+                        <div class="head">
+                            <div class="face-detail eye-left"></div>
+                            <div class="face-detail eye-right"></div>
+                            <div class="smile"></div>
+                        </div>
+
+                        <!-- Arms -->
+                        <div class="arm arm-left">
+                            <div class="hand hand-left"></div>
+                        </div>
+                        <div class="arm arm-right">
+                            <div class="hand hand-right"></div>
+                        </div>
+
+                        <!-- Body -->
+                        <div class="body"></div>
+
+                        <!-- Envelope -->
+                        <div class="envelope-held">
+                            <div class="envelope-lines">
+                                <div class="envelope-line"></div>
+                                <div class="envelope-line" style="width: 50px;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Legs -->
+                        <div class="leg leg-left">
+                            <div class="shoe"></div>
+                        </div>
+                        <div class="leg leg-right">
+                            <div class="shoe"></div>
+                        </div>
+                    </div>
+
+                    <!-- Skateboard -->
+                    <div class="skateboard-container">
+                        <div class="skateboard">
+                            <div class="wheel wheel-left"></div>
+                            <div class="wheel wheel-right"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form Validation and Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('.submit-btn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const loadingDots = submitBtn.querySelector('.loading-dots');
+            const successMsg = document.getElementById('successMessage');
+            const errorMsg = document.getElementById('errorMessage');
+            
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            // Hide previous messages
+            successMsg.classList.remove('show');
+            errorMsg.classList.remove('show');
+            
+            // Validate email
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                errorMsg.textContent = '✗ Please enter a valid email address.';
+                errorMsg.classList.add('show');
+                document.getElementById('email').style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    document.getElementById('email').style.animation = '';
+                }, 500);
+                return;
+            }
+            
+            // Show loading animation
+            btnText.style.display = 'none';
+            loadingDots.classList.add('active');
+            submitBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Hide loading, show success
+                loadingDots.classList.remove('active');
+                btnText.style.display = 'inline';
+                submitBtn.disabled = false;
+                
+                successMsg.classList.add('show');
+                
+                // Log form data (in real app, this would be sent to server)
+                console.log('Form submitted:', { name, email, message });
+                
+                // Reset form with animation
+                const inputs = this.querySelectorAll('input, textarea');
+                inputs.forEach((input, index) => {
+                    setTimeout(() => {
+                        input.style.transition = 'all 0.3s';
+                        input.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            input.value = '';
+                            input.style.background = '#f0f4f8';
+                            input.style.transform = 'scale(1)';
+                        }, 150);
+                    }, index * 100);
+                });
+                
+                // Hide success message after 4 seconds
+                setTimeout(() => {
+                    successMsg.classList.remove('show');
+                }, 4000);
+            }, 2000);
+        });
+
+        // Enhanced Input Validation and Effects
+        const inputs = document.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+                this.parentElement.style.transition = 'transform 0.3s';
+            });
+
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+                
+                if (this.value.trim() !== '') {
+                    this.style.background = '#e0f2fe';
+                } else {
+                    this.style.background = '#f0f4f8';
+                }
+            });
+
+            // Typing animation effect
+            input.addEventListener('input', function() {
+                this.style.transform = 'scale(1.01)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 100);
+            });
+        });
+
+        // Real-time Email Validation
+        const emailInput = document.getElementById('email');
+        emailInput.addEventListener('blur', function() {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (this.value && !emailPattern.test(this.value)) {
+                this.style.background = '#fee2e2';
+            } else if (this.value) {
+                this.style.background = '#e0f2fe';
+            }
+        });
+
+        // Parallax Effect on Mouse Move
+        document.addEventListener('mousemove', (e) => {
+            const illustrations = document.querySelectorAll('.phone-icon, .message-icon, .squiggle');
+            const mouseX = e.clientX / window.innerWidth - 0.5;
+            const mouseY = e.clientY / window.innerHeight - 0.5;
+            
+            illustrations.forEach((item, index) => {
+                const speed = (index + 1) * 5;
+                const x = mouseX * speed;
+                const y = mouseY * speed;
+                item.style.transition = 'transform 0.3s ease-out';
+                item.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+
+        // Keyboard Navigation Enhancement
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+                const form = document.getElementById('contactForm');
+                const inputs = Array.from(form.querySelectorAll('input, textarea'));
+                const currentIndex = inputs.indexOf(e.target);
+                
+                if (currentIndex < inputs.length - 1) {
+                    inputs[currentIndex + 1].focus();
+                } else {
+                    form.querySelector('.submit-btn').click();
+                }
+            }
+        });
+    </script>
 </body>
 </html>
