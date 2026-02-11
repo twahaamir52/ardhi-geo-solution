@@ -1,187 +1,334 @@
-<!-- PROJECTS SECTION -->
-<section class="section light">
-    <h2 class="section-title">Sample Projects</h2>
-    <div class="underline"></div>
-<style>* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Segoe UI", Tahoma, sans-serif;
-  }
-  
-  body {
-    background: #f4f6f9;
-    color: #333;
-  }
-  
-  /* HERO */
-  .hero {
-    background: #87bb0d;
-    color: white;
-    padding: 80px 20px;
-    text-align: center;
-  }
-  
-  .hero-content {
-    max-width: 900px;
-    margin: auto;
-  }
-  
-  .hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-  }
-  
-  .hero p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 30px;
-  }
-  
-  .hero-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-  }
-  
-  /* BUTTONS */
-  .btn {
-    padding: 12px 22px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: 0.3s;
-  }
-  
-  .btn.primary {
-    background: #4da3ff;
-    color: white;
-  }
-  
-  .btn.primary:hover {
-    background: #3587e0;
-  }
-  
-  .btn.secondary {
-    background: #2f80ed;
-    color: white;
-  }
-  
-  .btn.secondary:hover {
-    background: #1f6ed5;
-  }
-  
-  /* SECTIONS */
-  .section {
-    padding: 70px 20px;
-    max-width: 1200px;
-    margin: auto;
-  }
-  
-  .section.light {
-    background: #2e967f;
-  }
-  
-  .section-title {
-    text-align: center;
-    font-size: 2rem;
-  }
-  
-  .underline {
-    width: 60px;
-    height: 4px;
-    background: #ffb24d;
-    margin: 10px auto 40px;
-    border-radius: 5px;
-  }
-  
-  /* CARDS */
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-  }
-  
-  .cards.four {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  
-  .card {
-    background: rgb(157, 170, 182);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    text-align: center;
-    transition: transform 0.3s;
-  }
-  
-  .card:hover {
-    transform: translateY(-6px);
-  }
-  
-  .card h3 {
-    margin-bottom: 15px;
-    color: #0a1616;
-  }
-  
-  .card p {
-    font-size: 0.95rem;s
-    line-height: 1.6;
-  
-  
-  /* RESPONSIVE */
-  @media (max-width: 992px) {
-    .cards,
-    .cards.four {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  
-    .hero h1 {
-      font-size: 2rem;
-    }
-  }
-  
-  @media (max-width: 600px) {
-    .cards,
-    .cards.four {
-      grid-template-columns: 1fr;
-    }
-  
-    .hero h1 {
-      font-size: 1.7rem;
-    }
-  }</style>
-    <div class="cards four">
-      <div class="card">
-        <h3>Healthcare GIS Mapping</h3>
-        <p>
-          Implemented geospatial data systems to optimize healthcare
-          facility planning and service delivery.
-        </p>
-      </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Projects - GIS & Technology</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      <div class="card">
-        <h3>Agriculture Monitoring</h3>
-        <p>
-          Developed mobile and web-based platforms for monitoring crop performance,
-        land use patterns, soil conditions, and seasonal agricultural productivity
-        through GIS and remote sensing data..
-        </p>
-      </div>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            padding: 40px 20px;
+            position: relative;
+        }
 
-      <div class="card">
-        <h3>Real Estate Dashboard</h3>
-        <p>
-          Built an interactive property management and analytics system.
-        </p>
-      </div>
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(59, 165, 137, 0.88) 0%, rgba(77, 184, 150, 0.88) 100%);
+            z-index: -1;
+        }
 
-      <div class="card">
-        <h3>Land Surveying & Cadastral Mapping</h3>
-      <p>
-        Conducted high-precision land surveying and cadastral mapping using
-        GNSS and total station technologies to support land registration,
-        boundary verification, and legal land documentation.
-      </p>
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: #ff9933;
+            border-radius: 3px;
+            box-shadow: 0 2px 6px rgba(255, 153, 51, 0.4);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+            margin-top: 80px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px 35px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease;
+            animation-fill-mode: both;
+            backdrop-filter: blur(10px);
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
+        .project-card:nth-child(6) { animation-delay: 0.6s; }
+        .project-card:nth-child(7) { animation-delay: 0.7s; }
+        .project-card:nth-child(8) { animation-delay: 0.8s; }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59, 165, 137, 0.15), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-20px) scale(1.03);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .project-card h3 {
+            color: #2c3e50;
+            font-size: 1.6em;
+            margin-bottom: 18px;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
+        .project-card p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-size: 1em;
+        }
+
+        .project-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #3ba589;
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 3px solid rgba(59, 165, 137, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-link {
+            color: #2c8a70;
+            border-top-color: #3ba589;
+        }
+
+        .project-link .arrow {
+            font-size: 1.8em;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .project-card:hover .project-link .arrow {
+            transform: translateX(10px);
+            color: #ff9933;
+        }
+
+        .project-number {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 3em;
+            font-weight: bold;
+            color: rgba(59, 165, 137, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-number {
+            color: rgba(59, 165, 137, 0.2);
+            transform: scale(1.2);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                margin-top: 60px;
+            }
+
+            .project-card {
+                padding: 30px 25px;
+            }
+
+            .project-card h3 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sample Projects</h1>
+        
+        <div class="projects-grid">
+            <div class="project-card" onclick="window.open('https://example.com/healthcare-gis', '_blank')">
+                <span class="project-number">01</span>
+                <h3>Healthcare GIS Mapping</h3>
+                <p>Implemented geospatial data systems to optimize healthcare facility planning and service delivery.</p>
+                <div class="project-link">
+                    <span>View Project</span>
+                    <span class="arrow">→</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="window.open('https://example.com/agriculture-monitoring', '_blank')">
+                <span class="project-number">02</span>
+                <h3>Agriculture Monitoring</h3>
+                <p>Developed mobile and web-based platforms for monitoring crop performance, land use patterns, soil conditions, and seasonal agricultural productivity through GIS and remote sensing data.</p>
+                <div class="project-link">
+                    <span>View Project</span>
+                    <span class="arrow">→</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="window.open('https://example.com/real-estate-dashboard', '_blank')">
+                <span class="project-number">03</span>
+                <h3>Real Estate Dashboard</h3>
+                <p>Built an interactive property management and analytics system.</p>
+                <div class="project-link">
+                    <span>View Project</span>
+                    <span class="arrow">→</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="window.open('https://example.com/land-surveying', '_blank')">
+                <span class="project-number">04</span>
+                <h3>Land Surveying & Cadastral Mapping</h3>
+                <p>Conducted high-precision land surveying and cadastral mapping using GNSS and total station technologies to support land registration, boundary verification, and legal land documentation.</p>
+                <div class="project-link">
+                    <span>View Project</span>
+                    <span class="arrow">→</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="window.open('https://example.com/urban-planning', '_blank')">
+                <span class="project-number">05</span>
+                <h3>Urban Planning & Development</h3>
+                <p>Created comprehensive master plans for urban development using advanced GIS tools and spatial analysis to optimize infrastructure placement and zoning regulations.</p>
+                <div class="project-link">
+                    <span>View Project</span>
+                    <span class="arrow">→</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="window.open('https://example.com/environmental-monitoring', '_blank')">
+                <span class="project-number">06</span>
+                <h3>Environmental Monitoring System</h3>
+                <p>Deployed real-time environmental monitoring systems using remote sensing and GIS technologies to track deforestation, water quality, and climate change impacts.</p>
+                <div class="project-link">
+                    <span>View Project</span>
+                    <span class="arrow">→</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="window.open('https://example.com/infrastructure-management', '_blank')">
+                <span class="project-number">07</span>
+                <h3>Infrastructure Asset Management</h3>
+                <p>Developed web-based GIS platform for managing municipal infrastructure assets including roads, water networks, and public facilities with maintenance tracking.</p>
+                <div class="project-link">
+                    <span>View Project</span>
+                    <span class="arrow">→</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="window.open('https://example.com/disaster-management', '_blank')">
+                <span class="project-number">08</span>
+                <h3>Disaster Risk Management</h3>
+                <p>Implemented GIS-based disaster risk assessment and emergency response planning system for flood-prone areas with real-time alert capabilities.</p>
+                <div class="project-link">
+                    <span>View Project</span>
+                    <span class="arrow">→</span>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script>
+        // Add click feedback animation
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+
+        // Add scroll reveal effect
+        window.addEventListener('scroll', function() {
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach(card => {
+                const cardPosition = card.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if(cardPosition < screenPosition) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
