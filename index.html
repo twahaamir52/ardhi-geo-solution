@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ardhi Geo Consulting - Geospatial & Land Management</title>
+    <title>Ardhi Geo Consulting Tanzania</title>
     <style>
         * {
             margin: 0;
@@ -13,155 +13,319 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #2c3e50;
             overflow-x: hidden;
-            background: #b9b2b2;
-            color: #ebe7e7;
         }
 
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #4a5f3a 0%, #2d3a24 50%, #1a2316 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Animated background particles */
-        .particle {
-            position: absolute;
-            background: rgba(196, 184, 184, 0.1);
-            border-radius: 50%;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) translateX(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3;
-            }
-            50% {
-                transform: translateY(-100vh) translateX(50px);
-                opacity: 0.5;
-            }
-            90% {
-                opacity: 0.3;
-            }
-        }
-
-        /* Navigation */
+        /* Navigation Bar */
         nav {
+            background: linear-gradient(135deg, #5dada8 0%, #4db8b3 100%);
+            padding: 15px 0;
             position: fixed;
-            top: 0;
             width: 100%;
-            background: #eca5c66c;
-            backdrop-filter: blur(10px);
+            top: 0;
             z-index: 1000;
-            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
             transform: translateY(-100%);
+            animation: slideDown 0.8s ease-out 0.2s forwards;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            animation: fadeInLeft 0.8s ease-out 0.5s forwards;
+        }
+
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 8px;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: transform 0.3s ease;
         }
 
-        nav.visible {
-            transform: translateY(0);
+        .logo-image:hover {
+            transform: scale(1.1) rotate(5deg);
         }
 
-        nav ul {
-            list-style: none;
+        .logo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .nav-links {
             display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
+            list-style: none;
+            gap: 50px;
         }
 
-        nav a {
-            color: #fff;
+        .nav-links li {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .nav-links li:nth-child(1) { animation-delay: 0.5s; }
+        .nav-links li:nth-child(2) { animation-delay: 0.6s; }
+        .nav-links li:nth-child(3) { animation-delay: 0.7s; }
+        .nav-links li:nth-child(4) { animation-delay: 0.8s; }
+        .nav-links li:nth-child(5) { animation-delay: 0.9s; }
+
+        .nav-links a {
+            color: white;
             text-decoration: none;
+            font-size: 16px;
             font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
             transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 5px;
             position: relative;
         }
 
-        nav a::after {
+        .nav-links a::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 50%;
             width: 0;
             height: 2px;
-            background: #6b8e4e;
+            background: white;
             transition: all 0.3s ease;
             transform: translateX(-50%);
         }
 
-        nav a:hover::after {
+        .nav-links a:hover::after {
             width: 80%;
         }
 
-        nav a:hover {
-            color: #6b8e4e;
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #5dada8 0%, #4a9b96 50%, #3d8a85 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+        }
+
+        /* Animated Background Particles */
+        .particle {
+            position: absolute;
+            background: rgba(93, 218, 208, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) {
+            width: 10px;
+            height: 10px;
+            top: 15%;
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 12s;
+        }
+
+        .particle:nth-child(2) {
+            width: 8px;
+            height: 8px;
+            top: 25%;
+            left: 25%;
+            animation-delay: 2s;
+            animation-duration: 15s;
+        }
+
+        .particle:nth-child(3) {
+            width: 12px;
+            height: 12px;
+            top: 35%;
+            right: 20%;
+            animation-delay: 4s;
+            animation-duration: 18s;
+        }
+
+        .particle:nth-child(4) {
+            width: 6px;
+            height: 6px;
+            bottom: 30%;
+            left: 15%;
+            animation-delay: 1s;
+            animation-duration: 14s;
+        }
+
+        .particle:nth-child(5) {
+            width: 10px;
+            height: 10px;
+            bottom: 40%;
+            right: 30%;
+            animation-delay: 3s;
+            animation-duration: 16s;
+        }
+
+        .particle:nth-child(6) {
+            width: 8px;
+            height: 8px;
+            top: 60%;
+            left: 5%;
+            animation-delay: 5s;
+            animation-duration: 13s;
+        }
+
+        .particle:nth-child(7) {
+            width: 12px;
+            height: 12px;
+            top: 45%;
+            right: 15%;
+            animation-delay: 2.5s;
+            animation-duration: 17s;
+        }
+
+        .particle:nth-child(8) {
+            width: 7px;
+            height: 7px;
+            bottom: 20%;
+            left: 35%;
+            animation-delay: 4.5s;
+            animation-duration: 15.5s;
+        }
+
+        .particle:nth-child(9) {
+            width: 9px;
+            height: 9px;
+            top: 50%;
+            right: 5%;
+            animation-delay: 1.5s;
+            animation-duration: 14.5s;
+        }
+
+        .particle:nth-child(10) {
+            width: 11px;
+            height: 11px;
+            bottom: 15%;
+            right: 25%;
+            animation-delay: 3.5s;
+            animation-duration: 16.5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.4;
+            }
+            25% {
+                transform: translateY(-40px) translateX(30px);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-80px) translateX(-20px);
+                opacity: 1;
+            }
+            75% {
+                transform: translateY(-40px) translateX(35px);
+                opacity: 0.6;
+            }
         }
 
         /* Hero Content */
-        .hero-content {
+        .hero-container {
             text-align: center;
-            z-index: 10;
-            max-width: 1000px;
-            animation: fadeInUp 1s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            max-width: 1200px;
+            padding: 60px 40px;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out 0.5s forwards;
         }
 
         h1 {
-            font-size: clamp(2rem, 5vw, 4rem);
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #fff, #6b8e4e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 1s ease 0.2s backwards;
+            font-size: 64px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #ffffff;
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .hero p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
+        .highlight {
+            color: #5ddad0;
+            text-shadow: 2px 4px 8px rgba(93, 218, 208, 0.4);
+        }
+
+        .description {
+            font-size: 18px;
             line-height: 1.8;
-            margin-bottom: 2rem;
-            color: #e0e0e0;
-            animation: fadeInUp 1s ease 0.4s backwards;
+            color: #ffffff;
+            max-width: 900px;
+            margin: 0 auto 50px;
+            text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.15);
         }
 
         .cta-button {
             display: inline-block;
-            padding: 1rem 2.5rem;
-            background: linear-gradient(135deg, #6b8e4e, #4a5f3a);
-            color: #fff;
-            text-decoration: none;
+            padding: 18px 50px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
             border-radius: 50px;
+            color: #ffffff;
+            font-size: 18px;
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
+            text-decoration: none;
             cursor: pointer;
-            border: none;
-            box-shadow: 0 10px 30px rgba(107, 142, 78, 0.3);
-            animation: fadeInUp 1s ease 0.6s backwards;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             position: relative;
             overflow: hidden;
         }
@@ -173,8 +337,8 @@
             left: 50%;
             width: 0;
             height: 0;
-            background: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
             transform: translate(-50%, -50%);
             transition: width 0.6s, height 0.6s;
         }
@@ -186,246 +350,398 @@
 
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(107, 142, 78, 0.5);
+            background: rgba(255, 255, 255, 0.35);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
         }
 
-        /* Features Section */
-        .features {
-            padding: 5rem 2rem;
-            background: #4e4848;
+        .cta-button span {
+            position: relative;
+            z-index: 1;
         }
 
-        .section-title {
-            text-align: center;
-            font-size: clamp(2rem, 4vw, 3rem);
-            margin-bottom: 3rem;
-            background: linear-gradient(135deg, #fff, #6b8e4e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: fadeIn 1s ease-out 1.5s forwards, bounce 2s ease-in-out 2.5s infinite;
+            opacity: 0;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+        .scroll-arrow {
+            width: 30px;
+            height: 30px;
+            border-left: 3px solid rgba(255, 255, 255, 0.7);
+            border-bottom: 3px solid rgba(255, 255, 255, 0.7);
+            transform: rotate(-45deg);
+        }
+
+        /* Services Section */
+        .services-section {
+            background: #3a4a5a;
+            padding: 100px 40px;
+            position: relative;
+        }
+
+        .services-container {
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .feature-card {
-            background: linear-gradient(135deg, #2d3a24, #1f2718);
-            padding: 2rem;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(107, 142, 78, 0.2);
-            cursor: pointer;
+        .services-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #5ddad0;
+            text-align: center;
+            margin-bottom: 60px;
             opacity: 0;
             transform: translateY(30px);
         }
 
-        .feature-card.visible {
-            animation: fadeInUp 0.6s ease forwards;
+        .services-title.visible {
+            animation: fadeInUp 1s ease-out forwards;
         }
 
-        .feature-card:hover {
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(93, 218, 208, 0.2);
+            border-radius: 15px;
+            padding: 40px;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .service-card.visible {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .service-card:nth-child(1).visible { animation-delay: 0.2s; }
+        .service-card:nth-child(2).visible { animation-delay: 0.4s; }
+        .service-card:nth-child(3).visible { animation-delay: 0.6s; }
+        .service-card:nth-child(4).visible { animation-delay: 0.8s; }
+        .service-card:nth-child(5).visible { animation-delay: 1s; }
+        .service-card:nth-child(6).visible { animation-delay: 1.2s; }
+
+        .service-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(107, 142, 78, 0.3);
-            border-color: rgba(107, 142, 78, 0.5);
+            background: rgba(93, 218, 208, 0.1);
+            border-color: rgba(93, 218, 208, 0.5);
+            box-shadow: 0 15px 40px rgba(93, 218, 208, 0.2);
         }
 
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
         }
 
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #6b8e4e;
+        .service-card h3 {
+            color: #5ddad0;
+            font-size: 24px;
+            margin-bottom: 15px;
         }
 
-        .feature-card p {
-            color: #c0c0c0;
+        .service-card p {
+            color: #b8c5d0;
             line-height: 1.6;
+            font-size: 16px;
         }
 
-        /* About Section */
-        .about {
-            padding: 5rem 2rem;
-            background: linear-gradient(135deg, #2d3a24, #1a2316);
+        /* About Us Section */
+        .about-section {
+            background: linear-gradient(135deg, #2d4a3e 0%, #3a5a4a 100%);
+            padding: 100px 40px;
+            position: relative;
+        }
+
+        .about-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #5ddad0;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .about-title.visible {
+            animation: fadeInUp 1s ease-out forwards;
         }
 
         .about-content {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
+            color: #d0d8dd;
+            font-size: 18px;
+            line-height: 1.8;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .about-content.visible {
+            animation: fadeInUp 1s ease-out 0.3s forwards;
         }
 
         .about-content p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #e0e0e0;
-            margin-bottom: 1.5rem;
+            margin-bottom: 25px;
         }
 
-        /* Contact Section */
-        .contact {
-            padding: 5rem 2rem;
-            background: #1a1a1a;
+        /* Contact/Find Us Section */
+        .contact-section {
+            background: linear-gradient(135deg, #1a1f1a 0%, #242b24 100%);
+            padding: 100px 40px;
+            position: relative;
         }
 
-        .contact-form {
-            max-width: 600px;
+        .contact-container {
+            max-width: 700px;
             margin: 0 auto;
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
+        .contact-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #5ddad0;
+            text-align: center;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(30px);
         }
 
-        .form-group label {
+        .contact-title.visible {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .contact-form {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .contact-form.visible {
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+
+        .form-group-contact {
+            margin-bottom: 30px;
+        }
+
+        .form-group-contact label {
             display: block;
-            margin-bottom: 0.5rem;
-            color: #6b8e4e;
+            color: #8a9a8a;
+            font-size: 16px;
+            margin-bottom: 10px;
             font-weight: 500;
         }
 
-        .form-group input,
-        .form-group textarea {
+        .form-group-contact input,
+        .form-group-contact textarea {
             width: 100%;
-            padding: 1rem;
-            border: 1px solid rgba(107, 142, 78, 0.3);
-            background: rgba(45, 58, 36, 0.3);
-            color: #fff;
-            border-radius: 8px;
+            padding: 18px 24px;
+            background: rgba(58, 90, 74, 0.3);
+            border: 2px solid rgba(93, 218, 208, 0.2);
+            border-radius: 12px;
+            color: #d0d8dd;
+            font-size: 16px;
             font-family: inherit;
             transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
             outline: none;
-            border-color: #6b8e4e;
-            background: rgba(45, 58, 36, 0.5);
         }
 
-        .form-group textarea {
-            resize: vertical;
+        .form-group-contact input::placeholder,
+        .form-group-contact textarea::placeholder {
+            color: #6a7a6a;
+        }
+
+        .form-group-contact input:focus,
+        .form-group-contact textarea:focus {
+            background: rgba(58, 90, 74, 0.5);
+            border-color: rgba(93, 218, 208, 0.5);
+            box-shadow: 0 0 20px rgba(93, 218, 208, 0.15);
+        }
+
+        .form-group-contact textarea {
             min-height: 150px;
+            resize: vertical;
         }
 
-        /* Interactive Map */
-        .map-container {
-            margin-top: 3rem;
-            height: 400px;
-            background: linear-gradient(135deg, #2d3a24, #1f2718);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .submit-contact-btn {
+            width: auto;
+            padding: 18px 60px;
+            background: linear-gradient(135deg, #5ddad0 0%, #4ac4ba 100%);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(93, 218, 208, 0.3);
             position: relative;
             overflow: hidden;
-            border: 2px solid rgba(107, 142, 78, 0.3);
         }
 
-        .map-placeholder {
+        .submit-contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .submit-contact-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .submit-contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(93, 218, 208, 0.4);
+        }
+
+        .submit-contact-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .success-message-contact {
+            display: none;
+            background: #10b981;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-top: 20px;
             text-align: center;
-            padding: 2rem;
+            font-weight: 500;
         }
 
-        .map-placeholder svg {
-            width: 200px;
-            height: 200px;
-            fill: #6b8e4e;
-            opacity: 0.3;
+        .success-message-contact.show {
+            display: block;
+            animation: successSlide 0.5s ease-out;
+        }
+
+        /* Location Section */
+        .location-section {
+            background: linear-gradient(135deg, #2d4a3e 0%, #3a5a4a 100%);
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .location-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .location-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInScale 1s ease-out 0.3s forwards;
+        }
+
+        .location-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+            opacity: 0;
+        }
+
+        .location-title.visible {
+            animation: fadeInUp 1s ease-out 0.4s forwards;
+        }
+
+        .location-subtitle {
+            font-size: 18px;
+            color: #b8c5d0;
+            opacity: 0;
+        }
+
+        .location-subtitle.visible {
+            animation: fadeInUp 1s ease-out 0.6s forwards;
         }
 
         /* Footer */
         footer {
-            background: #0d0d0d;
-            padding: 2rem;
+            background: #1a1f1a;
+            padding: 40px 40px 30px;
             text-align: center;
-            color: #888;
         }
 
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateX(-50%) translateY(0);
+        .footer-text {
+            color: #8a9a8a;
+            font-size: 14px;
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.5s forwards;
+        }
+
+        .footer-text p {
+            margin-bottom: 8px;
+        }
+
+        .copyright {
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
             }
-            50% {
-                transform: translateX(-50%) translateY(10px);
-            }
-        }
-
-        .scroll-indicator svg {
-            width: 30px;
-            height: 30px;
-            fill: #6b8e4e;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav ul {
-                gap: 1rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
+            to {
+                opacity: 1;
+                transform: scale(1);
             }
         }
 
-        /* Success message */
-        .success-message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            background: linear-gradient(135deg, #6b8e4e, #4a5f3a);
-            padding: 2rem 3rem;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            text-align: center;
-            transition: transform 0.3s ease;
+        @keyframes successSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.8);
+            }
+            70% {
+                transform: translateY(5px) scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
-        .success-message.show {
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .success-message h3 {
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        /* Authentication Modal */
-        .auth-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 3000;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .auth-modal.active {
-            display: flex;
+        /* Keyframe Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes fadeIn {
@@ -437,691 +753,334 @@
             }
         }
 
-        .auth-modal-content {
-            background: linear-gradient(135deg, #2d3a24, #1f2718);
-            padding: 3rem;
-            border-radius: 20px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            border: 2px solid rgba(107, 142, 78, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            animation: slideUp 0.4s ease;
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+            }
         }
 
-        @keyframes slideUp {
+        @keyframes slideDown {
             from {
-                transform: translateY(50px);
                 opacity: 0;
+                transform: translateY(-100%);
             }
             to {
-                transform: translateY(0);
                 opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            font-size: 2rem;
-            color: #6b8e4e;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .close-modal:hover {
-            transform: rotate(90deg);
-        }
-
-        .auth-form h2 {
-            margin-bottom: 0.5rem;
-            color: #6b8e4e;
-        }
-
-        .auth-subtitle {
-            color: #888;
-            margin-bottom: 2rem;
-        }
-
-        .auth-button {
-            width: 100%;
-            margin-top: 1rem;
-        }
-
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 1rem 0;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #c0c0c0;
-            font-size: 0.9rem;
-        }
-
-        .checkbox-label input {
-            width: auto;
-        }
-
-        .forgot-password {
-            color: #6b8e4e;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-        }
-
-        .forgot-password:hover {
-            color: #8bb066;
-        }
-
-        .auth-switch {
-            text-align: center;
-            margin-top: 1.5rem;
-            color: #888;
-        }
-
-        .auth-switch a {
-            color: #6b8e4e;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .auth-switch a:hover {
-            color: #8bb066;
-        }
-
-        .login-btn {
-            background: linear-gradient(135deg, #6b8e4e, #4a5f3a);
-            padding: 0.5rem 1.5rem !important;
-            border-radius: 25px;
-        }
-
-        /* Dashboard Styles */
-        .dashboard {
-            min-height: 100vh;
-            background: #1a1a1a;
-            padding: 2rem;
-        }
-
-        .dashboard-header {
-            background: linear-gradient(135deg, #2d3a24, #1f2718);
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(107, 142, 78, 0.3);
-        }
-
-        .dashboard-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .dashboard-nav h2 {
-            color: #6b8e4e;
-            font-size: 2rem;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .user-name {
-            color: #fff;
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            background: rgba(107, 142, 78, 0.2);
-            border-radius: 25px;
-        }
-
-        .logout-btn {
-            background: rgba(255, 59, 48, 0.2);
-            border: 1px solid rgba(255, 59, 48, 0.5);
-            color: #ff3b30;
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .logout-btn:hover {
-            background: rgba(255, 59, 48, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .dashboard-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .dashboard-card {
-            background: linear-gradient(135deg, #2d3a24, #1f2718);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(107, 142, 78, 0.3);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(107, 142, 78, 0.6);
-            box-shadow: 0 10px 30px rgba(107, 142, 78, 0.2);
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .dashboard-card h3 {
-            color: #6b8e4e;
-            margin-bottom: 1rem;
-        }
-
-        .card-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #fff;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-label {
-            color: #888;
-            font-size: 0.9rem;
-        }
-
-        .dashboard-section {
-            background: linear-gradient(135deg, #2d3a24, #1f2718);
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(107, 142, 78, 0.3);
-        }
-
-        .dashboard-section h3 {
-            color: #6b8e4e;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .activity-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .activity-item {
-            display: flex;
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(107, 142, 78, 0.1);
-            border-radius: 10px;
-            border: 1px solid rgba(107, 142, 78, 0.2);
-        }
-
-        .activity-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(107, 142, 78, 0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .activity-details {
-            flex: 1;
-        }
-
-        .activity-title {
-            color: #fff;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .activity-time {
-            color: #888;
-            font-size: 0.85rem;
-        }
-
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .action-btn {
-            background: rgba(107, 142, 78, 0.2);
-            border: 1px solid rgba(107, 142, 78, 0.4);
-            color: #fff;
-            padding: 1rem;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            justify-content: center;
-        }
-
-        .action-btn:hover {
-            background: rgba(107, 142, 78, 0.3);
-            border-color: rgba(107, 142, 78, 0.6);
-            transform: translateY(-3px);
-        }
-
-        .action-btn span {
-            font-size: 1.2rem;
-        }
-
-        .profile-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .profile-field {
-            display: flex;
-            justify-content: space-between;
-            padding: 1rem;
-            background: rgba(107, 142, 78, 0.1);
-            border-radius: 10px;
-            border: 1px solid rgba(107, 142, 78, 0.2);
-        }
-
-        .profile-field label {
-            color: #6b8e4e;
-            font-weight: 600;
-        }
-
-        .profile-field span {
-            color: #fff;
-        }
-
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .dashboard-nav {
-                flex-direction: column;
-                text-align: center;
+            .logo-text {
+                font-size: 20px;
             }
 
-            .user-info {
-                flex-direction: column;
+            .logo-image {
+                width: 40px;
+                height: 40px;
             }
 
-            .quick-actions {
-                grid-template-columns: 1fr;
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                flex-direction: column;
+                background: linear-gradient(135deg, #5dada8 0%, #4db8b3 100%);
+                width: 100%;
+                padding: 40px;
+                gap: 20px;
+                transition: left 0.3s ease;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
             }
 
-            .profile-field {
-                flex-direction: column;
-                gap: 0.5rem;
+            .nav-links.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .description {
+                font-size: 16px;
+            }
+
+            .cta-button {
+                padding: 15px 40px;
+                font-size: 16px;
+            }
+
+            .hero-container {
+                padding: 40px 20px;
+            }
+
+            .services-title {
+                font-size: 36px;
+            }
+
+            .service-card {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            .description {
+                font-size: 14px;
+            }
+
+            .services-title {
+                font-size: 28px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav id="navbar">
-        <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="features.html">Features</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="login.html">Login</a></li>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="logo">
+                <div class="logo-image">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- GEO Logo -->
+                        <g transform="translate(100, 100)">
+                            <!-- Orbital ring -->
+                            <ellipse cx="0" cy="0" rx="85" ry="35" 
+                                     fill="none" stroke="#2d4a3e" stroke-width="8"
+                                     transform="rotate(-25)"/>
+                            
+                            <!-- GEO Text -->
+                            <text x="0" y="15" 
+                                  font-family="Arial, sans-serif" 
+                                  font-size="55" 
+                                  font-weight="bold" 
+                                  fill="#2d4a3e" 
+                                  text-anchor="middle">GEO</text>
+                        </g>
+                    </svg>
+                </div>
+                <span class="logo-text">ArdhiGeo</span>
+            </div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.htlm">Login</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </nav>
 
-    <!-- Authentication Modal -->
-    <div class="auth-modal" id="authModal">
-        <div class="auth-modal-content">
-            <span class="close-modal" onclick="closeAuthModal()">&times;</span>
-            
-            <!-- Login Form -->
-            <div class="auth-form" id="loginForm">
-                <h2>Welcome Back</h2>
-                <p class="auth-subtitle">Login to access your dashboard</p>
-                <form onsubmit="handleLogin(event)">
-                    <div class="form-group">
-                        <label for="loginEmail">Email Address</label>
-                        <input type="email" id="loginEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="loginPassword">Password</label>
-                        <input type="password" id="loginPassword" required>
-                    </div>
-                    <div class="form-options">
-                        <label class="checkbox-label">
-                            <input type="checkbox"> Remember me
-                        </label>
-                        <a href="#" class="forgot-password">Forgot Password?</a>
-                    </div>
-                    <button type="submit" class="cta-button auth-button">Login</button>
-                </form>
-                <p class="auth-switch">Don't have an account? <a href="#" onclick="switchAuthForm('register')">Register here</a></p>
-            </div>
-
-            <!-- Registration Form -->
-            <div class="auth-form" id="registerForm" style="display: none;">
-                <h2>Create Account</h2>
-                <p class="auth-subtitle">Join Ardhi Geo Consulting Tanzania</p>
-                <form onsubmit="handleRegister(event)">
-                    <div class="form-group">
-                        <label for="registerName">Full Name</label>
-                        <input type="text" id="registerName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerEmail">Email Address</label>
-                        <input type="email" id="registerEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerPhone">Phone Number</label>
-                        <input type="tel" id="registerPhone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerCompany">Company/Organization</label>
-                        <input type="text" id="registerCompany">
-                    </div>
-                    <div class="form-group">
-                        <label for="registerPassword">Password</label>
-                        <input type="password" id="registerPassword" required minlength="6">
-                    </div>
-                    <div class="form-group">
-                        <label for="registerConfirmPassword">Confirm Password</label>
-                        <input type="password" id="registerConfirmPassword" required minlength="6">
-                    </div>
-                    <div class="form-options">
-                        <label class="checkbox-label">
-                            <input type="checkbox" required> I agree to the Terms & Conditions
-                        </label>
-                    </div>
-                    <button type="submit" class="cta-button auth-button">Create Account</button>
-                </form>
-                <p class="auth-switch">Already have an account? <a href="#" onclick="switchAuthForm('login')">Login here</a></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- User Dashboard -->
-    <div class="dashboard" id="userDashboard" style="display: none;">
-        <div class="dashboard-header">
-            <div class="dashboard-nav">
-                <h2>Dashboard</h2>
-                <div class="user-info">
-                    <span class="user-name" id="dashboardUserName">User</span>
-                    <button class="logout-btn" onclick="handleLogout()">Logout</button>
-                </div>
-            </div>
-        </div>
-        
-        <div class="dashboard-content">
-            <div class="dashboard-grid">
-                <div class="dashboard-card">
-                    <div class="card-icon">📊</div>
-                    <h3>Projects</h3>
-                    <p class="card-number">0</p>
-                    <p class="card-label">Active Projects</p>
-                </div>
-                
-                <div class="dashboard-card">
-                    <div class="card-icon">📁</div>
-                    <h3>Documents</h3>
-                    <p class="card-number">0</p>
-                    <p class="card-label">Uploaded Files</p>
-                </div>
-                
-                <div class="dashboard-card">
-                    <div class="card-icon">🗺️</div>
-                    <h3>Maps</h3>
-                    <p class="card-number">0</p>
-                    <p class="card-label">Created Maps</p>
-                </div>
-                
-                <div class="dashboard-card">
-                    <div class="card-icon">📈</div>
-                    <h3>Analytics</h3>
-                    <p class="card-number">0</p>
-                    <p class="card-label">Data Points</p>
-                </div>
-            </div>
-
-            <div class="dashboard-section">
-                <h3>Recent Activity</h3>
-                <div class="activity-list">
-                    <div class="activity-item">
-                        <div class="activity-icon">✓</div>
-                        <div class="activity-details">
-                            <p class="activity-title">Account Created</p>
-                            <p class="activity-time">Just now</p>
-                        </div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-icon">📝</div>
-                        <div class="activity-details">
-                            <p class="activity-title">Welcome! Start by exploring our services</p>
-                            <p class="activity-time">Just now</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="dashboard-section">
-                <h3>Quick Actions</h3>
-                <div class="quick-actions">
-                    <button class="action-btn" onclick="showComingSoon('New Project')">
-                        <span>➕</span> New Project
-                    </button>
-                    <button class="action-btn" onclick="showComingSoon('Upload Document')">
-                        <span>📤</span> Upload Document
-                    </button>
-                    <button class="action-btn" onclick="showComingSoon('Create Map')">
-                        <span>🗺️</span> Create Map
-                    </button>
-                    <button class="action-btn" onclick="showComingSoon('Request Survey')">
-                        <span>📐</span> Request Survey
-                    </button>
-                </div>
-            </div>
-
-            <div class="dashboard-section">
-                <h3>Your Profile</h3>
-                <div class="profile-info">
-                    <div class="profile-field">
-                        <label>Name:</label>
-                        <span id="profileName">-</span>
-                    </div>
-                    <div class="profile-field">
-                        <label>Email:</label>
-                        <span id="profileEmail">-</span>
-                    </div>
-                    <div class="profile-field">
-                        <label>Phone:</label>
-                        <span id="profilePhone">-</span>
-                    </div>
-                    <div class="profile-field">
-                        <label>Company:</label>
-                        <span id="profileCompany">-</span>
-                    </div>
-                    <button class="action-btn" onclick="showComingSoon('Edit Profile')">Edit Profile</button>
-                </div>
-            </div>
-
-            <button class="cta-button" onclick="backToHomePage()" style="margin-top: 2rem;">Back to Home</button>
-        </div>
-    </div>
-
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Ardhi Geo Consulting Tanzania</h1>
-            <p>Delivering innovative geospatial and land management solutions by integrating advanced GIS systems, accurate land surveying, spatial data analysis, and sustainable land-use planning to support infrastructure growth and informed decision-making across Tanzania.</p>
-            <button class="cta-button" onclick="scrollToContact()">Discover More</button>
+    <section class="hero-section" id="home">
+        <!-- Animated Particles -->
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+
+        <!-- Hero Content -->
+        <div class="hero-container">
+            <h1>
+                Ardhi Geo Consulting <span class="highlight">Tanzania</span>
+            </h1>
+            
+            <p class="description">
+                Delivering innovative geospatial and land management solutions by integrating advanced GIS systems, accurate land surveying, spatial data analysis, and sustainable land-use planning to support infrastructure growth and informed decision-making across Tanzania.
+            </p>
+            
+            <a href="#services" class="cta-button">
+                <span>Discover More</span>
+            </a>
         </div>
+
+        <!-- Scroll Indicator -->
         <div class="scroll-indicator">
-            <svg viewBox="0 0 24 24">
-                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
-            </svg>
+            <div class="scroll-arrow"></div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <h2 class="section-title">Our Services</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🗺️</div>
-                <h3>GIS Systems</h3>
-                <p>Advanced Geographic Information Systems for comprehensive spatial data management and analysis, enabling better decision-making.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📐</div>
-                <h3>Land Surveying</h3>
-                <p>Precise and accurate land surveying services using modern technology to ensure reliable measurements and boundary determinations.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3>Spatial Data Analysis</h3>
-                <p>In-depth spatial data analysis to extract meaningful insights for urban planning, resource management, and development projects.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🌱</div>
-                <h3>Sustainable Planning</h3>
-                <p>Environmentally conscious land-use planning strategies that balance development needs with ecological preservation.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🏗️</div>
-                <h3>Infrastructure Support</h3>
-                <p>Geospatial solutions tailored for infrastructure development, from roads to utilities, ensuring optimal placement and efficiency.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">💡</div>
-                <h3>Electrical Consulting Services</h3>
-                <p>Expert consulting for electricity supply, power distribution, and renewable energy projects, providing strategic guidance for public and private sector initiatives
-                .</p>
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="services-container">
+            <h2 class="services-title">Our Services</h2>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🗺️</div>
+                    <h3>GIS Mapping</h3>
+                    <p>Advanced Geographic Information Systems for precise spatial data analysis and visualization to support informed decision-making.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📐</div>
+                    <h3>Land Surveying</h3>
+                    <p>Accurate land measurement and boundary determination using state-of-the-art surveying equipment and techniques.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Spatial Data Analysis</h3>
+                    <p>Comprehensive analysis of geographic data to identify patterns, trends, and relationships for strategic planning.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🏗️</div>
+                    <h3>Infrastructure Planning</h3>
+                    <p>Strategic infrastructure development planning to support sustainable growth and efficient resource allocation.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🌱</div>
+                    <h3>Land-Use Planning</h3>
+                    <p>Sustainable land management strategies that balance development needs with environmental conservation.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Digital Mapping</h3>
+                    <p>Modern digital mapping solutions for accurate representation and management of geographical information.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <h2 class="section-title">About Us</h2>
-        <div class="about-content">
-            <p>Ardhi Geo Consulting Tanzania is a leading provider of geospatial and land management services dedicated to transforming how Tanzania approaches land development and infrastructure planning.</p>
-            <p>With a team of experienced professionals and cutting-edge technology, we deliver solutions that are accurate, sustainable, and tailored to meet the unique challenges of Tanzania's diverse landscape.</p>
-            <p>Our commitment to excellence and innovation drives us to continuously improve our services and support Tanzania's growth journey.</p>
+    <!-- About Us Section -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <h2 class="about-title">About Us</h2>
+            
+            <div class="about-content">
+                <p>
+                    Ardhi Geo Consulting Tanzania is a leading provider of geospatial and land management services dedicated to transforming how Tanzania approaches land development and infrastructure planning.
+                </p>
+                
+                <p>
+                    With a team of experienced professionals and cutting-edge technology, we deliver solutions that are accurate, sustainable, and tailored to meet the unique challenges of Tanzania's diverse landscape.
+                </p>
+                
+                <p>
+                    Our commitment to excellence and innovation drives us to continuously improve our services and support Tanzania's growth journey.
+                </p>
+            </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <h2 class="section-title">Find Us</h2>
-        <form class="contact-form" id="contactForm">
-            <div class="form-group">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="service">Service Interested In</label>
-                <input type="text" id="service" name="service" placeholder="e.g., GIS Systems, Land Surveying">
-            </div>
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" required></textarea>
-            </div>
-            <button type="submit" class="cta-button">Send Message</button>
-        </form>
+    <!-- Contact/Find Us Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <h2 class="contact-title">Find Us</h2>
+            
+            <form class="contact-form" id="contactForm">
+                <div class="form-group-contact">
+                    <label for="yourName">Your Name</label>
+                    <input type="text" id="yourName" name="yourName" required>
+                </div>
 
-        <div class="map-container">
-            <div class="map-placeholder">
-                <svg viewBox="0 0 24 24">
-                    <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/>
-                </svg>
-                <h3>Tanzania</h3>
-                <p>Serving clients across the nation</p>
-            </div>
+                <div class="form-group-contact">
+                    <label for="emailAddress">Email Address</label>
+                    <input type="email" id="emailAddress" name="emailAddress" required>
+                </div>
+
+                <div class="form-group-contact">
+                    <label for="serviceInterested">Service Interested In</label>
+                    <input type="text" id="serviceInterested" name="serviceInterested" placeholder="e.g., GIS Systems, Land Surveying">
+                </div>
+
+                <div class="form-group-contact">
+                    <label for="messageText">Message</label>
+                    <textarea id="messageText" name="messageText" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-contact-btn">
+                    <span>Send Message</span>
+                </button>
+
+                <div class="success-message-contact" id="successMessageContact">
+                    ✓ Message sent successfully! We'll get back to you soon.
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location-section">
+        <div class="location-container">
+            <div class="location-icon">📍</div>
+            <h3 class="location-title">Tanzania</h3>
+            <p class="location-subtitle">Serving clients across the nation</p>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 ArdhiGeo Consulting Tanzania. All rights reserved.</p>
-        <p>Empowering Tanzania through innovative geospatial solutions.</p>
+        <div class="footer-content">
+            <div class="footer-text">
+                <p class="copyright">© 2026 ArdhiGeo Consulting Tanzania. All rights reserved.</p>
+                <p>Empowering Tanzania through innovative geospatial solutions.</p>
+            </div>
+        </div>
     </footer>
 
-    <!-- Success Message -->
-    <div class="success-message" id="successMessage">
-        <h3>✓ Message Sent!</h3>
-        <p>Thank you for contacting us. We'll get back to you soon.</p>
-    </div>
-
     <script>
-        // Create animated particles
-        function createParticles() {
-            const hero = document.querySelector('.hero');
-            const particleCount = 30;
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
             
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.width = Math.random() * 10 + 5 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                hero.appendChild(particle);
-            }
-        }
-
-        // Show navbar on scroll
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('visible');
+            // Animate hamburger to X
+            const spans = menuToggle.querySelectorAll('span');
+            menuToggle.classList.toggle('active');
+            
+            if (navLinks.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translateY(8px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translateY(-8px)';
             } else {
-                navbar.classList.remove('visible');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
             }
+        });
 
-            // Animate feature cards on scroll
-            const cards = document.querySelectorAll('.feature-card');
-            cards.forEach(card => {
-                const cardTop = card.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                if (cardTop < windowHeight - 100) {
-                    card.classList.add('visible');
-                }
+        // Close mobile menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const spans = menuToggle.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
             });
         });
 
-        // Smooth scrolling
+        // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1135,56 +1094,183 @@
             });
         });
 
-        // Scroll to contact function
-        function scrollToContact() {
-            document.getElementById('contact').scrollIntoView({
-                behavior: 'smooth'
+        // Scroll Indicator Hide on Scroll
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                scrollIndicator.style.opacity = '0';
+            } else {
+                scrollIndicator.style.opacity = '1';
+            }
+        });
+
+        // Intersection Observer for Services Section
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe services title and cards
+        const servicesTitle = document.querySelector('.services-title');
+        const serviceCards = document.querySelectorAll('.service-card');
+
+        observer.observe(servicesTitle);
+        serviceCards.forEach(card => observer.observe(card));
+
+        // Observe about section
+        const aboutTitle = document.querySelector('.about-title');
+        const aboutContent = document.querySelector('.about-content');
+        
+        if (aboutTitle) observer.observe(aboutTitle);
+        if (aboutContent) observer.observe(aboutContent);
+
+        // Observe contact section
+        const contactTitle = document.querySelector('.contact-title');
+        const contactForm = document.querySelector('.contact-form');
+        
+        if (contactTitle) observer.observe(contactTitle);
+        if (contactForm) observer.observe(contactForm);
+
+        // Observe location section
+        const locationTitle = document.querySelector('.location-title');
+        const locationSubtitle = document.querySelector('.location-subtitle');
+        
+        if (locationTitle) observer.observe(locationTitle);
+        if (locationSubtitle) observer.observe(locationSubtitle);
+
+        // Contact Form Submission
+        const contactFormElement = document.getElementById('contactForm');
+        if (contactFormElement) {
+            contactFormElement.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const submitBtn = this.querySelector('.submit-contact-btn');
+                const successMsg = document.getElementById('successMessageContact');
+                
+                const yourName = document.getElementById('yourName').value.trim();
+                const emailAddress = document.getElementById('emailAddress').value.trim();
+                const serviceInterested = document.getElementById('serviceInterested').value.trim();
+                const messageText = document.getElementById('messageText').value.trim();
+                
+                // Validate email
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(emailAddress)) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+                
+                // Show loading state
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<span>Sending...</span>';
+                submitBtn.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // Show success message
+                    successMsg.classList.add('show');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Log form data
+                    console.log('Contact form submitted:', {
+                        name: yourName,
+                        email: emailAddress,
+                        service: serviceInterested,
+                        message: messageText
+                    });
+                    
+                    // Reset form with animation
+                    const inputs = this.querySelectorAll('input, textarea');
+                    inputs.forEach((input, index) => {
+                        setTimeout(() => {
+                            input.style.transition = 'all 0.3s';
+                            input.style.transform = 'scale(0.95)';
+                            setTimeout(() => {
+                                input.value = '';
+                                input.style.transform = 'scale(1)';
+                            }, 150);
+                        }, index * 100);
+                    });
+                    
+                    // Hide success message after 4 seconds
+                    setTimeout(() => {
+                        successMsg.classList.remove('show');
+                    }, 4000);
+                }, 1500);
             });
         }
 
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Show success message
-            const successMessage = document.getElementById('successMessage');
-            successMessage.classList.add('show');
-            
-            // Reset form
-            this.reset();
-            
-            // Hide success message after 3 seconds
-            setTimeout(() => {
-                successMessage.classList.remove('show');
-            }, 3000);
-        });
+        // Enhanced input effects for contact form
+        const contactInputs = document.querySelectorAll('.form-group-contact input, .form-group-contact textarea');
+        contactInputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.transform = 'scale(1.01)';
+            });
 
-        // Initialize particles
-        createParticles();
-
-        // Trigger animation on load
-        window.addEventListener('load', function() {
-            const cards = document.querySelectorAll('.feature-card');
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.animationDelay = index * 0.1 + 's';
-                }, 100);
+            input.addEventListener('blur', function() {
+                this.style.transform = 'scale(1)';
             });
         });
 
-        // Add hover effect to particles
-        document.addEventListener('mousemove', function(e) {
+        // Parallax Effect on Mouse Move
+        document.addEventListener('mousemove', (e) => {
             const particles = document.querySelectorAll('.particle');
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
-            
+            const mouseX = e.clientX / window.innerWidth - 0.5;
+            const mouseY = e.clientY / window.innerHeight - 0.5;
+
             particles.forEach((particle, index) => {
-                const speed = (index % 3 + 1) * 0.5;
-                const x = (mouseX - 0.5) * speed * 20;
-                const y = (mouseY - 0.5) * speed * 20;
+                const speed = (index + 1) * 3;
+                const x = mouseX * speed;
+                const y = mouseY * speed;
+                particle.style.transition = 'transform 0.3s ease-out';
                 particle.style.transform = `translate(${x}px, ${y}px)`;
             });
         });
+
+        // CTA Button Ripple Effect
+        const ctaButton = document.querySelector('.cta-button');
+        ctaButton.addEventListener('click', (e) => {
+            const ripple = document.createElement('span');
+            const rect = ctaButton.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.style.position = 'absolute';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(255, 255, 255, 0.5)';
+            ripple.style.transform = 'scale(0)';
+            ripple.style.animation = 'ripple 0.6s ease-out';
+            
+            ctaButton.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
