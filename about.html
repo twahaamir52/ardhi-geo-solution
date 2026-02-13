@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ardhi Geo Consulting - Our Location</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,381 +11,270 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-gradient: linear-gradient(135deg, #6b8e23 0%, #556b2f 100%);
-            --secondary-gradient: linear-gradient(135deg, #8fbc8f 0%, #6b8e23 100%);
-            --accent-color: #9acd32;
-            --dark-bg: #2d3a2d;
-            --card-bg: rgba(45, 58, 45, 0.95);
-            --card-light: rgba(60, 75, 60, 0.9);
-            --shadow-light: 0 10px 40px rgba(107, 142, 35, 0.1);
-            --shadow-medium: 0 20px 60px rgba(107, 142, 35, 0.2);
-            --shadow-heavy: 0 30px 80px rgba(107, 142, 35, 0.3);
-            --text-light: #c8d5c8;
-            --text-lighter: #e0ebe0;
-        }
-
         body {
-            font-family: 'Poppins', sans-serif;
-            background: #3d3d3d;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a8d8ea 0%, #7fc7d9 100%);
+            color: #ffffff;
             min-height: 100vh;
-            padding: 40px 20px;
-            position: relative;
             overflow-x: hidden;
         }
 
-        /* Animated background elements */
-        .bg-decoration {
-            position: fixed;
-            border-radius: 50%;
-            opacity: 0.1;
-            z-index: 0;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .bg-decoration:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            background: var(--primary-gradient);
-            top: -100px;
-            left: -100px;
-            animation-delay: 0s;
-        }
-
-        .bg-decoration:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            background: var(--secondary-gradient);
-            top: 50%;
-            right: -50px;
-            animation-delay: 5s;
-        }
-
-        .bg-decoration:nth-child(3) {
-            width: 250px;
-            height: 250px;
-            background: var(--primary-gradient);
-            bottom: -100px;
-            left: 30%;
-            animation-delay: 10s;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            25% {
-                transform: translate(30px, -30px) rotate(90deg);
-            }
-            50% {
-                transform: translate(-20px, 20px) rotate(180deg);
-            }
-            75% {
-                transform: translate(40px, 10px) rotate(270deg);
-            }
-        }
-
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
+            padding: 40px 20px;
         }
 
-        /* Header section */
+        /* Header Section */
         .header {
             text-align: center;
             margin-bottom: 60px;
-            animation: fadeInDown 1s ease;
+            animation: fadeInDown 1s ease-out;
         }
 
-        .map-pin {
+        .location-icon {
             width: 60px;
             height: 60px;
             margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .location-icon::before {
+            content: "📍";
+            font-size: 50px;
+            filter: hue-rotate(90deg);
             animation: bounce 2s infinite;
         }
 
-        .map-pin svg {
-            width: 100%;
-            height: 100%;
-            fill: url(#pinGradient);
-            filter: drop-shadow(0 5px 15px rgba(236, 72, 153, 0.4));
-        }
-
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
         .header h1 {
-            font-family: 'Montserrat', sans-serif;
             font-size: 3.5rem;
-            font-weight: 700;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #2c5f7c;
             margin-bottom: 10px;
-            letter-spacing: -1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         .header p {
             font-size: 1.2rem;
-            color: var(--text-light);
-            font-weight: 300;
+            color: #4a7c8f;
         }
 
-        /* Main card */
-        .location-card {
-            background: var(--card-bg);
-            border-radius: 30px;
-            padding: 50px;
-            box-shadow: var(--shadow-heavy);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(139, 195, 74, 0.3);
-            animation: fadeInUp 1s ease 0.3s backwards;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        /* Contact Card */
+        .contact-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 0;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.3s both;
         }
 
-        .location-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 40px 100px rgba(107, 142, 35, 0.35);
+        .contact-card::before {
+            content: '';
+            display: block;
+            height: 60px;
+            background: linear-gradient(135deg, #2c5f7c 0%, #1e4a5f 100%);
         }
 
-        .card-title {
-            font-family: 'Montserrat', sans-serif;
+        .contact-card > * {
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+
+        .contact-card > *:first-child {
+            padding-top: 30px;
+        }
+
+        .contact-card > *:last-child {
+            padding-bottom: 40px;
+        }
+
+        .company-name {
             font-size: 2.5rem;
-            font-weight: 700;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 40px;
+            color: #2c5f7c;
+            margin-bottom: 30px;
+            border-left: 4px solid #17a2b8;
             padding-left: 20px;
-            border-left: 5px solid var(--accent-color);
+            margin-left: 40px;
         }
 
-        /* Contact info grid */
         .contact-info {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
+            padding-left: 40px;
+            padding-right: 40px;
         }
 
-        .info-item {
-            animation: fadeIn 1s ease backwards;
-        }
-
-        .info-item:nth-child(1) { animation-delay: 0.5s; }
-        .info-item:nth-child(2) { animation-delay: 0.6s; }
-        .info-item:nth-child(3) { animation-delay: 0.7s; }
-
-        .info-label {
-            font-size: 0.85rem;
-            font-weight: 600;
+        .contact-item h3 {
+            color: #17a2b8;
+            font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #9acd32;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
-        .info-value {
+        .contact-item p {
+            color: #2c5f7c;
             font-size: 1.1rem;
-            color: var(--text-lighter);
-            font-weight: 500;
         }
 
-        .info-value a {
-            color: var(--text-lighter);
+        .contact-item a {
+            color: #2c5f7c;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
-        .info-value a:hover {
-            color: #9acd32;
+        .contact-item a:hover {
+            color: #17a2b8;
         }
 
-        /* Services section */
-        .services-title {
+        /* Services Section */
+        .services-header {
             text-align: center;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-lighter);
-            margin-bottom: 50px;
-            animation: fadeIn 1s ease 0.8s backwards;
+            font-size: 2.5rem;
+            color: #2c5f7c;
+            margin-bottom: 40px;
+            padding-left: 40px;
+            padding-right: 40px;
         }
 
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
+            margin-bottom: 60px;
+            padding-left: 40px;
+            padding-right: 40px;
         }
 
         .service-card {
-            background: linear-gradient(145deg, #3a4d3a 0%, #2d3a2d 100%);
-            border-radius: 20px;
-            padding: 40px 30px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            animation: fadeInUp 1s ease backwards;
-            border: 1px solid rgba(139, 195, 74, 0.2);
+            background: #f0f8ff;
+            border-radius: 15px;
+            padding: 35px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 1s ease-out both;
+            border: 2px solid transparent;
         }
 
-        .service-card:nth-child(1) { animation-delay: 0.9s; }
-        .service-card:nth-child(2) { 
-            animation-delay: 1s;
-        }
-        .service-card:nth-child(3) { 
-            animation-delay: 1.1s;
-        }
-        .service-card:nth-child(4) { 
-            animation-delay: 1.2s;
+        .service-card:nth-child(1) { animation-delay: 0.5s; }
+        .service-card:nth-child(2) { animation-delay: 0.7s; }
+        .service-card:nth-child(3) { animation-delay: 0.9s; }
+        .service-card:nth-child(4) { animation-delay: 1.1s; }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(23, 162, 184, 0.3);
+            border-color: #17a2b8;
+            background: #e6f7ff;
         }
 
         .service-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 20px;
-            display: inline-block;
-            filter: drop-shadow(0 5px 15px rgba(154, 205, 50, 0.4));
-            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
         }
 
-        /* Individual icon animations */
-        .service-card:nth-child(1) .service-icon {
-            animation: rotate360 4s ease-in-out infinite;
-        }
-
-        .service-card:nth-child(2) .service-icon {
-            animation: pulseGlow 2s ease-in-out infinite;
-        }
-
-        .service-card:nth-child(3) .service-icon {
-            animation: bounceScale 2.5s ease-in-out infinite;
-        }
-
-        .service-card:nth-child(4) .service-icon {
-            animation: wiggle 3s ease-in-out infinite;
-        }
-
-        /* Hover animations for icons */
-        .service-card:hover .service-icon {
-            transform: scale(1.2) rotate(360deg);
-            filter: drop-shadow(0 8px 20px rgba(154, 205, 50, 0.6));
-        }
-
-        /* Icon animation keyframes */
-        @keyframes rotate360 {
-            0%, 100% { 
-                transform: rotate(0deg) translateY(0);
-            }
-            50% { 
-                transform: rotate(180deg) translateY(-10px);
-            }
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { 
-                transform: scale(1);
-                filter: drop-shadow(0 5px 15px rgba(154, 205, 50, 0.4));
-            }
-            50% { 
-                transform: scale(1.15);
-                filter: drop-shadow(0 8px 25px rgba(154, 205, 50, 0.8));
-            }
-        }
-
-        @keyframes bounceScale {
-            0%, 100% { 
-                transform: translateY(0) scale(1);
-            }
-            25% { 
-                transform: translateY(-15px) scale(1.1);
-            }
-            50% { 
-                transform: translateY(0) scale(0.95);
-            }
-            75% { 
-                transform: translateY(-8px) scale(1.05);
-            }
-        }
-
-        @keyframes wiggle {
-            0%, 100% { 
-                transform: rotate(0deg) translateX(0);
-            }
-            25% { 
-                transform: rotate(-15deg) translateX(-5px);
-            }
-            50% { 
-                transform: rotate(0deg) translateX(0);
-            }
-            75% { 
-                transform: rotate(15deg) translateX(5px);
-            }
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(154, 205, 50, 0.2) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .service-card:hover::before {
-            opacity: 1;
-            transform: translate(25%, 25%);
-        }
-
-        .service-card:hover {
-            transform: translateY(-15px) scale(1.03);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-        }
+        .service-card:nth-child(2) .service-icon { animation-delay: 0.5s; }
+        .service-card:nth-child(3) .service-icon { animation-delay: 1s; }
+        .service-card:nth-child(4) .service-icon { animation-delay: 1.5s; }
 
         .service-card h3 {
-            font-family: 'Montserrat', sans-serif;
+            color: #2c5f7c;
             font-size: 1.5rem;
-            font-weight: 700;
             margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
-            color: #9acd32;
         }
 
         .service-card p {
-            font-size: 1rem;
-            font-weight: 300;
-            opacity: 0.9;
+            color: #4a7c8f;
             line-height: 1.6;
-            position: relative;
-            z-index: 1;
-            color: #c8d5c8;
+        }
+
+        /* About Section */
+        .about-section {
+            background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInUp 1s ease-out 1.3s both;
+        }
+
+        .about-section h2 {
+            color: #ffffff;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+        }
+
+        .about-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto 30px;
+            color: #ffffff;
+        }
+
+        .copyright {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        /* Mission, Vision, Motto Section */
+        .mvv-section {
+            margin-top: 60px;
+            animation: fadeInUp 1s ease-out 1.5s both;
+            background: linear-gradient(135deg, #a8d8ea 0%, #7fc7d9 100%);
+            border-radius: 20px;
+            padding: 50px 40px;
+        }
+
+        .mvv-header {
+            text-align: center;
+            font-size: 2rem;
+            color: #2c5f7c;
+            margin-bottom: 50px;
+        }
+
+        .mvv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+        }
+
+        .mvv-card {
+            text-align: center;
+            animation: fadeInUp 1s ease-out both;
+        }
+
+        .mvv-card:nth-child(1) { animation-delay: 1.7s; }
+        .mvv-card:nth-child(2) { animation-delay: 1.9s; }
+        .mvv-card:nth-child(3) { animation-delay: 2.1s; }
+
+        .mvv-circle {
+            display: none;
+        }
+
+        .mvv-card h3 {
+            color: #17a2b8;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+
+        .mvv-card p {
+            color: #4a7c8f;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            max-width: 400px;
+            margin: 0 auto;
         }
 
         /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -409,164 +297,80 @@
             }
         }
 
-        /* Responsive design */
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2.5rem;
             }
 
-            .location-card {
-                padding: 30px 20px;
-            }
-
-            .card-title {
+            .company-name {
                 font-size: 1.8rem;
             }
 
-            .services-grid {
+            .services-grid,
+            .mvv-grid {
                 grid-template-columns: 1fr;
             }
-        }
 
-        /* Interactive cursor effect for service cards */
-        .service-card {
-            --x: 50%;
-            --y: 50%;
-        }
-
-        .service-card::after {
-            content: '';
-            position: absolute;
-            top: var(--y);
-            left: var(--x);
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-        }
-
-        .service-card:hover::after {
-            width: 300px;
-            height: 300px;
-        }
-
-        /* About Us Section */
-        .about-section {
-            background: linear-gradient(145deg, rgba(50, 206, 218, 0.904) 0%, rgba(45, 58, 45, 0.6) 100%);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 60px 50px;
-            margin-top: 60px;
-            text-align: center;
-            border: 1px solid rgba(98, 214, 223, 0.3);
-            animation: fadeInUp 1s ease 1.3s backwards;
-            transition: all 0.3s ease;
-        }
-
-        .about-section:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .about-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 30px;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-light);
-            max-width: 900px;
-            margin: 0 auto 40px;
-            font-weight: 400;
-        }
-
-        .copyright {
-            font-size: 0.95rem;
-            color: rgba(200, 213, 200, 0.7);
-            font-weight: 300;
-            margin-top: 30px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(126, 230, 230, 0.2);
-        }
-
-        @media (max-width: 768px) {
-            .about-section {
-                padding: 40px 30px;
-            }
-
-            .about-title {
-                font-size: 2rem;
-            }
-
-            .about-text {
-                font-size: 1rem;
+            .mvv-circle {
+                width: 150px;
+                height: 150px;
+                font-size: 3rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Background decorations -->
-    <div class="bg-decoration"></div>
-    <div class="bg-decoration"></div>
-    <div class="bg-decoration"></div>
-
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <div class="map-pin">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="pinGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#9acd32;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#6b8e23;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                </svg>
-            </div>
+            <div class="location-icon"></div>
             <h1>Our Location</h1>
             <p>Ardhi Geo Consulting</p>
         </div>
 
-        <!-- Main location card -->
-        <div class="location-card">
-            <h2 class="card-title">Ardhi Geo Consulting</h2>
-
-            <!-- Contact information -->
+        <!-- Contact Card -->
+        <div class="contact-card">
+            <h2 class="company-name">Ardhi Geo Consulting</h2>
+            
             <div class="contact-info">
-                <div class="info-item">
-                    <div class="info-label">Address:</div>
-                    <div class="info-value">Morogoro CBD, Morogoro, Tanzania</div>
+                <div class="contact-item">
+                    <h3>ADDRESS:</h3>
+                    <p>Morogoro CBD, Morogoro, Tanzania</p>
                 </div>
-                <div class="info-item">
-                    <div class="info-label">Phone:</div>
-                    <div class="info-value">
-                        <a href="tel:+255743033121">+255 743 033 121</a>
-                    </div>
+                <div class="contact-item">
+                    <h3>PHONE:</h3>
+                    <p><a href="tel:+255743033121">+255 743 033 121</a></p>
                 </div>
-                <div class="info-item">
-                    <div class="info-label">Email:</div>
-                    <div class="info-value">
-                        <a href="mailto:info@ardhigeoconsulting.com">info@ardhigeoconsulting.com</a>
-                    </div>
+                <div class="contact-item">
+                    <h3>EMAIL:</h3>
+                    <p><a href="mailto:info@ardhigeoconsulting.com">info@ardhigeoconsulting.com</a></p>
                 </div>
             </div>
 
-            <!-- Services section -->
-            <h3 class="services-title">Service:</h3>
+            <!-- Services -->
+            <h2 class="services-header">Service:</h2>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">📐</div>
+                    <div class="service-icon">🏗️</div>
                     <h3>Upimaji wa Ardhi</h3>
                     <p>Cadastral, Engineering na Topographic Survey</p>
                 </div>
@@ -576,7 +380,7 @@
                     <p>Uchambuzi wa Takwimu wa Kijiografia</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">📊</div>
+                    <div class="service-icon">🛰️</div>
                     <h3>Remote Sensing</h3>
                     <p>Matumizi ya Satellite & Drone</p>
                 </div>
@@ -588,55 +392,37 @@
             </div>
         </div>
 
-        <!-- About Us Section -->
+        <!-- Mission, Vision, Motto -->
+        <div class="mvv-section">
+            <div class="mvv-grid">
+                <div class="mvv-card">
+                    <div class="mvv-circle"></div>
+                    <h3>MISSION</h3>
+                    <p>Improve the quality of life of our employees, our customers and our community, and participate deeply and effectively in development.</p>
+                </div>
+                <div class="mvv-card">
+                    <div class="mvv-circle"></div>
+                    <h3>VISION</h3>
+                    <p>To be a pioneering company with a multinational dimension, using smart and international best practices and being according to our fundamental values.</p>
+                </div>
+                <div class="mvv-card">
+                    <div class="mvv-circle"></div>
+                    <h3>MOTTO</h3>
+                    <p>Building long-lasting cooperation and partnerships for valuable and sustainable development</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
         <div class="about-section">
-            <h2 class="about-title">About Us</h2>
-            <p class="about-text">
-                Ardhi Geo Consulting Tanzania ni kampuni ya kisasa inayohusika na huduma za Upimaji wa Ardhi, GIS, Ramani na teknolojia ya kijiografia. Tunazingatia usahihi, ubunifu na maendeleo endelevu.
-            </p>
+            <h2>About Us</h2>
+            <p>Ardhi Geo Consulting Tanzania ni kampuni ya kisasa inayohusika na huduma za Upimaji wa Ardhi, GIS, Ramani na teknolojia ya kijiografia. Tunazingatia usahihi, ubunifu na maendeleo endelevu.</p>
             <p class="copyright">© 2026 Ardhi Geo Consulting. All Rights Reserved.</p>
         </div>
     </div>
 
     <script>
-        // Interactive cursor tracking for service cards
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                card.style.setProperty('--x', `${x}px`);
-                card.style.setProperty('--y', `${y}px`);
-            });
-        });
-
-        // Add subtle parallax effect to background decorations
-        document.addEventListener('mousemove', (e) => {
-            const decorations = document.querySelectorAll('.bg-decoration');
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            
-            decorations.forEach((decoration, index) => {
-                const speed = (index + 1) * 10;
-                const xMove = (x - 0.5) * speed;
-                const yMove = (y - 0.5) * speed;
-                
-                decoration.style.transform = `translate(${xMove}px, ${yMove}px)`;
-            });
-        });
-
-        // Add click animation to service cards
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 200);
-            });
-        });
-
-        // Animate elements on scroll (for mobile)
+        // Smooth scroll reveal on scroll
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -651,10 +437,29 @@
             });
         }, observerOptions);
 
-        // Observe all animated elements
-        document.querySelectorAll('.service-card, .info-item').forEach(el => {
+        document.querySelectorAll('.service-card, .mvv-card').forEach(el => {
             observer.observe(el);
         });
+
+        // Interactive hover effects
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.background = '#d6f0f5';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.background = '#f0f8ff';
+            });
+        });
+
+        // Add parallax effect to header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('.header');
+            header.style.transform = `translateY(${scrolled * 0.3}px)`;
+        });
+
+        // Console message
+        console.log('%c🌍 Ardhi Geo Consulting - Precision Mapping Solutions', 'color: #17a2b8; font-size: 16px; font-weight: bold;');
     </script>
 </body>
 </html>
