@@ -1,334 +1,643 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sample Projects - GIS & Technology</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tanzania GIS Projects Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #3a9d8f; --teal-dark: #2d7a6e; --teal-bg: #5bb8a8;
+    --teal-light: #e8f7f5; --white: #fff; --text: #1a2e2b;
+    --text-muted: #4a6660; --border: #c2e8e3;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'DM Sans',sans-serif; background:var(--teal-bg); min-height:100vh; padding:52px 24px 60px; }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-image: url('background.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            min-height: 100vh;
-            padding: 40px 20px;
-            position: relative;
-        }
+  .tz-flag-bar { position:fixed; top:0; left:0; right:0; height:5px; z-index:300;
+    background:linear-gradient(90deg,#1eb53a 0%,#1eb53a 30%,#fcd116 30%,#fcd116 35%,#000 35%,#000 65%,#fcd116 65%,#fcd116 70%,#1eb53a 70%,#1eb53a 100%); }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(59, 165, 137, 0.88) 0%, rgba(77, 184, 150, 0.88) 100%);
-            z-index: -1;
-        }
+  /* HEADER */
+  .section-header { text-align:center; margin-bottom:32px; }
+  .tz-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.38); color:white; font-size:0.77rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; padding:6px 18px; border-radius:30px; margin-bottom:14px; }
+  .section-header h2 { font-family:'Playfair Display',serif; font-size:2.6rem; color:white; text-shadow:0 2px 12px rgba(0,0,0,0.15); margin-bottom:10px; }
+  .section-header p { color:rgba(255,255,255,0.88); font-size:1rem; max-width:560px; margin:0 auto; line-height:1.6; }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+  /* STATS BAR */
+  .stats-bar { display:flex; gap:14px; max-width:1000px; margin:0 auto 24px; flex-wrap:wrap; }
+  .stat-card { flex:1; min-width:130px; background:rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.28); border-radius:14px; padding:13px 16px; display:flex; align-items:center; gap:10px; backdrop-filter:blur(8px); }
+  .stat-icon { font-size:1.5rem; }
+  .stat-value { font-size:1.35rem; font-weight:700; color:white; line-height:1; }
+  .stat-label { font-size:0.7rem; color:rgba(255,255,255,0.75); margin-top:3px; text-transform:uppercase; letter-spacing:0.07em; }
 
-        h1 {
-            text-align: center;
-            color: #ffffff;
-            font-size: 3em;
-            margin-bottom: 20px;
-            animation: fadeInDown 1s ease;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-        }
+  /* CONTROLS */
+  .controls { display:flex; gap:10px; max-width:1000px; margin:0 auto 20px; flex-wrap:wrap; align-items:center; }
+  .search-wrap { position:relative; flex:1; min-width:200px; }
+  .search-wrap input { width:100%; padding:10px 16px 10px 40px; border-radius:10px; border:none; background:rgba(255,255,255,0.92); font-family:'DM Sans',sans-serif; font-size:0.88rem; color:var(--text); outline:none; box-shadow:0 2px 10px rgba(0,0,0,0.08); }
+  .search-icon { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--teal-dark); font-size:1rem; pointer-events:none; }
+  .filter-btn { padding:10px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.38); background:rgba(255,255,255,0.18); color:white; font-family:'DM Sans',sans-serif; font-size:0.8rem; font-weight:600; cursor:pointer; transition:background 0.2s,border-color 0.2s; backdrop-filter:blur(6px); }
+  .filter-btn.active,.filter-btn:hover { background:white; color:var(--teal-dark); border-color:white; }
+  .results-count { color:rgba(255,255,255,0.8); font-size:0.8rem; margin-left:auto; white-space:nowrap; }
 
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 5px;
-            background: #ff9933;
-            border-radius: 3px;
-            box-shadow: 0 2px 6px rgba(255, 153, 51, 0.4);
-        }
+  /* GRID */
+  .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; max-width:1000px; margin:0 auto; }
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 35px;
-            margin-top: 80px;
-        }
+  /* CARD */
+  .card { background:var(--white); border-radius:18px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.10); transition:transform 0.28s,box-shadow 0.28s; display:flex; flex-direction:column; animation:fadeUp 0.4s ease both; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+  .card:hover { transform:translateY(-5px); box-shadow:0 14px 40px rgba(0,0,0,0.17); }
+  .card-scene { width:100%; height:200px; flex-shrink:0; overflow:hidden; position:relative; }
+  .card-scene svg { width:100%; height:100%; }
+  .db-badge { position:absolute; top:10px; right:10px; background:rgba(0,0,0,0.55); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.25); color:white; font-size:0.68rem; font-weight:600; padding:4px 9px; border-radius:20px; display:flex; align-items:center; gap:5px; }
+  .db-dot { width:6px; height:6px; border-radius:50%; background:#4ade80; animation:pulse 1.8s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(0.8)} }
+  .status-pill { position:absolute; top:10px; left:10px; font-size:0.67rem; font-weight:700; letter-spacing:0.06em; padding:3px 9px; border-radius:20px; text-transform:uppercase; }
+  .status-active { background:#dcfce7; color:#166534; }
+  .status-completed { background:#dbeafe; color:#1e40af; }
+  .status-ongoing { background:#fef3c7; color:#92400e; }
+  .card-body { padding:18px 22px 16px; flex:1; display:flex; flex-direction:column; }
+  .card-tag { display:inline-block; background:var(--teal-light); color:var(--teal-dark); font-size:0.7rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:3px 10px; border-radius:20px; margin-bottom:6px; width:fit-content; }
+  .card h3 { font-family:'Playfair Display',serif; font-size:1.18rem; color:var(--text); margin-bottom:5px; line-height:1.3; }
+  .card-meta { display:flex; gap:12px; margin-bottom:9px; flex-wrap:wrap; }
+  .meta-item { display:flex; align-items:center; gap:4px; font-size:0.77rem; color:var(--text-muted); }
+  .meta-item strong { color:var(--teal-dark); }
+  .card p { color:var(--text-muted); font-size:0.86rem; line-height:1.65; margin-bottom:10px; flex:1; }
+  .card-details { background:var(--teal-light); border-radius:10px; padding:9px 13px; margin-bottom:10px; }
+  .card-details ul { list-style:none; display:flex; flex-direction:column; gap:4px; }
+  .card-details ul li { font-size:0.79rem; color:var(--teal-dark); display:flex; align-items:flex-start; gap:7px; }
+  .card-details ul li::before { content:"✓"; font-weight:700; flex-shrink:0; margin-top:1px; }
+  .db-fields { border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-bottom:10px; }
+  .db-fields-header { background:var(--teal-dark); color:white; font-size:0.68rem; font-weight:600; letter-spacing:0.08em; padding:6px 12px; display:flex; align-items:center; gap:6px; text-transform:uppercase; }
+  .db-fields table { width:100%; border-collapse:collapse; }
+  .db-fields td { font-size:0.77rem; padding:5px 12px; border-bottom:1px solid var(--border); }
+  .db-fields tr:last-child td { border-bottom:none; }
+  .db-fields td:first-child { color:var(--text-muted); width:40%; font-weight:500; }
+  .card-tools { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:12px; }
+  .tool-badge { background:#f0faf8; border:1px solid var(--border); color:var(--teal-dark); font-size:0.7rem; font-weight:500; padding:3px 8px; border-radius:6px; }
+  .divider { height:1px; background:var(--border); margin-bottom:12px; }
 
-        .project-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px 35px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-            animation: fadeInUp 0.6s ease;
-            animation-fill-mode: both;
-            backdrop-filter: blur(10px);
-        }
+  /* VIEW PROJECT BUTTON */
+  .view-btn {
+    display:flex; align-items:center; gap:8px;
+    background:var(--teal); color:white;
+    border:none; border-radius:10px; padding:10px 18px;
+    font-family:'DM Sans',sans-serif; font-size:0.88rem; font-weight:600;
+    cursor:pointer; transition:background 0.2s, gap 0.2s, transform 0.15s;
+    width:100%; justify-content:space-between;
+  }
+  .view-btn:hover { background:var(--teal-dark); transform:translateY(-1px); }
+  .view-btn .btn-arrow { font-size:1rem; transition:transform 0.2s; }
+  .view-btn:hover .btn-arrow { transform:translateX(4px); }
+  .view-btn .btn-update { background:rgba(255,255,255,0.25); border-radius:10px; padding:2px 8px; font-size:0.7rem; }
 
-        .project-card:nth-child(1) { animation-delay: 0.1s; }
-        .project-card:nth-child(2) { animation-delay: 0.2s; }
-        .project-card:nth-child(3) { animation-delay: 0.3s; }
-        .project-card:nth-child(4) { animation-delay: 0.4s; }
-        .project-card:nth-child(5) { animation-delay: 0.5s; }
-        .project-card:nth-child(6) { animation-delay: 0.6s; }
-        .project-card:nth-child(7) { animation-delay: 0.7s; }
-        .project-card:nth-child(8) { animation-delay: 0.8s; }
+  /* NO RESULTS */
+  .no-results { grid-column:1/-1; text-align:center; padding:60px 20px; color:rgba(255,255,255,0.75); }
+  .no-results p { font-size:1.1rem; margin-top:12px; }
 
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(59, 165, 137, 0.15), transparent);
-            transition: left 0.7s ease;
-        }
+  /* ==================== MODAL ==================== */
+  .modal-overlay {
+    position:fixed; inset:0; background:rgba(10,30,25,0.72); z-index:500;
+    display:flex; align-items:center; justify-content:center; padding:20px;
+    backdrop-filter:blur(8px);
+    opacity:0; pointer-events:none; transition:opacity 0.3s;
+  }
+  .modal-overlay.open { opacity:1; pointer-events:all; }
 
-        .project-card:hover::before {
-            left: 100%;
-        }
+  .modal {
+    background:white; border-radius:22px; width:100%; max-width:780px;
+    max-height:90vh; overflow-y:auto; position:relative;
+    box-shadow:0 24px 80px rgba(0,0,0,0.35);
+    transform:translateY(30px) scale(0.97);
+    transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .modal-overlay.open .modal { transform:translateY(0) scale(1); }
 
-        .project-card:hover {
-            transform: translateY(-20px) scale(1.03);
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
-            background: rgba(255, 255, 255, 1);
-        }
+  /* Modal scrollbar */
+  .modal::-webkit-scrollbar { width:6px; }
+  .modal::-webkit-scrollbar-track { background:#f0faf8; }
+  .modal::-webkit-scrollbar-thumb { background:var(--teal); border-radius:3px; }
 
-        .project-card h3 {
-            color: #2c3e50;
-            font-size: 1.6em;
-            margin-bottom: 18px;
-            font-weight: bold;
-            line-height: 1.4;
-        }
+  /* Modal hero */
+  .modal-hero { height:220px; position:relative; overflow:hidden; }
+  .modal-hero svg { width:100%; height:100%; }
+  .modal-close {
+    position:absolute; top:14px; right:14px; width:34px; height:34px;
+    background:rgba(0,0,0,0.45); border:none; border-radius:50%; color:white;
+    font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    backdrop-filter:blur(4px); transition:background 0.2s;
+  }
+  .modal-close:hover { background:rgba(0,0,0,0.7); }
+  .modal-status-pill {
+    position:absolute; bottom:14px; left:16px;
+    font-size:0.72rem; font-weight:700; letter-spacing:0.06em;
+    padding:4px 12px; border-radius:20px; text-transform:uppercase;
+  }
+  .modal-id { position:absolute; bottom:14px; right:16px; background:rgba(0,0,0,0.5); color:white; font-size:0.7rem; padding:4px 10px; border-radius:14px; font-weight:600; backdrop-filter:blur(4px); }
 
-        .project-card p {
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 25px;
-            font-size: 1em;
-        }
+  .modal-body { padding:26px 28px 32px; }
+  .modal-tag { display:inline-block; background:var(--teal-light); color:var(--teal-dark); font-size:0.72rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:4px 11px; border-radius:20px; margin-bottom:10px; }
+  .modal-title { font-family:'Playfair Display',serif; font-size:1.65rem; color:var(--text); margin-bottom:6px; line-height:1.25; }
+  .modal-location { color:var(--teal); font-size:0.85rem; font-weight:600; margin-bottom:18px; }
 
-        .project-link {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: #3ba589;
-            font-weight: 600;
-            font-size: 1.1em;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 3px solid rgba(59, 165, 137, 0.2);
-            transition: all 0.3s ease;
-        }
+  /* Modal meta grid */
+  .modal-meta-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:22px; }
+  .modal-meta-box { background:var(--teal-light); border-radius:12px; padding:12px 14px; text-align:center; }
+  .modal-meta-box .mmb-val { font-size:1.1rem; font-weight:700; color:var(--teal-dark); }
+  .modal-meta-box .mmb-lbl { font-size:0.7rem; color:var(--text-muted); margin-top:3px; text-transform:uppercase; letter-spacing:0.06em; }
 
-        .project-card:hover .project-link {
-            color: #2c8a70;
-            border-top-color: #3ba589;
-        }
+  /* Section headings */
+  .modal-section { margin-bottom:22px; }
+  .modal-section h4 { font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal-dark); margin-bottom:12px; display:flex; align-items:center; gap:7px; }
+  .modal-section h4::after { content:''; flex:1; height:1px; background:var(--border); }
 
-        .project-link .arrow {
-            font-size: 1.8em;
-            transition: transform 0.3s ease;
-            display: inline-block;
-        }
+  /* Progress bar */
+  .progress-wrap { margin-bottom:14px; }
+  .progress-label { display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-muted); margin-bottom:5px; }
+  .progress-label strong { color:var(--text); }
+  .progress-bar { height:8px; background:#e2f0ee; border-radius:4px; overflow:hidden; }
+  .progress-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,var(--teal),var(--teal-dark)); transition:width 0.8s cubic-bezier(0.4,0,0.2,1); }
 
-        .project-card:hover .project-link .arrow {
-            transform: translateX(10px);
-            color: #ff9933;
-        }
+  /* Timeline */
+  .timeline { position:relative; padding-left:20px; }
+  .timeline::before { content:''; position:absolute; left:6px; top:6px; bottom:6px; width:2px; background:var(--border); border-radius:2px; }
+  .tl-item { position:relative; margin-bottom:14px; padding-left:18px; }
+  .tl-dot { position:absolute; left:-14px; top:4px; width:12px; height:12px; border-radius:50%; border:2px solid var(--teal); background:white; }
+  .tl-dot.done { background:var(--teal); }
+  .tl-dot.current { background:#fcd116; border-color:#c8a100; animation:pulse 1.5s infinite; }
+  .tl-date { font-size:0.72rem; color:var(--teal-dark); font-weight:600; margin-bottom:2px; }
+  .tl-title { font-size:0.85rem; font-weight:600; color:var(--text); }
+  .tl-desc { font-size:0.78rem; color:var(--text-muted); margin-top:2px; }
 
-        .project-number {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 3em;
-            font-weight: bold;
-            color: rgba(59, 165, 137, 0.1);
-            transition: all 0.3s ease;
-        }
+  /* Team */
+  .team-grid { display:flex; flex-wrap:wrap; gap:10px; }
+  .team-card { display:flex; align-items:center; gap:10px; background:var(--teal-light); border-radius:12px; padding:10px 14px; flex:1; min-width:200px; }
+  .team-avatar { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1rem; font-weight:700; color:white; flex-shrink:0; }
+  .team-name { font-size:0.83rem; font-weight:600; color:var(--text); }
+  .team-role { font-size:0.72rem; color:var(--text-muted); }
 
-        .project-card:hover .project-number {
-            color: rgba(59, 165, 137, 0.2);
-            transform: scale(1.2);
-        }
+  /* Updates feed */
+  .updates-feed { display:flex; flex-direction:column; gap:10px; }
+  .update-item { border:1px solid var(--border); border-radius:12px; padding:13px 16px; position:relative; overflow:hidden; }
+  .update-item::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; }
+  .update-info::before { background:#3b82f6; }
+  .update-success::before { background:#22c55e; }
+  .update-warning::before { background:#f59e0b; }
+  .update-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; }
+  .update-badge { font-size:0.68rem; font-weight:700; letter-spacing:0.06em; padding:2px 8px; border-radius:20px; text-transform:uppercase; }
+  .badge-info { background:#dbeafe; color:#1e40af; }
+  .badge-success { background:#dcfce7; color:#166534; }
+  .badge-warning { background:#fef3c7; color:#92400e; }
+  .update-date { font-size:0.72rem; color:var(--text-muted); }
+  .update-title { font-size:0.85rem; font-weight:600; color:var(--text); margin-bottom:3px; }
+  .update-desc { font-size:0.8rem; color:var(--text-muted); line-height:1.5; }
+  .update-author { font-size:0.72rem; color:var(--teal-dark); margin-top:5px; }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
+  /* Map preview placeholder */
+  .map-preview { border-radius:12px; overflow:hidden; height:160px; background:linear-gradient(135deg,#e8f7f5,#b2dfdb); display:flex; align-items:center; justify-content:center; position:relative; margin-bottom:0; }
+  .map-preview svg { width:100%; height:100%; }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+  /* Gallery row */
+  .gallery-row { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .gallery-cell { border-radius:10px; height:80px; display:flex; align-items:center; justify-content:center; font-size:2rem; }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-                margin-top: 60px;
-            }
-
-            .project-card {
-                padding: 30px 25px;
-            }
-
-            .project-card h3 {
-                font-size: 1.4em;
-            }
-        }
-    </style>
+  @media(max-width:680px) {
+    .grid { grid-template-columns:1fr; }
+    .section-header h2 { font-size:2rem; }
+    .modal-meta-grid { grid-template-columns:repeat(2,1fr); }
+    .modal-body { padding:18px 18px 26px; }
+    .modal-title { font-size:1.35rem; }
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Sample Projects</h1>
-        
-        <div class="projects-grid">
-            <div class="project-card" onclick="window.open('https://example.com/healthcare-gis', '_blank')">
-                <span class="project-number"></span>
-                <h3>Electricity supply GIS Mapping</h3>
-                <p>Implemented geospatial data systems to optimize Electricity supply facility,planning and service delivery.</p>
-                <div class="project-link">
-                    <span>View Project</span>
-                    <span class="arrow">→</span>
-                </div>
-            </div>
+<div class="tz-flag-bar"></div>
 
-            <div class="project-card" onclick="window.open('https://example.com/agriculture-monitoring', '_blank')">
-                <span class="project-number"></span>
-                <h3>Agriculture Monitoring</h3>
-                <p>Developed mobile and web-based platforms for monitoring crop performance, land use patterns, soil conditions, and seasonal agricultural productivity through GIS and remote sensing data.</p>
-                <div class="project-link">
-                    <span>View Project</span>
-                    <span class="arrow">→</span>
-                </div>
-            </div>
 
-            <div class="project-card" onclick="window.open('https://example.com/real-estate-dashboard', '_blank')">
-                <span class="project-number"></span>
-                <h3>Real Estate Dashboard</h3>
-                <p>Built an interactive property management and analytics system.</p>
-                <div class="project-link">
-                    <span>View Project</span>
-                    <span class="arrow">→</span>
-                </div>
-            </div>
+<script>
+const DB = {
+  projects: [
+    {
+      id:"TZP-001", title:"Electricity Supply GIS Mapping", category:"Energy & Infrastructure",
+      status:"completed", location:"Dodoma, Morogoro & Tabora  Regions", region:"Dodoma",
+      client:"TANESCO / REA", year:2024, duration:"14 months", budget:"TZS 470M", area_km2:1209, progress:55,
+      description:"Partnered with TANESCO to map transmission and distribution networks across rural Tanzania, identifying unelectrified villages and prioritizing grid extension routes to support Tanzania's Rural Electrification Program (REA) targets under Vision 2030.",
+      achievements:["Mapped 620+ km of MV/LV lines across Dodoma & Morogoro regions","Identified 138 unelectrified villages for priority connection","Reduced TANESCO field planning time by 45%"],
+      tools:["ArcGIS","QGIS","PostGIS","Python","OpenStreetMap TZ"], scene:"energy", tags:["energy","gis","infrastructure","tanesco"],
+      team:[{name:"Amir Twaha",role:"GIS Lead",color:"#2d7a6e",icon:"A"},{name:"James About",role:"Field Surveyor",color:"#1565c0",icon:"J"},{name:"Grace Kimaro",role:"Data Analyst",color:"#7b1fa2",icon:"G"}],
+      timeline:[
+        {date:"Jan 2025",title:"Project Kickoff",desc:"Stakeholder alignment with TANESCO & REA",done:true},
+        {date:"Mar 2025",title:"Field Survey Phase",desc:"GPS data collection across 12 districts",done:true},
+        {date:"Jul 2025",title:"GIS Database Build",desc:"PostGIS schema, 620 km of network digitized",done:true},
+        {date:"Oct 2025",title:"Dashboard Launch",desc:"TANESCO web portal deployed to 8 regions",done:true},
+        {date:"Feb 2026",title:"Handover & Training",desc:"TANESCO staff trained, documentation complete",done:true}
+      ],
+      updates:[
+        {type:"success",badge:"Completed",date:"15 Feb 2026",title:"Project officially handed over to TANESCO",desc:"All deliverables accepted. 138 villages flagged for connection in REA Phase IV budget cycle.",author:"Amir Twaha · GIS Lead"},
+        {type:"info",badge:"Report",date:"10 Jan 2026",title:"Final impact assessment published",desc:"Independent review confirmed 45% reduction in planning lead time. Report shared with Ministry of Energy.",author:"Grace Kimaro · Data Analyst"},
+        {type:"success",badge:"Milestone",date:"28 Oct 2025",title:"TANESCO web portal goes live",desc:"8-region dashboard deployed. Real-time asset tracking enabled for 62 district engineers.",author:"James About · Field Surveyor"}
+      ],
+      gallery:["⚡","🗺️","📊","🔌","🏘️","📡"]
+    },
+    {
+      id:"TZP-002", title:"Agriculture Monitoring", category:"Agri-Tech",
+      status:"active", location:"Kilimanjaro, Arusha & Mbeya Regions", region:"Kilimanjaro",
+      client:"Ministry of Agriculture TZ", year:2024, duration:"24 months", budget:"TZS 680M", area_km2:92000, progress:52,
+      description:"Developed mobile and web platforms to monitor maize, rice, and coffee yield performance using Sentinel-2 satellite imagery across Tanzania's key agricultural belts, supporting the Ministry of Agriculture's food security programs and smallholder farmer advisory services.",
+      achievements:["Monitored 92,000 ha of farmland in Kilimanjaro & Mbeya","NDVI crop health SMS alerts for 4,500+ smallholder farmers","Early drought stress detection in Dodoma maize belt — 3 weeks ahead"],
+      tools:["Google Earth Engine","Sentinel-2","QGIS","Flutter","FAO GAEZ"], scene:"agriculture", tags:["agriculture","ndvi","remote sensing","kilimanjaro"],
+      team:[{name:"Baraka Njau",role:"Remote Sensing Specialist",color:"#2e7d32",icon:"B"},{name:"Salma Ally",role:"Mobile Dev",color:"#e65100",icon:"S"},{name:"Patrick Laizer",role:"Agronomist",color:"#1565c0",icon:"P"}],
+      timeline:[
+        {date:"Jan 2024",title:"Inception & Baseline",desc:"Baseline crop cover mapping across 3 regions",done:true},
+        {date:"Mar 2024",title:"Platform Development",desc:"Flutter mobile app beta released to 50 farmers",done:true},
+        {date:"Jun 2024",title:"NDVI Monitoring Live",desc:"Sentinel-2 automated pipeline operational",done:true},
+        {date:"Sep 2024",title:"Season 1 Report",desc:"Long rains season yield assessment complete",done:true},
+        {date:"Dec 2024",title:"Scale-up Phase",desc:"Expanding to 4,500 farmers across Mbeya",current:true},
+        {date:"Jun 2025",title:"Final Report",desc:"Comprehensive food security impact evaluation",done:false}
+      ],
+      updates:[
+        {type:"warning",badge:"Update",date:"12 Dec 2024",title:"Scale-up underway — Mbeya Region",desc:"Onboarding 1,200 new smallholder farmers to the SMS alert system. Field team deployed to Mbeya Urban & Mbarali districts.",author:"Baraka Njau · Remote Sensing"},
+        {type:"success",badge:"Milestone",date:"04 Nov 2024",title:"Season 1 yields mapped — above forecast",desc:"Kilimanjaro coffee zone recorded 12% above average NDVI. Preliminary yield report sent to Ministry of Agriculture.",author:"Patrick Laizer · Agronomist"},
+        {type:"info",badge:"Tech Update",date:"18 Sep 2024",title:"Sentinel-2 pipeline upgraded to 5-day refresh",desc:"Processing latency reduced from 10 to 5 days. 97.3% cloud-free composite success rate for Oct–Dec period.",author:"Baraka Njau · Remote Sensing"}
+      ],
+      gallery:["🌾","🛰️","📱","🌱","☁️","📈"]
+    },
+    {
+      id:"TZP-003", title:"Real Estate Dashboard", category:"PropTech",
+      status:"completed", location:"Dar es Salaam — Ilala, Kinondoni & Temeke", region:"Dar es Salaam",
+      client:"MLHHSD / Private Sector", year:2023, duration:"8 months", budget:"TZS 190M", area_km2:1393, progress:100,
+      description:"Built an interactive spatial analytics system for Tanzania's urban real estate sector, visualizing plot availability and tracking property values across Dar es Salaam's 3 municipalities. Integrated with MLHHSD land registry for real-time due diligence and ownership verification workflows.",
+      achievements:["14,000+ parcels mapped across Ilala, Kinondoni & Temeke","Price heatmaps for Kariakoo, Masaki, Mikocheni & Mbezi Beach","Integrated with MLHHSD & TIC land registry APIs"],
+      tools:["Mapbox GL JS","Node.js","PostgreSQL","PostGIS","React"], scene:"realestate", tags:["real estate","property","dar es salaam","dashboard"],
+      team:[{name:"Farida Hassan",role:"Full-Stack Dev",color:"#0d47a1",icon:"F"},{name:"Moses Kileo",role:"GIS Analyst",color:"#4a148c",icon:"M"}],
+      timeline:[
+        {date:"Mar 2023",title:"Requirements & Design",desc:"Stakeholder workshops with MLHHSD & 3 agencies",done:true},
+        {date:"May 2023",title:"Data Integration",desc:"14,000+ parcels loaded from MLHHSD registry",done:true},
+        {date:"Aug 2023",title:"Dashboard Live",desc:"Mapbox-powered portal launched to 12 agencies",done:true},
+        {date:"Nov 2023",title:"Project Close",desc:"Final handover, user training, documentation",done:true}
+      ],
+      updates:[
+        {type:"success",badge:"Live",date:"20 Nov 2023",title:"Dashboard adopted by 12 real estate agencies",desc:"User base grew to 340 registered agents across Dar es Salaam within first month of launch.",author:"Farida Hassan · Full-Stack Dev"},
+        {type:"info",badge:"Feature",date:"15 Oct 2023",title:"Price prediction model added",desc:"Random Forest model integrated. Predicts property value range with ±8% accuracy for Kariakoo & Masaki zones.",author:"Moses Kileo · GIS Analyst"}
+      ],
+      gallery:["🏢","🗺️","📊","🏘️","💰","🔍"]
+    },
+    {
+      id:"TZP-004", title:"Land Surveying & Cadastral Mapping", category:"Surveying & Cadastre",
+      status:"completed", location:"Mbeya, Mwanza & Tanga Regions", region:"Mbeya",
+      client:"MLHHSD / World Bank", year:2025, duration:"18 months", budget:"TZS 540M", area_km2:320, progress:100,
+      description:"Conducted high-precision cadastral surveys with GNSS RTK and total station technologies, partnering with Tanzania's Ministry of Lands (MLHHSD) to formalize land rights for rural communities and peri-urban settlers — reducing land conflict and enabling smallholder access to credit.",
+      achievements:["Demarcated 4,100+ plots across Mbeya, Mwanza & Tanga peri-urban zones","CCROs issued for 3,600 beneficiaries","Sub-centimeter GNSS RTK accuracy aligned to Arc 1960 Tanzania datum"],
+      tools:["Trimble R10","Total Station","AutoCAD Civil 3D","ArcGIS","LADM"], scene:"surveying", tags:["cadastre","land","surveying","mbeya","gnss"],
+      team:[{name:"Jesca About",role:"Lead Surveyor",color:"#bf360c",icon:"H"},{name:"Humphley Fungameza",role:"GIS Technician",color:"#2d7a6e",icon:"N"},{name:"David Maro",role:"Legal Land Expert",color:"#1565c0",icon:"D"}],
+      timeline:[
+        {date:"Apr 2022",title:"Mobilization",desc:"Equipment procurement, team deployment to Mbeya",done:true},
+        {date:"Jul 2022",title:"Survey Phase 1 — Mbeya",desc:"1,500 plots demarcated in Mbeya Urban & Mbarali",done:true},
+        {date:"Nov 2022",title:"Survey Phase 2 — Mwanza & Tanga",desc:"2,600 additional plots surveyed & digitized",done:true},
+        {date:"Mar 2023",title:"CCRO Processing",desc:"3,600 certificates processed with MLHHSD",done:true},
+        {date:"Sep 2023",title:"Project Close",desc:"World Bank review passed, final report submitted",done:true}
+      ],
+      updates:[
+        {type:"success",badge:"Impact",date:"22 Jan 2026",title:"World Bank impact review: Exceeded targets",desc:"3,600 of 3,000 targeted CCROs issued — 120% of target. Land conflict cases in surveyed areas dropped 34%.",author:"David Maro · Legal Land Expert"},
+        {type:"success",badge:"Published",date:"10 Jul 2025",title:"Case study published in UN-Habitat journal",desc:"Methodology featured as best practice model for Sub-Saharan Africa peri-urban cadastre programs.",author:"Jesca about · Lead Surveyor"}
+      ],
+      gallery:["📐","🛰️","📜","🗺️","🔭","📋"]
+    },
+    {
+      id:"TZP-005", title:"Urban Planning & Development", category:"Urban Planning",
+      status:"ongoing", location:"Dar es Salaam, Mwanza & Dodoma", region:"Dar es Salaam",
+      client:"TAMISEMI / Municipal Councils", year:2024, duration:"36 months", budget:"TZS 1.2B", area_km2:285, progress:38,
+      description:"Creating GIS-based master plans for Tanzania's fastest-growing cities in collaboration with TAMISEMI and municipal councils. Spatial analysis used to model population growth, define zoning bylaws, optimize infrastructure corridors, and identify informal settlement upgrade priorities aligned to Vision 2025.",
+      achievements:["Master plan covering 285 km² of Dar es Salaam's peri-urban expansion","Informal settlement profiling across 47 sub-wards in Mwanza","3D scenario modeling for Dodoma Capital City development phases"],
+      tools:["ArcGIS Pro","CityEngine","ENVI","InVEST","Python"], scene:"urban", tags:["urban","planning","master plan","dar es salaam","dodoma"],
+      team:[{name:"Rehema Lyimo",role:"Urban Planner",color:"#1a237e",icon:"R"},{name:"Felix Mwenda",role:"3D Modeler",color:"#bf360c",icon:"F"},{name:"Agness Kaale",role:"Community Liaison",color:"#2e7d32",icon:"A"}],
+      timeline:[
+        {date:"Feb 2024",title:"Inception Report",desc:"Baseline studies, stakeholder mapping complete",done:true},
+        {date:"Apr 2024",title:"Existing Conditions Analysis",desc:"Land use, population density & infrastructure survey",done:true},
+        {date:"Aug 2024",title:"Draft Master Plan",desc:"Zoning proposals presented to Dar City Council",current:true},
+        {date:"Jan 2025",title:"Public Consultations",desc:"Community input sessions in 8 wards",done:false},
+        {date:"Jun 2025",title:"Final Master Plan",desc:"Council approval & Gazette notification",done:false},
+        {date:"Jan 2026",title:"Implementation Guide",desc:"Phased infrastructure delivery plan",done:false}
+      ],
+      updates:[
+        {type:"warning",badge:"In Progress",date:"15 Dec 2024",title:"Mwanza informal settlement mapping — Phase 2",desc:"47 sub-wards in Mwanza profiled. Satellite change detection flagged 8 new informal clusters in Nyamagana District.",author:"Rehema Lyimo · Urban Planner"},
+        {type:"info",badge:"Presentation",date:"30 Oct 2024",title:"Draft zoning framework presented to Dar City Council",desc:"Three growth scenarios modeled (compact, sprawl, polycentric). Council expressed preference for polycentric model.",author:"Felix Mwenda · 3D Modeler"},
+        {type:"success",badge:"Award",date:"05 Sep 2024",title:"Project shortlisted for AfriCity Planning Excellence Award",desc:"Among 5 finalists in the Sub-Saharan Urban Innovation category for 2024.",author:"Agness Kaale · Community Liaison"}
+      ],
+      gallery:["🏙️","🗺️","🏗️","🏘️","📐","🌆"]
+    },
+    {
+      id:"TZP-006", title:"Environmental Monitoring System", category:"Environment",
+      status:"active", location:"Selous, Eastern Arc Mountains & Lake Tanganyika", region:"Lindi / Morogoro",
+      client:"NEMC / MNRT", year:2024, duration:"30 months", budget:"TZS 780M", area_km2:54000, progress:44,
+      description:"Deployed real-time environmental monitoring for Tanzania's biodiversity hotspots — tracking forest cover loss in the Selous Game Reserve (UNESCO World Heritage Site), water quality in Lake Tanganyika and Lake Victoria, and climate change impacts across the Eastern Arc Mountains.",
+      achievements:["Detected 12,400 ha of deforestation in Selous over 18 months","Water quality mapping along Lake Victoria & Tanganyika shorelines","Carbon stock estimation across Eastern Arc Mountain forests"],
+      tools:["Google Earth Engine","Landsat 8/9","SNAP","R","QGIS"], scene:"environment", tags:["environment","deforestation","selous","lake tanganyika","remote sensing"],
+      team:[{name:"Zawadi Mganga",role:"Environmental Scientist",color:"#2e7d32",icon:"Z"},{name:"Ibrahim Ally",role:"Remote Sensing Analyst",color:"#1565c0",icon:"I"},{name:"Lucia Minja",role:"Water Quality Specialist",color:"#6a1b9a",icon:"L"}],
+      timeline:[
+        {date:"Mar 2024",title:"System Setup",desc:"GEE pipeline, Landsat & Sentinel feeds configured",done:true},
+        {date:"Jun 2024",title:"Baseline Forest Cover",desc:"2020–2023 deforestation trajectory established",done:true},
+        {date:"Sep 2024",title:"Water Quality Sensors Live",desc:"Lake Tanganyika monitoring stations activated",done:true},
+        {date:"Jan 2025",title:"Annual Report",desc:"Year 1 biodiversity impact assessment",current:true},
+        {date:"Jun 2025",title:"Carbon Stock Pilot",desc:"Eastern Arc carbon credit methodology pilot",done:false},
+        {date:"Sep 2026",title:"Final Report",desc:"30-month ecosystem health assessment",done:false}
+      ],
+      updates:[
+        {type:"warning",badge:"Alert",date:"08 Jan 2025",title:"Elevated deforestation detected — Liwale District",desc:"December analysis flagged 340 ha clearance in southern Selous. Alert sent to MNRT enforcement unit. Investigation underway.",author:"Ibrahim Ally · Remote Sensing"},
+        {type:"info",badge:"Data",date:"20 Nov 2024",title:"Lake Tanganyika — turbidity spike recorded",desc:"Sensor station at Kigoma recorded elevated turbidity Dec 14–18. Linked to heavy rainfall event. Returning to baseline.",author:"Lucia Minja · Water Quality"},
+        {type:"success",badge:"Published",date:"02 Oct 2024",title:"Baseline forest cover report accepted by NEMC",desc:"2020–2023 deforestation trajectory validated by NEMC technical committee. Data feeding into national REDD+ reporting.",author:"Zawadi Mganga · Environmental Scientist"}
+      ],
+      gallery:["🌍","🛰️","🌊","🌳","📡","🔬"]
+    },
+    {
+      id:"TZP-007", title:"Infrastructure Asset Management", category:"Asset Management",
+      status:"active", location:"Dar es Salaam, Moshi & Arusha Municipalities", region:"Dar es Salaam",
+      client:"DAWASA / Dar es Salaam City Council", year:2023, duration:"20 months", budget:"TZS 560M", area_km2:1393, progress:70,
+      description:"Developed a web-based GIS platform for Dar es Salaam City Council and DAWASA to manage roads, water supply networks, sewers, and public facilities across Ilala, Kinondoni, and Temeke. IoT integration enables real-time monitoring of the aging pipe network, flagging leaks and non-revenue water hotspots.",
+      achievements:["Catalogued 2,100+ km of roads and DAWASA pipe networks","Predictive pipe-burst alerts linked to field crews via mobile app","Non-revenue water (NRW) hotspot mapping reduced losses by 18%"],
+      tools:["ArcGIS Online","Esri Field Maps","FME","SQL Server","IoT Sensors"], scene:"infrastructure", tags:["infrastructure","dawasa","water","roads","iot"],
+      team:[{name:"Peter Mbwilo",role:"GIS Platform Lead",color:"#4a148c",icon:"P"},{name:"Joyce Mwita",role:"IoT Engineer",color:"#bf360c",icon:"J"},{name:"Samuel Nkya",role:"Field Operations",color:"#2d7a6e",icon:"S"}],
+      timeline:[
+        {date:"Jun 2023",title:"Asset Inventory",desc:"Field capture of 2,100 km road & pipe network started",done:true},
+        {date:"Oct 2023",title:"IoT Integration",desc:"Pressure sensors installed at 42 network nodes",done:true},
+        {date:"Jan 2024",title:"Dashboard Live",desc:"City Council & DAWASA dashboards operational",done:true},
+        {date:"Jun 2024",title:"NRW Hotspot Mapping",desc:"18% NRW reduction achieved in pilot zones",done:true},
+        {date:"Dec 2024",title:"Moshi & Arusha Expansion",desc:"System being rolled out to 2 additional cities",current:true},
+        {date:"Mar 2025",title:"Handover",desc:"Full platform handover to City Council IT team",done:false}
+      ],
+      updates:[
+        {type:"info",badge:"Expansion",date:"10 Jan 2025",title:"Moshi Municipality onboarding — Week 3",desc:"Field capture team covering Moshi Urban's 320 km pipe network. 68% complete. IoT sensor installation begins Feb 1.",author:"Samuel Nkya · Field Operations"},
+        {type:"success",badge:"Result",date:"05 Dec 2024",title:"NRW reduction target exceeded in Kinondoni",desc:"Non-revenue water losses reduced 22% in Kinondoni pilot — exceeding 18% target. DAWASA approving expansion to Ilala.",author:"Joyce Mwita · IoT Engineer"},
+        {type:"warning",badge:"Incident",date:"18 Nov 2024",title:"Pipe burst detected — Morogoro Road node",desc:"Pressure sensor #MT-017 flagged anomaly at 02:14. DAWASA crew dispatched within 28 minutes. Burst repaired by 06:00.",author:"Joyce Mwita · IoT Engineer"}
+      ],
+      gallery:["🛣️","💧","📡","🔧","🗺️","📱"]
+    },
+    {
+      id:"TZP-008", title:"Disaster Risk Management", category:"Disaster Risk",
+      status:"active", location:"Rufiji River Basin, Pwani & Morogoro Regions", region:"Pwani",
+      client:"PMO-RALG / NEMC", year:2024, duration:"18 months", budget:"TZS 490M", area_km2:68000, progress:58,
+      description:"Implemented a GIS-based flood hazard assessment and early warning system for Tanzania's flood-prone Rufiji River Basin and Pwani coastline. Real-time SMS alerts triggered by TMA weather station data and upstream river gauge readings protect vulnerable communities from seasonal flooding.",
+      achievements:["Flood inundation maps for 38 high-risk wards in Pwani & Morogoro","TMA rainfall integration — SMS alerts reaching 180,000+ residents","Evacuation corridor modeling for 14 vulnerable coastal communities"],
+      tools:["HEC-RAS","ArcGIS","OpenLayers","Node.js","Beem Africa SMS"], scene:"disaster", tags:["disaster","flood","rufiji","pwani","early warning"],
+      team:[{name:"Ramadhani Salum",role:"Hydrological Engineer",color:"#b71c1c",icon:"R"},{name:"Beatrice Nzuki",role:"GIS & Early Warning",color:"#1565c0",icon:"B"},{name:"Omar Juma",role:"Community Outreach",color:"#2e7d32",icon:"O"}],
+      timeline:[
+        {date:"Apr 2024",title:"Hazard Mapping",desc:"HEC-RAS flood models for 38 wards completed",done:true},
+        {date:"Jul 2024",title:"TMA Integration",desc:"Rainfall sensors linked to SMS alert pipeline",done:true},
+        {date:"Sep 2024",title:"Community Drills",desc:"Evacuation exercises in 6 pilot communities",done:true},
+        {date:"Dec 2024",title:"2024 Flood Season Response",desc:"System active for long rains monitoring",current:true},
+        {date:"Mar 2025",title:"Scale to 14 Communities",desc:"All 14 target communities fully onboarded",done:false},
+        {date:"Sep 2025",title:"Project Close",desc:"Final impact assessment & handover to PMO-RALG",done:false}
+      ],
+      updates:[
+        {type:"warning",badge:"🚨 Alert",date:"14 Jan 2025",title:"FLOOD WATCH ACTIVE — Rufiji Lower Basin",desc:"TMA forecast 85mm rainfall Jan 15–17. Alert SMS sent to 62,000 residents in Kibiti & Rufiji districts. Evacuation routes activated.",author:"Beatrice Nzuki · GIS & Early Warning"},
+        {type:"success",badge:"Milestone",date:"10 Dec 2024",title:"First full season operational — zero flood casualties",desc:"Long rains 2024 season completed. 6 communities monitored continuously. 0 flood fatalities vs. avg 12 in prior years.",author:"Ramadhani Salum · Hydrological Engineer"},
+        {type:"info",badge:"Training",date:"22 Sep 2024",title:"Evacuation drills completed — 6 pilot communities",desc:"3,400 residents participated. Average evacuation time: 18 minutes (target: 20 min). Village leaders trained on alert protocols.",author:"Omar Juma · Community Outreach"}
+      ],
+      gallery:["🌊","⚠️","🗺️","📱","🚁","🏘️"]
+    }
+  ],
+  getAll(){ return this.projects; },
+  getById(id){ return this.projects.find(p=>p.id===id); },
+  getByCategory(cat){ return cat==="All"?this.projects:this.projects.filter(p=>p.category===cat); },
+  getCategories(){ return ["All",...new Set(this.projects.map(p=>p.category))]; },
+  search(q){ const lq=q.toLowerCase(); return this.projects.filter(p=>p.title.toLowerCase().includes(lq)||p.category.toLowerCase().includes(lq)||p.location.toLowerCase().includes(lq)||p.client.toLowerCase().includes(lq)||p.tags.some(t=>t.includes(lq))); },
+  stats(){ return { total:this.projects.length, totalArea:this.projects.reduce((s,p)=>s+p.area_km2,0).toLocaleString(), active:this.projects.filter(p=>p.status==="active"||p.status==="ongoing").length, updates:this.projects.reduce((s,p)=>s+p.updates.length,0) }; }
+};
+</script>
 
-            <div class="project-card" onclick="window.open('https://example.com/land-surveying', '_blank')">
-                <span class="project-number"></span>
-                <h3>Land Surveying & Cadastral Mapping</h3>
-                <p>Conducted high-precision land surveying and cadastral mapping using GNSS and total station technologies to support land registration, boundary verification, and legal land documentation.</p>
-                <div class="project-link">
-                    <span>View Project</span>
-                    <span class="arrow">→</span>
-                </div>
-            </div>
+<!-- SVG SCENES -->
+<script>
+const SCENES={
+  energy:`<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ge" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0d1f12"/><stop offset="55%" stop-color="#1a5e42"/><stop offset="100%" stop-color="#e97c30"/></linearGradient></defs><rect width="480" height="200" fill="url(#ge)"/><circle cx="390" cy="72" r="30" fill="#fcd116" opacity="0.85"/><ellipse cx="70" cy="200" rx="130" ry="60" fill="#0a2e14"/><ellipse cx="280" cy="205" rx="200" ry="58" fill="#0a2e14"/><ellipse cx="460" cy="205" rx="100" ry="50" fill="#0a2e14"/><rect x="48" y="148" width="5" height="28" fill="#061510"/><ellipse cx="50" cy="142" rx="18" ry="8" fill="#061510"/><rect x="118" y="145" width="5" height="30" fill="#061510"/><ellipse cx="120" cy="138" rx="21" ry="9" fill="#061510"/><g stroke="#fcd116" stroke-width="1.6" fill="none" opacity="0.92"><line x1="95" y1="62" x2="85" y2="128"/><line x1="95" y1="62" x2="105" y2="128"/><line x1="85" y1="128" x2="105" y2="128"/><line x1="82" y1="90" x2="108" y2="90"/><line x1="225" y1="57" x2="215" y2="126"/><line x1="225" y1="57" x2="235" y2="126"/><line x1="215" y1="126" x2="235" y2="126"/><line x1="212" y1="84" x2="238" y2="84"/><line x1="358" y1="60" x2="348" y2="124"/><line x1="358" y1="60" x2="368" y2="124"/><line x1="348" y1="124" x2="368" y2="124"/><line x1="345" y1="87" x2="371" y2="87"/><path d="M82,90 Q155,106 212,84" stroke-width="1" fill="none"/><path d="M212,84 Q285,100 345,87" stroke-width="1" fill="none"/><path d="M85,128 Q155,145 215,126" stroke-width="0.9" fill="none"/><path d="M215,126 Q285,143 348,124" stroke-width="0.9" fill="none"/></g><text x="240" y="26" font-family="Georgia,serif" font-size="11" fill="rgba(255,255,255,0.82)" text-anchor="middle">TANESCO Grid • Dodoma–Morogoro</text></svg>`,
+  agriculture:`<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#90caf9"/><stop offset="100%" stop-color="#c8e6c9"/></linearGradient></defs><rect width="480" height="200" fill="url(#ga)"/><polygon points="345,28 400,130 290,130" fill="white" opacity="0.75"/><polygon points="345,28 370,78 320,78" fill="#b0bec5" opacity="0.5"/><polygon points="345,28 358,55 332,55" fill="white" opacity="0.9"/><text x="362" y="24" font-family="sans-serif" font-size="9" fill="#37474f">Mt. Kilimanjaro</text><ellipse cx="80" cy="38" rx="55" ry="18" fill="white" opacity="0.6"/><rect x="0" y="130" width="480" height="70" fill="#4caf50"/><rect x="0" y="130" width="88" height="70" fill="#2e7d32"/><rect x="92" y="130" width="75" height="70" fill="#66bb6a"/><rect x="171" y="130" width="72" height="70" fill="#a5d6a7"/><rect x="247" y="130" width="88" height="70" fill="#388e3c"/><rect x="339" y="130" width="141" height="70" fill="#81c784"/><ellipse cx="210" cy="18" rx="170" ry="48" fill="none" stroke="#1565c0" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.5"/><circle cx="80" cy="30" r="7" fill="#1565c0" opacity="0.85"/><line x1="73" y1="27" x2="67" y2="22" stroke="#90caf9" stroke-width="1.5"/><line x1="87" y1="27" x2="93" y2="22" stroke="#90caf9" stroke-width="1.5"/><text x="170" y="118" font-family="sans-serif" font-size="10" fill="#1b5e20" text-anchor="middle" font-weight="600">Kilimanjaro–Arusha Zone</text></svg>`,
+  realestate:`<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gr" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#01579b"/><stop offset="65%" stop-color="#0288d1"/><stop offset="100%" stop-color="#80deea"/></linearGradient></defs><rect width="480" height="200" fill="url(#gr)"/><rect x="0" y="148" width="480" height="52" fill="#023e8a" opacity="0.88"/><rect x="18" y="102" width="24" height="48" fill="#1a3a5c"/><rect x="46" y="88" width="28" height="62" fill="#1e4d7b"/><rect x="78" y="98" width="20" height="52" fill="#1a3a5c"/><rect x="102" y="78" width="34" height="72" fill="#1e4d7b"/><rect x="140" y="92" width="24" height="58" fill="#1a3a5c"/><rect x="168" y="82" width="22" height="68" fill="#15345c"/><rect x="200" y="70" width="38" height="80" fill="#1e4d7b"/><rect x="242" y="88" width="26" height="62" fill="#1a3a5c"/><rect x="272" y="78" width="30" height="72" fill="#1e4d7b"/><rect x="306" y="95" width="22" height="55" fill="#1a3a5c"/><rect x="332" y="84" width="28" height="66" fill="#15345c"/><rect x="388" y="88" width="30" height="62" fill="#1e4d7b"/><rect x="422" y="96" width="40" height="54" fill="#1a3a5c"/><rect x="52" y="94" width="4" height="3" fill="#fcd116" opacity="0.75"/><rect x="108" y="84" width="4" height="3" fill="#fcd116" opacity="0.8"/><rect x="206" y="76" width="4" height="3" fill="#fcd116" opacity="0.8"/><circle cx="130" cy="108" r="5" fill="#e53935" opacity="0.92"/><circle cx="240" cy="88" r="5" fill="#e53935" opacity="0.92"/><circle cx="380" cy="102" r="5" fill="#e53935" opacity="0.92"/><text x="130" y="100" font-family="sans-serif" font-size="7" fill="#ffd600" text-anchor="middle">Kariakoo</text><text x="240" y="80" font-family="sans-serif" font-size="7" fill="#ffd600" text-anchor="middle">Masaki</text><text x="380" y="94" font-family="sans-serif" font-size="7" fill="#ffd600" text-anchor="middle">Mbezi Beach</text><text x="240" y="24" font-family="Georgia,serif" font-size="12" fill="white" text-anchor="middle" opacity="0.9">Dar es Salaam Property Analytics</text></svg>`,
+  surveying:`<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gs" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4a843"/><stop offset="100%" stop-color="#f5dea0"/></linearGradient></defs><rect width="480" height="200" fill="url(#gs)"/><rect x="0" y="148" width="480" height="52" fill="#8d6e3a"/><g stroke="#1a6b5a" stroke-width="1.3" fill="none" opacity="0.78"><rect x="28" y="152" width="72" height="40"/><rect x="104" y="152" width="60" height="40"/><rect x="168" y="152" width="80" height="40"/><rect x="252" y="152" width="56" height="40"/><rect x="312" y="152" width="72" height="40"/><rect x="388" y="152" width="66" height="40"/></g><text x="64" y="176" font-family="monospace" font-size="9" fill="#1a6b5a" text-anchor="middle">TZ-001</text><text x="134" y="176" font-family="monospace" font-size="9" fill="#1a6b5a" text-anchor="middle">TZ-002</text><text x="208" y="176" font-family="monospace" font-size="9" fill="#1a6b5a" text-anchor="middle">TZ-003</text><text x="280" y="176" font-family="monospace" font-size="9" fill="#1a6b5a" text-anchor="middle">TZ-004</text><text x="348" y="176" font-family="monospace" font-size="9" fill="#1a6b5a" text-anchor="middle">TZ-005</text><rect x="222" y="112" width="6" height="34" fill="#4a3000"/><rect x="208" y="107" width="34" height="11" fill="#5c3d00" rx="3"/><circle cx="225" cy="106" r="8" fill="#6d4c00"/><circle cx="225" cy="106" r="4" fill="#1a6b5a"/><line x1="225" y1="146" x2="202" y2="175" stroke="#4a3000" stroke-width="2.5"/><line x1="225" y1="146" x2="225" y2="178" stroke="#4a3000" stroke-width="2.5"/><line x1="225" y1="146" x2="248" y2="175" stroke="#4a3000" stroke-width="2.5"/><circle cx="315" cy="128" r="8" fill="#d4a373"/><rect x="310" y="136" width="10" height="20" fill="#2d5a27"/><line x1="300" y1="122" x2="300" y2="158" stroke="#888" stroke-width="2"/><circle cx="300" cy="120" r="5" fill="#1565c0"/><line x1="232" y1="106" x2="300" y2="120" stroke="#fcd116" stroke-width="1" stroke-dasharray="4,3" opacity="0.85"/><text x="240" y="28" font-family="Georgia,serif" font-size="11" fill="#3d2b00" text-anchor="middle">Land Registration — Mbeya Region</text></svg>`,
+  urban:`<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gu" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a237e"/><stop offset="100%" stop-color="#3949ab"/></linearGradient></defs><rect width="480" height="200" fill="url(#gu)"/><circle cx="50" cy="20" r="1.2" fill="white" opacity="0.8"/><circle cx="130" cy="14" r="1" fill="white" opacity="0.7"/><circle cx="430" cy="22" r="1.2" fill="white" opacity="0.8"/><rect x="0" y="122" width="480" height="78" fill="#263238"/><rect x="100" y="122" width="8" height="78" fill="#455a64"/><rect x="240" y="122" width="8" height="78" fill="#455a64"/><rect x="380" y="122" width="8" height="78" fill="#455a64"/><rect x="0" y="158" width="480" height="6" fill="#455a64"/><rect x="10" y="126" width="84" height="28" fill="#e53935" opacity="0.25" rx="2"/><rect x="10" y="126" width="84" height="28" fill="#1a3a5c" rx="2" opacity="0.68"/><rect x="114" y="126" width="120" height="28" fill="#1b5e20" opacity="0.25" rx="2"/><rect x="114" y="126" width="120" height="28" fill="#1e4d7b" rx="2" opacity="0.65"/><rect x="254" y="126" width="120" height="28" fill="#0d47a1" opacity="0.25" rx="2"/><rect x="254" y="126" width="120" height="28" fill="#1a3a5c" rx="2" opacity="0.65"/><rect x="10" y="167" width="84" height="33" fill="#1e3a5c" rx="2"/><rect x="114" y="167" width="120" height="33" fill="#1e4d7b" rx="2"/><rect x="254" y="167" width="120" height="33" fill="#1e3a5c" rx="2"/><rect x="390" y="126" width="82" height="74" fill="#15345c" rx="2"/><rect x="22" y="131" width="5" height="4" fill="#fcd116" opacity="0.7"/><rect x="122" y="131" width="5" height="4" fill="#fcd116" opacity="0.75"/><rect x="263" y="131" width="5" height="4" fill="#fcd116" opacity="0.7"/><text x="240" y="24" font-family="Georgia,serif" font-size="12" fill="white" text-anchor="middle" opacity="0.9">Dar es Salaam Master Plan 2035</text></svg>`,
+  environment:`<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="genv" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1b5e20"/><stop offset="100%" stop-color="#43a047"/></linearGradient></defs><rect width="480" height="200" fill="url(#genv)"/><ellipse cx="110" cy="38" rx="80" ry="25" fill="white" opacity="0.2"/><ellipse cx="55" cy="148" rx="55" ry="36" fill="#0a3a0a"/><ellipse cx="148" cy="140" rx="65" ry="42" fill="#0d3d0d"/><ellipse cx="242" cy="144" rx="62" ry="40" fill="#0a3a0a"/><ellipse cx="336" cy="142" rx="66" ry="40" fill="#0d3d0d"/><ellipse cx="432" cy="148" rx="58" ry="36" fill="#0a3a0a"/><ellipse cx="240" cy="198" rx="230" ry="28" fill="#0077b6" opacity="0.72"/><ellipse cx="240" cy="65" rx="195" ry="52" fill="none" stroke="#fcd116" stroke-width="1.5" stroke-dasharray="7,4" opacity="0.5"/><circle cx="98" cy="35" r="7" fill="#1565c0"/><line x1="91" y1="31" x2="85" y2="26" stroke="#90caf9" stroke-width="1.5"/><line x1="105" y1="31" x2="111" y2="26" stroke="#90caf9" stroke-width="1.5"/><circle cx="190" cy="148" r="16" fill="#e53935" opacity="0.2"/><circle cx="190" cy="148" r="9" fill="#e53935" opacity="0.65"/><text x="190" y="152" font-family="sans-serif" font-size="9" fill="white" text-anchor="middle" font-weight="bold">!</text><text x="240" y="22" font-family="Georgia,serif" font-size="12" fill="white" text-anchor="middle" opacity="0.92">Selous–Eastern Arc Ecosystem Monitor</text></svg>`,
+  infrastructure:`<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gi" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a148c"/><stop offset="100%" stop-color="#7b1fa2"/></linearGradient></defs><rect width="480" height="200" fill="url(#gi)"/><ellipse cx="240" cy="205" rx="320" ry="80" fill="#ff6f00" opacity="0.12"/><rect x="0" y="132" width="480" height="68" fill="#1a1a2e"/><rect x="0" y="155" width="480" height="7" fill="#37474f"/><rect x="148" y="132" width="7" height="68" fill="#37474f"/><rect x="318" y="132" width="7" height="68" fill="#37474f"/><line x1="0" y1="176" x2="480" y2="176" stroke="#0288d1" stroke-width="3" stroke-dasharray="12,4" opacity="0.72"/><circle cx="75" cy="158" r="6" fill="#1b5e20" opacity="0.9"/><circle cx="148" cy="158" r="6" fill="#e53935" opacity="0.9"/><circle cx="240" cy="158" r="6" fill="#ffd600" opacity="0.9"/><circle cx="320" cy="158" r="6" fill="#1b5e20" opacity="0.9"/><circle cx="420" cy="158" r="6" fill="#1b5e20" opacity="0.9"/><text x="75" y="148" font-family="monospace" font-size="7" fill="#a5d6a7" text-anchor="middle">GOOD</text><text x="148" y="148" font-family="monospace" font-size="7" fill="#ef9a9a" text-anchor="middle">POOR</text><text x="240" y="148" font-family="monospace" font-size="7" fill="#fff59d" text-anchor="middle">FAIR</text><text x="240" y="24" font-family="Georgia,serif" font-size="12" fill="white" text-anchor="middle" opacity="0.9">Municipal Network — Dar es Salaam</text></svg>`,
+  disaster:`<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gd" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#37000a"/><stop offset="55%" stop-color="#7a1515"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient><linearGradient id="gdf" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0077b6"/><stop offset="100%" stop-color="#023e8a"/></linearGradient></defs><rect width="480" height="200" fill="url(#gd)"/><ellipse cx="115" cy="50" rx="105" ry="40" fill="#4a0000" opacity="0.72"/><ellipse cx="308" cy="42" rx="135" ry="44" fill="#4a0000" opacity="0.72"/><polyline points="148,82 136,112 150,112 136,148" stroke="#fcd116" stroke-width="2.5" fill="none" opacity="0.92"/><polyline points="315,76 302,110 317,110 302,148" stroke="#fcd116" stroke-width="2.5" fill="none" opacity="0.82"/><rect x="0" y="150" width="480" height="50" fill="url(#gdf)" opacity="0.88"/><ellipse cx="110" cy="165" rx="62" ry="10" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/><polygon points="75,132 108,116 140,132" fill="#5c3d00"/><rect x="75" y="132" width="65" height="20" fill="#5c3d00"/><polygon points="198,138 232,120 268,138" fill="#5c3d00"/><rect x="198" y="138" width="70" height="14" fill="#5c3d00"/><line x1="55" y1="148" x2="420" y2="148" stroke="#fcd116" stroke-width="2.5" stroke-dasharray="10,5" opacity="0.82"/><polygon points="420,141 440,148 420,155" fill="#fcd116" opacity="0.92"/><circle cx="240" cy="100" r="22" fill="#e53935" opacity="0.92"/><text x="240" y="107" font-family="sans-serif" font-size="20" fill="white" text-anchor="middle" font-weight="bold">!</text><text x="240" y="22" font-family="Georgia,serif" font-size="12" fill="white" text-anchor="middle" opacity="0.95">Flood Early Warning — Rufiji River Basin</text></svg>`
+};
+</script>
 
-            <div class="project-card" onclick="window.open('https://example.com/urban-planning', '_blank')">
-                <span class="project-number"></span>
-                <h3>Urban Planning & Development</h3>
-                <p>Created comprehensive master plans for urban development using advanced GIS tools and spatial analysis to optimize infrastructure placement and zoning regulations.</p>
-                <div class="project-link">
-                    <span>View Project</span>
-                    <span class="arrow">→</span>
-                </div>
-            </div>
+<!-- HTML -->
+<div class="section-header">
+  <div class="tz-badge">🇹🇿 Tanzania GIS Database</div>
+  <h2>Featured Projects</h2>
+  <p>Live project registry powered by an in-page database — search, filter, and explore detailed updates for each initiative.</p>
+</div>
+<div class="stats-bar" id="statsBar"></div>
+<div class="controls" id="controls"></div>
+<div class="grid" id="projectGrid"></div>
 
-            <div class="project-card" onclick="window.open('https://example.com/environmental-monitoring', '_blank')">
-                <span class="project-number"></span>
-                <h3>Environmental Monitoring System</h3>
-                <p>Deployed real-time environmental monitoring systems using remote sensing and GIS technologies to track deforestation, water quality, and climate change impacts.</p>
-                <div class="project-link">
-                    <span>View Project</span>
-                    <span class="arrow">→</span>
-                </div>
-            </div>
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-hero" id="modalHero"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
 
-            <div class="project-card" onclick="window.open('https://example.com/infrastructure-management', '_blank')">
-                <span class="project-number"></span>
-                <h3>Infrastructure Asset Management</h3>
-                <p>Developed web-based GIS platform for managing municipal infrastructure assets including roads, water networks, and public facilities with maintenance tracking.</p>
-                <div class="project-link">
-                    <span>View Project</span>
-                    <span class="arrow">→</span>
-                </div>
-            </div>
+<script>
+const STATUS_CLASS={active:"status-active",completed:"status-completed",ongoing:"status-ongoing"};
+const STATUS_LABEL={active:"● Active",completed:"✓ Completed",ongoing:"⟳ Ongoing"};
+const UPDATE_CLASS={success:"update-success",info:"update-info",warning:"update-warning"};
+const BADGE_CLASS={success:"badge-success",info:"badge-info",warning:"badge-warning"};
 
-            <div class="project-card" onclick="window.open('https://example.com/disaster-management', '_blank')">
-                <span class="project-number"></span>
-                <h3>Disaster Risk Management</h3>
-                <p>Implemented GIS-based disaster risk assessment and emergency response planning system for flood-prone areas with real-time alert capabilities.</p>
-                <div class="project-link">
-                    <span>View Project</span>
-                    <span class="arrow">→</span>
-                </div>
-            </div>
-        </div>
+// ── Stats ──
+function renderStats(){
+  const s=DB.stats();
+  document.getElementById("statsBar").innerHTML=`
+    <div class="stat-card"><span class="stat-icon">📁</span><div class="stat-info"><span class="stat-value">${s.total}</span><span class="stat-label">Total Projects</span></div></div>
+    <div class="stat-card"><span class="stat-icon">🟢</span><div class="stat-info"><span class="stat-value">${s.active}</span><span class="stat-label">Active / Ongoing</span></div></div>
+    <div class="stat-card"><span class="stat-icon">🗺️</span><div class="stat-info"><span class="stat-value">${s.totalArea} km²</span><span class="stat-label">Total Area</span></div></div>
+    <div class="stat-card"><span class="stat-icon">🔔</span><div class="stat-info"><span class="stat-value">${s.updates}</span><span class="stat-label">Latest Updates</span></div></div>`;
+}
+
+// ── Controls ──
+let currentFilter="All", currentSearch="";
+function renderControls(){
+  const div=document.getElementById("controls");
+  div.innerHTML=`
+    <div class="search-wrap"><span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Search projects, regions, clients…" value="${currentSearch}"/></div>
+    ${DB.getCategories().map(c=>`<button class="filter-btn ${c===currentFilter?'active':''}" onclick="setFilter('${c}')">${c}</button>`).join("")}
+    <span class="results-count" id="resultsCount"></span>`;
+  document.getElementById("searchInput").addEventListener("input",e=>{currentSearch=e.target.value;renderGrid();});
+}
+function setFilter(cat){currentFilter=cat;renderControls();renderGrid();}
+
+// ── Card ──
+function buildCard(p,idx){
+  const lastUpdate=p.updates[0];
+  return `<div class="card" style="animation-delay:${idx*0.07}s">
+    <div class="card-scene">
+      ${SCENES[p.scene]}
+      <span class="status-pill ${STATUS_CLASS[p.status]}">${STATUS_LABEL[p.status]}</span>
+      <span class="db-badge"><span class="db-dot"></span>${p.id}</span>
+    </div>
+    <div class="card-body">
+      <span class="card-tag">${p.category}</span>
+      <h3>${p.title}</h3>
+      <div class="card-meta">
+        <span class="meta-item">📍 <strong>${p.region}</strong></span>
+        <span class="meta-item">📅 <strong>${p.year}</strong></span>
+        <span class="meta-item">⏱ <strong>${p.duration}</strong></span>
+      </div>
+      <p>${p.description}</p>
+      <div class="card-details"><ul>${p.achievements.map(a=>`<li>${a}</li>`).join("")}</ul></div>
+      <div class="db-fields">
+        <div class="db-fields-header">🗄️ Database Record</div>
+        <table>
+          <tr><td>Project ID</td><td><code>${p.id}</code></td></tr>
+          <tr><td>Client</td><td>${p.client}</td></tr>
+          <tr><td>Budget</td><td>${p.budget}</td></tr>
+          <tr><td>Area</td><td>${p.area_km2.toLocaleString()} km²</td></tr>
+          <tr><td>Last Update</td><td style="color:var(--teal-dark);font-weight:600">${lastUpdate.date}</td></tr>
+        </table>
+      </div>
+      <div class="card-tools">${p.tools.map(t=>`<span class="tool-badge">${t}</span>`).join("")}</div>
+      <div class="divider"></div>
+      <button class="view-btn" onclick="openModal('${p.id}')">
+        <span>View Project</span>
+        <span style="display:flex;align-items:center;gap:8px">
+          <span class="btn-update">${p.updates.length} updates</span>
+          <span class="btn-arrow">→</span>
+        </span>
+      </button>
+    </div>
+  </div>`;
+}
+
+// ── Grid ──
+function renderGrid(){
+  let projects=DB.getAll();
+  if(currentFilter!=="All") projects=DB.getByCategory(currentFilter);
+  if(currentSearch.trim()) projects=projects.filter(p=>{
+    const q=currentSearch.toLowerCase();
+    return p.title.toLowerCase().includes(q)||p.category.toLowerCase().includes(q)||p.location.toLowerCase().includes(q)||p.client.toLowerCase().includes(q)||p.tags.some(t=>t.includes(q));
+  });
+  const rc=document.getElementById("resultsCount");
+  if(rc) rc.textContent=`${projects.length} project${projects.length!==1?"s":""} found`;
+  const grid=document.getElementById("projectGrid");
+  if(!projects.length){grid.innerHTML=`<div class="no-results"><div style="font-size:3rem">🔍</div><p>No projects match "<strong>${currentSearch||currentFilter}</strong>".</p></div>`;return;}
+  grid.innerHTML=projects.map((p,i)=>buildCard(p,i)).join("");
+}
+
+// ── MODAL ──
+function openModal(id){
+  const p=DB.getById(id);
+  if(!p) return;
+
+  // Hero
+  document.getElementById("modalHero").innerHTML=`
+    ${SCENES[p.scene]}
+    <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    <span class="modal-status-pill ${STATUS_CLASS[p.status]}">${STATUS_LABEL[p.status]}</span>
+    <span class="modal-id">${p.id}</span>`;
+
+  // Body
+  const tlDots=p.timeline.map(t=>`
+    <div class="tl-item">
+      <div class="tl-dot ${t.current?'current':t.done?'done':''}"></div>
+      <div class="tl-date">${t.date}</div>
+      <div class="tl-title">${t.title}</div>
+      <div class="tl-desc">${t.desc}</div>
+    </div>`).join("");
+
+  const teamCards=p.team.map(m=>`
+    <div class="team-card">
+      <div class="team-avatar" style="background:${m.color}">${m.icon}</div>
+      <div><div class="team-name">${m.name}</div><div class="team-role">${m.role}</div></div>
+    </div>`).join("");
+
+  const updateItems=p.updates.map(u=>`
+    <div class="update-item ${UPDATE_CLASS[u.type]}">
+      <div class="update-header">
+        <span class="update-badge ${BADGE_CLASS[u.type]}">${u.badge}</span>
+        <span class="update-date">🕐 ${u.date}</span>
+      </div>
+      <div class="update-title">${u.title}</div>
+      <div class="update-desc">${u.desc}</div>
+      <div class="update-author">👤 ${u.author}</div>
+    </div>`).join("");
+
+  const galleryHtml=p.gallery.map((g,i)=>{
+    const colors=["#e8f7f5","#fef9e7","#e8f4fd","#fce8e8","#e8f5e9","#f3e8fd"];
+    return `<div class="gallery-cell" style="background:${colors[i%colors.length]}">${g}</div>`;
+  }).join("");
+
+  document.getElementById("modalBody").innerHTML=`
+    <span class="modal-tag">${p.category}</span>
+    <div class="modal-title">${p.title}</div>
+    <div class="modal-location">📍 ${p.location}</div>
+
+    <div class="modal-meta-grid">
+      <div class="modal-meta-box"><div class="mmb-val">${p.budget}</div><div class="mmb-lbl">Budget</div></div>
+      <div class="modal-meta-box"><div class="mmb-val">${p.duration}</div><div class="mmb-lbl">Duration</div></div>
+      <div class="modal-meta-box"><div class="mmb-val">${p.area_km2.toLocaleString()}</div><div class="mmb-lbl">Area (km²)</div></div>
+      <div class="modal-meta-box"><div class="mmb-val">${p.year}</div><div class="mmb-lbl">Started</div></div>
     </div>
 
-    <script>
-        // Add click feedback animation
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('click', function() {
-                this.style.transform = 'scale(0.98)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 200);
-            });
-        });
+    <div class="modal-section">
+      <h4>About</h4>
+      <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.7">${p.description}</p>
+    </div>
 
-        // Add scroll reveal effect
-        window.addEventListener('scroll', function() {
-            const cards = document.querySelectorAll('.project-card');
-            cards.forEach(card => {
-                const cardPosition = card.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.3;
-                
-                if(cardPosition < screenPosition) {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }
-            });
-        });
-    </script>
+    <div class="modal-section">
+      <h4>Progress — ${p.progress}% Complete</h4>
+      <div class="progress-wrap">
+        <div class="progress-label"><strong>${p.title}</strong><span>${p.progress}%</span></div>
+        <div class="progress-bar"><div class="progress-fill" id="pfill_${p.id}" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="modal-section">
+      <h4>Project Timeline</h4>
+      <div class="timeline">${tlDots}</div>
+    </div>
+
+    <div class="modal-section">
+      <h4>Project Team</h4>
+      <div class="team-grid">${teamCards}</div>
+    </div>
+
+    <div class="modal-section">
+      <h4>🔔 Latest Updates (${p.updates.length})</h4>
+      <div class="updates-feed">${updateItems}</div>
+    </div>
+
+    <div class="modal-section">
+      <h4>Tools & Technologies</h4>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">${p.tools.map(t=>`<span class="tool-badge" style="font-size:0.8rem;padding:5px 12px">${t}</span>`).join("")}</div>
+    </div>
+
+    <div class="modal-section">
+      <h4>Project Gallery</h4>
+      <div class="gallery-row">${galleryHtml}</div>
+    </div>`;
+
+  // Animate progress after render
+  setTimeout(()=>{
+    const fill=document.getElementById(`pfill_${p.id}`);
+    if(fill) fill.style.width=p.progress+"%";
+  },100);
+
+  document.getElementById("modalOverlay").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+
+function closeModal(e){
+  if(e.target===document.getElementById("modalOverlay")) closeModalBtn();
+}
+function closeModalBtn(){
+  document.getElementById("modalOverlay").classList.remove("open");
+  document.body.style.overflow="";
+}
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeModalBtn(); });
+
+// ── Boot ──
+renderStats();
+renderControls();
+renderGrid();
+</script>
 </body>
 </html>
