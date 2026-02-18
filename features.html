@@ -420,9 +420,9 @@ const SCENES={
 
 <!-- HTML -->
 <div class="section-header">
-  <div class="tz-badge">🇹🇿 Tanzania GIS Database</div>
-  <h2>Featured Projects</h2>
-  <p>Live project registry powered by an in-page database — search, filter, and explore detailed updates for each initiative.</p>
+  <div class="tz-badge">🇹🇿 Ardhi Geo Database</div>
+  <h2>Our Projects</h2>
+  <p>Live projects registry powered by an in-page database — search, filter, and explore detailed updates for each initiative.</p>
 </div>
 <div class="stats-bar" id="statsBar"></div>
 <div class="controls" id="controls"></div>
@@ -446,10 +446,10 @@ const BADGE_CLASS={success:"badge-success",info:"badge-info",warning:"badge-warn
 function renderStats(){
   const s=DB.stats();
   document.getElementById("statsBar").innerHTML=`
-    <div class="stat-card"><span class="stat-icon">📁</span><div class="stat-info"><span class="stat-value">${s.total}</span><span class="stat-label">Total Projects</span></div></div>
-    <div class="stat-card"><span class="stat-icon">🟢</span><div class="stat-info"><span class="stat-value">${s.active}</span><span class="stat-label">Active / Ongoing</span></div></div>
-    <div class="stat-card"><span class="stat-icon">🗺️</span><div class="stat-info"><span class="stat-value">${s.totalArea} km²</span><span class="stat-label">Total Area</span></div></div>
-    <div class="stat-card"><span class="stat-icon">🔔</span><div class="stat-info"><span class="stat-value">${s.updates}</span><span class="stat-label">Latest Updates</span></div></div>`;
+    <div class="stat-card"><span class="stat-icon"></span><div class="stat-info"><span class="stat-value">${s.total}</span><span class="stat-label">Total Projects</span></div></div>
+    <div class="stat-card"><span class="stat-icon"></span><div class="stat-info"><span class="stat-value">${s.active}</span><span class="stat-label">Active / Ongoing</span></div></div>
+    <div class="stat-card"><span class="stat-icon"></span><div class="stat-info"><span class="stat-value">${s.totalArea} km²</span><span class="stat-label">Total Area</span></div></div>
+    <div class="stat-card"><span class="stat-icon"></span><div class="stat-info"><span class="stat-value">${s.updates}</span><span class="stat-label">Latest Updates</span></div></div>`;
 }
 
 // ── Controls ──
